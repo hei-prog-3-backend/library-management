@@ -47,7 +47,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
-  /authors:
+
   #TODO2: complete GET (can be filtered by name) - PUT - DELETE
 components:
   schemas:
