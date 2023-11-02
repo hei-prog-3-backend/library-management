@@ -57,10 +57,17 @@ paths:
         in: query
         description: filtered author by name
         required: false
-        type: string
+        schema:
+         type: string
     responses:
-      200:
-        description: Successful responses
+     200:
+      description: The list of author filter by name
+      content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/author'
    put:
     summary: Create or update a list of author
     operationId: create or update
@@ -80,7 +87,22 @@ paths:
             type: array
             items:
                $ref: '#/components/schemas/author'
-
+  /author/{id}:
+    delete:
+     summary: delete author by id
+     parameters:
+      - name: id
+        in: path
+        description: id of author
+        required: true
+        schema:
+          type: integer
+     responses:
+       204:
+        description: author deleted successfuly
+       205:
+        description: author not found
+       
 components:
   schemas:
     Book:
@@ -108,7 +130,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
         name:
           type: string
         sex:
