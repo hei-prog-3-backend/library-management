@@ -28,7 +28,35 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
-    put:
+  /books/{releaseDate}:
+     get:
+      summary: Get books between two releaseDate
+      operationId: getBooksBetweenDates
+      parameters:
+       - in: path
+         name: startDate
+         description:  date releaseDate the range yyyy-mm-dd
+         required: true
+         schema:
+          type: string
+          format: date
+       - in: path
+         name: endDate
+         description: enddate releaseDate the range yyyy-mm-dd
+         required: true
+         schema:
+          type: string
+          format: date
+      responses:
+        200:
+          description: The list of books 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+     put:
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
