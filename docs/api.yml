@@ -53,6 +53,13 @@ paths:
       summary: Get all authors
       description: Get a list of all authors.
       operationId: getAuthors
+      parameters:
+        - in: query
+          name: name
+          description: Filter authors by name
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: The list of authors
