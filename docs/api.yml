@@ -18,6 +18,18 @@ paths:
           required: false
           schema:
             type: string
+         - in: query
+          name: startDate
+          description: Filter books with a release date greater than or equal to this date (format: YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: endDate
+          description: Filter books with a release date less than or equal to this date (format: YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
         #TODO3: add parameter to filter books by intervals of dates of the releaseDate
       responses:
         200:
