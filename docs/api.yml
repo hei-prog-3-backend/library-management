@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.0.0
-  description: STD22001
+  description: STD22057
 servers:
   - url: https://library.com
 paths:
@@ -72,3 +72,15 @@ components:
         releaseDate:
           type: string
           format: date
+    Author:
+      type: object
+      properties:
+        id:
+          type: string
+        name: 
+          type: string
+        sex:
+          type: string
+          enum:
+            - M
+            - F
