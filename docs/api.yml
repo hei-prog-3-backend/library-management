@@ -62,6 +62,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Author'
+    put:
+      summary: Create or update an author
+      operationId: crupdateAuthor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
 components:
   schemas:
     Book:
