@@ -77,6 +77,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Author'
+    delete:
+      summary: Delete an author
+      operationId: deleteAuthor
+      parameters:
+        - in: path
+          name: authorId
+          description: The ID of the author to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Author deleted successfully
 components:
   schemas:
     Book:
