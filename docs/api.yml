@@ -25,6 +25,13 @@ paths:
           schema:
             type: string
             format: date
+        - in: query
+          name: releaseDateEnd
+          description: Filter books with release dates before or equal to this date
+          required: false
+          schema:
+            type: string
+            format: date
         #TODO3: add parameter to filter books by intervals of dates of the releaseDate
       responses:
         200:
