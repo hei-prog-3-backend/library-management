@@ -65,7 +65,7 @@ paths:
     # TODO2: complete GET (can be filtered by name) - PUT - DELETE
     get:
       summary: Get all authors
-      description: Get a list of all authors.
+      description: Get a list of all authors. You can filter by name.
       operationId: getAuthors
       parameters:
         - in: query
@@ -121,7 +121,7 @@ components:
         bookName:
           type: string
         author:
-          type: string
+          $ref: '#/components/schemas/Author'
         pageNumbers:
           type: integer
         topic:
