@@ -5,6 +5,7 @@ info:
   description: STD22001
 servers:
   - url: https://library.com
+
 paths:
   /books:
     get:
@@ -92,6 +93,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Author'
+    delete:
+      summary: delete an author
+      operationId: deleteAuthor
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: 
+            type: integer
+      responses:
+        200:
+          description: author deleted
 
 components:
   schemas:
