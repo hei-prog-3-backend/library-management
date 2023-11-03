@@ -18,6 +18,13 @@ paths:
           required: false
           schema:
             type: string
+        - in: query
+          name: releaseDateEnd  
+          description: Filter books with release date less than or equal to this date
+          required: false
+          schema:
+            type: string
+            format: date
         #TODO3: add parameter to filter books by intervals of dates of the releaseDate
       responses:
         200:
@@ -49,6 +56,53 @@ paths:
                   $ref: '#/components/schemas/Book'
   /authors:
   #TODO2: complete GET (can be filtered by name) - PUT - DELETE
+   get:
+      summary: Get all authors or filter by name
+      description: Retrieve a list of authors or filter by name
+      operationId: getAuthors
+      parameters:
+        - in: query
+          name: authorName
+          description: Filter authors by name
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: List of authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+
+  put:
+      summary: Create or update authors
+      operationId: crupdateAuthors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Author'
+      responses:
+        200:
+          description: List of created or updated authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+
+  delete:
+      summary: Delete authors
+      operationId: deleteAuthors
+      responses:
+        200:
+          description: Deleted 
 components:
   schemas:
     Book:
