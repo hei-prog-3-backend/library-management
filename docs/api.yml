@@ -70,6 +70,13 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Author'
+      responses:
+        200:
+          description: The created or updated author
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
 components:
   schemas:
     Book:
