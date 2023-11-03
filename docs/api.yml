@@ -94,7 +94,26 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Author'              
+                  $ref: '#/components/schemas/Author'
+    delete:
+      summary: Delete author 
+      operationId: deletedAuthor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Author'
+      responses:
+        200:
+          description: The list of deleted author
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'                         
 
 components:
   schemas:
