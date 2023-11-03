@@ -48,7 +48,58 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
   /authors:
-    
+    get:
+      summary: Get all authors
+      description: Get all authors or filter by name
+      operationId: getAuthors
+      parameters:
+        - in: query
+          name: authorName
+          description: Filter return authors by name
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: The list of filtered authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+    put:
+      summary: Create or update an author
+      operationId: crupdateAuthor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        200:
+          description: The created or updated author
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+    delete:
+      summary: Delete an author
+      operationId: deleteAuthor
+      parameters:
+        - in: query
+          name: authorId
+          description: ID of the author to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: The author has been successfully deleted
+        404:
+          description: The author with the specified ID was not found
+        500:
+          description: An internal server error occurred
 components:
   schemas:
     Book:
