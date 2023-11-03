@@ -59,8 +59,7 @@ components:
         bookName:
           type: string
         author:
-          #TODO1: set it as a component with properties : id, name, sex (M or F)
-          type: string
+          $ref: '#/components/schemas/Authors'
         pageNumbers:
           type: integer
         topic:
