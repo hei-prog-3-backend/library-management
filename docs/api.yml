@@ -72,3 +72,15 @@ components:
         releaseDate:
           type: string
           format: date
+    Authors:
+      type: object
+      properties:
+        id:
+          type: string
+        authorName:
+          type: string
+        sex:
+          type: string
+          enum:
+            - M
+            - F
