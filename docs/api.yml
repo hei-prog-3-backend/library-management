@@ -59,6 +59,15 @@ components:
         bookName:
           type: string
         author:
+          id:
+            type: int
+          name:
+            type: string
+          sex:
+            type: string
+            enum:
+              -M
+              -F
           #TODO1: set it as a component with properties : id, name, sex (M or F)
           type: string
         pageNumbers:
