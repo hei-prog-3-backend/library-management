@@ -48,7 +48,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
   /authors:
-  #TODO2: complete GET (can be filtered by name) - PUT - DELETE
+    
 components:
   schemas:
     Book:
@@ -58,18 +58,8 @@ components:
           type: string
         bookName:
           type: string
-        Author:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-            sex:
-              type: string
-              enum:
-                - M
-                - F
+        author:
+          $ref: '#/components/schemas/Author'
         pageNumbers:
           type: integer
         topic:
@@ -81,3 +71,15 @@ components:
         releaseDate:
           type: string
           format: date
+    Author:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        sex:
+          type: string
+          enum:
+            - M
+            - F
