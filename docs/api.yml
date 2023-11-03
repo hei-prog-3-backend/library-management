@@ -19,6 +19,13 @@ paths:
           schema:
             type: string
         #TODO3: add parameter to filter books by intervals of dates of the releaseDate
+        - in: query
+          name: releaseDate
+          description: Filter books released on the date.
+          required: false
+          schema:
+            type: string
+            format: date
       responses:
         200:
           description: The list of filtered books
@@ -114,6 +121,7 @@ components:
         bookName:
           type: string
         author:
+          #TODO1: set it as a component with properties : id, name, sex (M or F)
           $ref: '#/components/schemas/Authors'
         pageNumbers:
           type: integer
