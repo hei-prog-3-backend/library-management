@@ -38,6 +38,20 @@ paths:
           schema:
             type: string
             format: date
+        - in: query
+          name: page 
+          description: page number for pagination
+          required: false    
+          schema:  
+            type: integer
+            default: 1
+        - in: query
+          name: pageSize
+          description: number of items 
+          required: false 
+          schema: 
+            type: integer
+            default: 50 
       responses:
         200:
           description: The list of filtered books
