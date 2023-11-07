@@ -149,25 +149,33 @@ paths:
           description: An internal server error occurred
   /books/{bookId}/authors/{authorId}:
     put:
+      summary: Update Book Authors
+      operationId: updateBookAuthors
       parameters:
         - name: bookId
           in: path
           required: true
-          schema: 
+          schema:
             type: string
         - name: authorId
           in: path
           required: true
-          schema: 
+          schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateBookAuthor'
       responses:
         200:
-          description: The author has been successfully
+          description: The authors of the book have been successfully updated
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Book'
-         
 
 components:
   schemas:
@@ -212,3 +220,10 @@ components:
         releaseDate:
           type: string
           format: date
+    UpdateBookAuthor:
+      type: object
+      properties:
+        bookId:
+          type: string
+        authorId:
+          type: string
