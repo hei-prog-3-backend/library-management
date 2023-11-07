@@ -29,6 +29,18 @@ paths:
           schema:
             type: string
             format: date
+        - in: query
+          name: page
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pageSize
+          description: Number of items par page
+          schema:
+            type: integer
+            default: 50
       responses:
         200:
           description: The list of filtered books
@@ -38,6 +50,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+
     put:
       summary: Create or update a list of books
       operationId: crupdateBooks
