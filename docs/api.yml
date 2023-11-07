@@ -15,20 +15,17 @@ paths:
         - in: query
           name: bookName
           description: Filter return books by given name
-          required: false
           schema:
             type: string
         - in: query
           name: releaseDateStart  
           description: Filter books with release date greater than or equal to this date
-          required: false
           schema:
             type: string
             format: date
         - in: query
           name: releaseDateEnd  
           description: Filter books with release date less than or equal to this date
-          required: false
           schema:
             type: string
             format: date
@@ -45,12 +42,13 @@ paths:
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Book'
+                $ref: '#/components/schemas/CrupdateBook'
       responses:
         200:
           description: The list of created or updated books
@@ -70,7 +68,6 @@ paths:
         - in: query
           name: authorName
           description: Filter authors by name
-          required: false
           schema:
             type: string
       responses:
@@ -113,25 +110,41 @@ paths:
 components:
   schemas:
     Book:
+      allOf:
+        - $ref: '#/components/schemas/CrupdateBook'
+        - type: object
+          properties:
+            author:
+              type: object
+              nullable: true
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                sex:
+                  type: string
+                  enum:
+                    - M
+                    - F
+    CrupdateBook:
       type: object
       properties:
         id:
           type: string
         bookName:
           type: string
-        author:
-          $ref: '#/components/schemas/Author'
         pageNumbers:
           type: integer
         topic:
           type: string
           enum:
-            - HORREUR
-            - AVENTURE
+            - ROMANCE
+            - COMEDY
+            - OTHER
         releaseDate:
           type: string
           format: date
-
     Author:
       type: object
       properties:
