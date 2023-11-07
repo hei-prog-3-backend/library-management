@@ -255,3 +255,5 @@ components:
           type: string
         authorId:
           type: string
+
+#2.b.i. UpdateBookAuthor sert de transfert de données dans le but de mettre à jour l'association entre un livre et un auteur
