@@ -173,6 +173,37 @@ paths:
                    type: array
                    items:
                      $ref: '#/components/schemas/Author'
+  /books/authors :
+      put:
+        tags:
+          - Authors 
+        summary: Update book-author link
+        operationId: UpdateBookAuthor
+        parameters:
+          - in: query
+            name: UpdateBookAuthor
+            description: Updates the association between books and authors.
+            required: true
+            schema:
+              type: string
+  
+        requestBody:
+          content:
+            application/json:
+               schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UpdateBookAuthor'
+        responses:
+          200:
+            description: updated the association between books and authors.
+            content:
+              application/json:
+                  schema: 
+                    type: array
+                    items: 
+                      $ref: '#/components/schemas/UpdateBookAuthor'
+
 
 components:
   schemas:
@@ -198,7 +229,7 @@ components:
             - M
             - F
     
-    #TD2 creation composant CrupdateBook
+    #create component CrupdateBook
     CrupdateBook:
        type: object
        properties:
@@ -217,6 +248,14 @@ components:
          releaseDate:
             type: string
             format: date
- 
+
+    #create component UpdateBookAuthor
+    UpdateBookAuthor:
+         type: object
+         properties:
+           bookId:
+              type: string
+           authorId:
+              type: string 
   
     
