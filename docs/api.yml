@@ -213,6 +213,28 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/UpdateBookAuthor"
+  /topic:
+    put:
+       summary: updated topic 
+       operationId: updateTopic
+       tags:
+         - Topic 
+       requestBody:
+         content:
+           application/json:
+            schema:
+             type: array
+             items:
+               $ref: "#/components/schemas/topic"
+       responses:
+         200:
+           description: updated successfuly
+           content:
+             application/json:
+              schema: 
+               type: array
+               items:
+                 $ref: "#/components/schemas/topic"
           
 components:
   schemas:
