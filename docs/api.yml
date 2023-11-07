@@ -90,6 +90,27 @@ paths:
       operationId: get author
       tags:
         - Author
+      parameters:
+        - in: query
+          name: authorname 
+          description: Filter authors by name
+          required: false
+          schema:
+            type: string 
+        - in: path
+          name: page
+          description: Page number for pagination 
+          required: true
+          schema:
+            type: integer
+            default: 1
+        - in: path
+          name: pageSize
+          description: Number of items per page 
+          required: true
+          schema:
+            type: integer
+            default: 50    
       responses:
         200:
           description: The list of filtered author
@@ -233,3 +254,6 @@ components:
             - OTHER      
       
 
+#La pagination est généralement gérée à l'aide des paramètres de requête plutôt qu'à travers les entêtes de la requête
+#Les entêtes de la requête, en revanche, sont généralement utilisés pour des informations générales sur la requête, telles 
+#que les informations d'authentification, le type de contenu accepté, les informations sur la langue
