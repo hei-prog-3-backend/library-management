@@ -118,26 +118,9 @@ paths:
 components:
   schemas:
     Book:
-      type: object
-      properties:
-        id:
-          type: string
-        bookName:
-          type: string
-        author:
-          #TODO1: set it as a component with properties : id, name, sex (M or F)
-          type: string
-        pageNumbers:
-          type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: date
+      allOf:
+        - $ref: '#/components/schemas/crupdateBook'
+        - $ref: '#/components/schemas/Author'  
     Author:  
       type: object
       properties:
@@ -147,5 +130,19 @@ components:
           type: string
         sex:
           type: string  
+    crupdateBook:
+      properties:
+        id:
+          type: string
+        bookName:
+          type: string
+        pageNumbers:
+          type: string
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER      
       
 
