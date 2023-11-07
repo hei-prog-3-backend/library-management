@@ -83,6 +83,18 @@ paths:
           description: Filter authors by name
           schema:
             type: string
+        - in: query
+          name: page
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pageSize
+          description: Number of items par page
+          schema:
+            type: integer
+            default: 50
       responses:
         200:
           description: List of authors
