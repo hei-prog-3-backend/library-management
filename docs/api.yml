@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.0.0
-  description: STD22001
+  description: STD22073
 servers:
   - url: https://library.com
 
@@ -25,6 +25,7 @@ paths:
           required: false
           schema:
             type: string
+            format: date
       responses:
         200:
           description: The list of filtered books
@@ -108,6 +109,16 @@ paths:
 
 components:
   schemas:
+    CrupdateBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: object
+        - required:
+          - id
+          - bookName
+          - releaseDate
+          - pageNumbers
+          - topic
     Book:
       type: object
       properties:
