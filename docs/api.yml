@@ -6,9 +6,18 @@ info:
 servers:
   - url: https://library.com
 
+  version: 1.1.0
+  description: STD22001
+servers:
+  - url: https://library.com
+tags:
+  - Books
+  - Authors
 paths:
   /books:
     get:
+      tags:
+        - Books
       summary: Get all books
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
@@ -26,6 +35,23 @@ paths:
           schema:
             type: string
             format: date
+          name: releaseDateMin
+          description: |
+            If  `releaseDateMax` is not provided, `releaseDateMin` is ignored.
+            `releaseDateMin` can not be after `releaseDateMax`.
+          schema:
+            type: string
+            format: date
+          required: false
+        - in: query
+          name: releaseDateMax
+          description: |
+            If  `releaseDateMin` is not provided, `releaseDateMax` is ignored.
+            `releaseDateMax` can not be after `releaseDateMin`.
+          schema:
+            type: string
+            format: date
+          required: false
       responses:
         200:
           description: The list of filtered books
@@ -36,6 +62,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
     put:
+      tags:
+        - Books
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
@@ -69,6 +97,22 @@ paths:
       responses:
         200:
           description: the list of filtered Author
+      summary: Get all authors
+      operationId: getAuthors
+      tags:
+        - Authors
+      parameters:
+        - name: authorName
+          in: query
+          description: |
+            Filter returned authors by given name. 
+            If not provided, then list is not filtered.
+          schema:
+            type: string
+          required: false
+      responses:
+        200:
+          description: The list of filtered authors
           content:
             application/json:
               schema:
@@ -78,6 +122,10 @@ paths:
     put:
       summary: create or update list of authors
       operationId: crupdateAuthors
+      summary: Create or update authors
+      operationId: crupdateAuthors
+      tags:
+        - Authors
       requestBody:
         content:
           application/json:
@@ -88,6 +136,12 @@ paths:
       responses:
         200:
           description: the list of created or updated authors
+              type: array
+              items:
+                $ref: '#/components/schemas/Author'
+      responses:
+        200:
+          description: The list of created or updated authors
           content:
             application/json:
               schema:
@@ -106,19 +160,36 @@ paths:
       responses:
         200:
           description: author deleted
-
+          
+  /authors/{aId}:
+    delete:
+      summary: Delete an author
+      operationId: deleteAuthor
+      tags:
+        - Authors
+      parameters:
+        - name: aId
+          in: path
+          description: Author identifier to be deleted
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: The author deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
 components:
   schemas:
     CrupdateBook:
       allOf:
         - $ref: '#/components/schemas/Book'
         - type: object
-        - required:
-          - id
-          - bookName
-          - releaseDate
-          - pageNumbers
-          - topic
+          properties:
+            author:
+              nullable: true
     Book:
       type: object
       properties:
@@ -151,3 +222,13 @@ components:
           enum:
             - M
             - F
+          type: string
+        authorName:
+          type: string
+        sex:
+          $ref: '#/components/schemas/Sex'
+    Sex:
+      type: string
+      enum:
+        - M
+        - F
