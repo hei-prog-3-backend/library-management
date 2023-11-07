@@ -235,7 +235,27 @@ paths:
                type: array
                items:
                  $ref: "#/components/schemas/topic"
-          
+    get:
+        summary: get all topics
+        operationId: getTopicbyName
+        tags:
+          - Topic
+        description: get all topic specified name
+        parameters:
+          - in: query
+            name: genre
+            required: false
+            schema:
+              type: string
+        responses:
+          200:
+            description: the liste of topics filtered
+            content:
+              application/json:
+               schema: 
+                 type: array
+                 items:
+                   $ref: "#/components/schemas/topic"
 components:
   schemas:
     crupdateBook:
