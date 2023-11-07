@@ -172,3 +172,11 @@ components:
       enum:
         - M
         - F
+    CrupdateBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: string
+      properties:
+        author:
+          type: object
+          required: false
