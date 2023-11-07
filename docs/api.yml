@@ -50,7 +50,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Book'
+                $ref: '#/components/schemas/CrupdateBook'
       responses:
         200:
           description: The list of created or updated books
@@ -113,8 +113,39 @@ paths:
           description: The author with the specified ID was not found
         500:
           description: An internal server error occurred
+  /books/{bookId}:
+    get:
+      summary: Get a specific book
+      description: Get a specific book by its ID
+      operationId: getBookById
+      parameters:
+        - in: path
+          name: bookId
+          description: ID of the book to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: The requested book
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
 components:
   schemas:
+    Author:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        sex:
+          type: string
+          enum:
+            - M
+            - F
     Book:
       type: object
       properties:
@@ -135,15 +166,23 @@ components:
         releaseDate:
           type: string
           format: date
-    Author:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        sex:
-          type: string
-          enum:
-            - M
-            - F
+    CrupdateBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - properties:
+            id:
+              type: string
+            author:
+              $ref: '#/components/schemas/Author'
+            bookName:
+              type: string
+            releaseDate:
+              type: string
+              format: date
+        - required:
+            - id
+            - author
+            - bookName
+            - pageNumbers
+            - topic
+            - releaseDate
