@@ -81,6 +81,20 @@ paths:
       responses:
         200:
           description: Author of the book updated successfully
+  /books/authors:
+    put:
+      summary: Update authors for multiple books
+      operationId: updateMultipleBookAuthors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateBookAuthor'
+      responses:
+        200:
+          description: Authors of multiple books updated successfully
   /authors:
   #TODO2: complete GET (can be filtered by name) - PUT - DELETE
     get: 
@@ -166,3 +180,12 @@ components:
         releaseDate:
           type: string
           format: date
+    UpdateBookAuthor:
+      type: object
+      properties:
+        bookId:
+          type: string
+          description: the book ID
+        authorId:
+          type: string
+          description: the author ID
