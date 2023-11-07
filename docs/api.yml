@@ -124,6 +124,26 @@ paths:
       responses:
         204:
           description: Author deleted successfully
+  /books/{bookId}/authors/{authorId}:
+    put:
+      summary: Update the author of a specific book
+      operationId: updateBookAuthor
+      parameters:
+        - in: path
+          name: bookId
+          description: The ID of the book to update
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: authorId
+          description: The ID of the new author
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Author of the book updated successfully  
 components:
   schemas:
     Book:
@@ -160,21 +180,10 @@ components:
       enum:
         - M
         - F
-    crupdateBook:
-      type: object
-      properties:
-        id:
-          type: string
-        bookName:
-          type: string
-        pageNumbers:
-          type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: date
+    CrupdateBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: object
+          properties:
+            author:
+              type: string
