@@ -72,3 +72,26 @@ components:
         releaseDate:
           type: string
           format: date
+
+components:
+   schemas:
+    CrupdateBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: object
+          properties:
+            ID:
+              type: integer
+            bookName:
+              type: string
+            pageNumbers:
+              type: integer
+            topic:
+              type: string
+              enum:
+                - ROMANCE
+                - COMEDY
+                - OTHER
+            releaseDate:
+              type: string
+              format: date
