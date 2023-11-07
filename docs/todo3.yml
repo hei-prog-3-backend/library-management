@@ -1,0 +1,16 @@
+parameters:
+  - in: query
+    name: releaseDateStart
+    description: Filter books 
+    required: false
+    schema:
+      type: string
+      format: date
+  - in: query
+    name: releaseDateEnd
+    description: Filter books and date
+    required: false
+    schema:
+      type: string
+      format: date
+      format: date 
