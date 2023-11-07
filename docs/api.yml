@@ -72,3 +72,21 @@ components:
         releaseDate:
           type: string
           format: date
+    schema:
+    author:
+       type: object
+       properties:
+        id:
+          type: object
+        name:
+          type: string
+        sex:
+          $ref: "#/components/schemas/Sex"
+       required:
+        - id
+    Sex:
+      type: string
+      enum:
+        - M
+        - F
+  
