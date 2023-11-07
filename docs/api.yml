@@ -136,6 +136,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Author'
+
+  /books/{bookId}/authors/{authorId}:
+    put:
+       summary: updated auhtor of book specified by id
+       operationId: update book
+       tags:
+        - Authors
+       parameters:
+          - name: bookId
+            in: path
+            description: id of books to updated
+            schema:
+              type: string
+            required: true
+          - name: authorId
+            in: path
+            description: id of auhtor
+            schema:
+              type: string
+            required: true
+       responses:
+         200: 
+          description: updated successfuly
+          content:
+           application/json:
+             schema: 
+               $ref: "#/components/schemas/Book"
 components:
   schemas:
     crupdateBook:
