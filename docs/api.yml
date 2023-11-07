@@ -227,15 +227,18 @@ components:
           $ref: '#/components/schemas/Author'
         pageNumbers:
           type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: date
+    topic:
+          type: object
+          properties:
+            genre:
+             type: string
+             enum:
+              - ROMANCE
+              - COMEDY
+              - OTHER
+            releaseDate:
+              type: string
+              format: date
     Author:
       type: object
       properties:
