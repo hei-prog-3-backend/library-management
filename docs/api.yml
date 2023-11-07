@@ -95,6 +95,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Book'
+  /books/authors:
+    put:
+      tags:
+        - Books
+      summary: Associate some books to some authors
+      operationId: associateBooksAuthors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateBook'
+      responses:
+        200:
+          description: List of updated books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
   /authors:
     get:
       summary: Get all authors
@@ -201,3 +223,13 @@ components:
         releaseDate:
           type: string
           format: date
+    UpdateBook:
+      type: object
+      properties:
+        bookId:
+          type: string
+        authorId:
+          type: string
+      required:
+        - bookId
+        - authorId
