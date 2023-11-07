@@ -257,3 +257,4 @@ components:
           type: string
 
 #2.b.i. UpdateBookAuthor sert de transfert de données dans le but de mettre à jour l'association entre un livre et un auteur
+#2.b.ii.  UpdateBookAuthor devrait avoir les propriétés de CrupdateBook et de Author dans le cas de: intégrité et validation des données, mises à jour partielles
