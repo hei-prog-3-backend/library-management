@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.1.0
-  description: STD22001
+  description: STD22057
 servers:
   - url: https://library.com
 tags:
@@ -41,6 +41,27 @@ paths:
             type: string
             format: date
           required: false
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: false
+          default: 1
+            - in: query
+              name: pageSize
+              schema:
+                type: integer
+              required: false
+              default: 50
+          responses:
+            200:
+              description: The books have been successfully returned
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Book'
       responses:
         200:
           description: The list of filtered books
@@ -86,6 +107,27 @@ paths:
           schema:
             type: string
           required: false
+        - in: path
+          name: page
+          schema:
+            type: integer
+          required: false
+          default: 1
+            - in: path
+              name: pageSize
+              schema:
+                type: integer
+              required: false
+              default: 50
+            responses:
+              200:
+                description: The authors have been successfully returned
+                content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Author'
       responses:
         200:
           description: The list of filtered authors
@@ -136,6 +178,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Author'
+  /books/{bookId}/authors/{authorId}:
+    put:
+      summary: modify the author of a Book by specifying each of their identifiers (ID) separately.
+      operationId: update author
+      parameters:
+        - in: path
+        - name: bookId
+        - required: false
+        - schema:
+            type: integer
+        - in: path
+        - name: authorId
+        - required: false
+        - schema:
+            type: integer
+      responses:
+          200:
+            description: author updated successfully
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Book'
+          400:
+            description: invalid request
+  /books/authors:
+    put:
+      operationId: updateBooksAuthors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateBookAuthor'
+      responses:
+        200:
+          description: all author updated successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        400:
+          description: La requête est invalide
 components:
   schemas:
     Book:
@@ -172,3 +260,20 @@ components:
       enum:
         - M
         - F
+
+    CrupdateBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: string
+      properties:
+        author:
+          type: object
+          required: false
+    UpdateBookAuthor:
+      type: object
+      properties:
+          bookId:
+            type: integer
+          authorId:
+            type: integer
+
