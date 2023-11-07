@@ -51,7 +51,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Book'
+                $ref: '#/components/schemas/CrupDateBook'
       responses:
         200:
           description: The list of created or updated books
@@ -83,8 +83,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/author'
-        404:
-          description: not found !
     put:
       summary: Create || update a author
       operationId: crupdateAuthors
@@ -104,39 +102,20 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/author'
-        404:
-          description: Not found !
     delete:
       summary: Delete list of authors
       responses:
         200:
           description: Deleting author successfully !
-        404: 
-          description: Author Not found
 components:
   schemas:
     Book:
-      type: object
-      properties:
-        id:
-          type: string
-        bookName:
-          type: string
-        author:
-          #TODO1: set it as a component with properties : id, name, sex (M or F)
-          $ref : '#/components/schemas/author'
-          type: string    
-        pageNumbers:
-          type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: date
+      allOf:
+        - $ref: '#/components/schemas/CrupDateBook'
+        - type: object
+          properties:
+            author:
+              $ref: '#/components/schemas/author'
     author:
       type : object
       properties: 
@@ -149,3 +128,21 @@ components:
           enum:
             - M
             - F
+    CrupDateBook:
+      type: object
+      properties:
+        id:
+          type: string
+        bookName:
+          type: string
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER
+        releaseDate:
+          type: string
+          format: date
