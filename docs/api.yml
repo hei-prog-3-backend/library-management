@@ -174,6 +174,30 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Author'
+  /authors/page/{page}/size/{size}:
+    get:
+      tags:
+        - Authors
+      parameters:
+        - in: path
+          name: page
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: size
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: The author deleted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
   /authors/{aId}:
     delete:
       summary: Delete an author
