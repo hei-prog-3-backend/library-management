@@ -260,6 +260,7 @@ components:
       enum:
         - M
         - F
+
     CrupdateBook:
       allOf:
         - $ref: '#/components/schemas/Book'
@@ -275,3 +276,4 @@ components:
             type: integer
           authorId:
             type: integer
+
