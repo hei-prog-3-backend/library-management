@@ -50,7 +50,7 @@ paths:
           required: false
         - in: query
           name:  pageSize
-          description: size items of pagination
+          description:  Number of items per page
           schema:
             type: integer
             default: 50
@@ -100,6 +100,20 @@ paths:
           schema:
             type: string
           required: false
+        - name: page
+          in: path
+          description: page number of pagination
+          schema:
+            type: integer
+            default: 1
+          required: true
+        - name: pageSize
+          in: path
+          description: Number of items per page
+          schema: 
+            type: integer
+            default: 50
+          required: true
       responses:
         200:
           description: The list of filtered authors
