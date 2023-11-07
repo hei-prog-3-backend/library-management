@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.0.0
-  description: STD22001
+  description: STD21089
 servers:
   - url: https://library.com
 tags:
@@ -147,29 +147,60 @@ paths:
           description: The author with the specified ID was not found
         500:
           description: An internal server error occurred
+  /books/{bookId}/authors/{authorId}:
+    put:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema: 
+            type: string
+        - name: authorId
+          in: path
+          required: true
+          schema: 
+            type: string
+      responses:
+        200:
+          description: The author has been successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+         
+
 components:
   schemas:
+    Sex:
+      type: string
+      enum:
+        - M
+        - F
     Author:
       type: object
+      allOf:
+        - $ref: '#components/schemas/CrupdateBook'
       properties:
         id:
           type: string
         name:
           type: string
         sex:
-          type: string
-          enum:
-            - M
-            - F
+          $ref: '#/components/schemas/Sex'
     Book:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/CrupdateBook'
+      properties:
+        author:
+          $ref: '#/components/schemas/Author'
+    CrupdateBook:
       type: object
       properties:
         id:
           type: string
         bookName:
           type: string
-        author:
-          $ref: '#/components/schemas/Author'
         pageNumbers:
           type: integer
         topic:
@@ -181,23 +212,3 @@ components:
         releaseDate:
           type: string
           format: date
-    CrupdateBook:
-      allOf:
-        - $ref: '#/components/schemas/Book'
-        - properties:
-            id:
-              type: string
-            author:
-              $ref: '#/components/schemas/Author'
-            bookName:
-              type: string
-            releaseDate:
-              type: string
-              format: date
-        - required:
-            - id
-            - author
-            - bookName
-            - pageNumbers
-            - topic
-            - releaseDate
