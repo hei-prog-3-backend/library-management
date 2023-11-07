@@ -301,7 +301,29 @@ paths:
           content:
            application/json:
              schema: 
-               $ref: "#/components/schemas/topic"    
+               $ref: "#/components/schemas/topic"   
+  /books/topics:
+       put:
+          summary:  updated book
+          operationId: UpdateBookTopic
+          tags:
+           - Topic
+          requestBody:
+           content:
+            application/json:
+             schema: 
+              type: array
+              items:
+               $ref: "#/components/schemas/UpdateBookTopic"
+          responses:
+           200:
+            description: updated successfuly
+            content:
+             application/json:
+              schema: 
+               type: array
+               items:
+                $ref: "#/components/schemas/UpdateBookTopic"
 components:
   schemas:
     crupdateBook:
@@ -357,3 +379,10 @@ components:
           type: string
          authorId:
           type: string  
+    UpdateBookTopic:
+       type: object
+       properties:
+         bookId:
+           type: string
+         TopicId:
+           type: string
