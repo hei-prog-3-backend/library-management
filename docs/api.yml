@@ -8,22 +8,20 @@ servers:
 paths:
   /books:
     get:
-      tags:
-        - "Books"    
       summary: Get all books
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
       parameters:
         - in: query
           name: bookName
-          description: Filter return books by given name
+          description: Filter books by name
           required: false
           schema:
             type: string
 
         - in: query
           name: releaseDate
-          description: Filter books by release date intervals
+          description: Filter books by release date intervals (YYYY-MM-DD)
           required: false
           schema:
             type: string
@@ -39,7 +37,7 @@ paths:
 
         - in: query
           name: pageSize
-          description: Page number for pagination (default:50)
+          description: Number of items per page for pagination (default:50)
           required: false
           schema:
             type: integer
@@ -54,9 +52,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
+
     put:
-      tags:
-        - "Books"
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
@@ -75,29 +72,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
+
   /authors:
     get:
-      tags:
-        - "Authors"
       summary: Get all authors
       description: Get all the authors in the database
       responses:
         "200":
-          description: The author's list
+          description: The list of authors
 
     put:
-      tags:
-        - "Authors"
-      summary: Update author by id
-      description: Update information according by id
+      summary: Update author by ID
+      description: Update author information based on the provided ID
       parameters:
-        - name: authorId
+        - name: id
           in: path
           required: true
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Author"
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
@@ -106,35 +98,31 @@ paths:
               $ref: "#/components/schemas/Author"
       responses:
         "200":
-          description: Author updated successfully
+          description: Author information has been updated successfully
 
     delete:
-      tags:
-        - "Authors"
-      summary: Delete author by id
-      description: Deleting an author by id
+      summary: Delete author by ID
+      description: Delete an author based on the provided ID
       parameters:
-        - name: authorId
+        - name: id
           in: path
           required: true
           schema:
-            type: string
+            type: integer
       responses:
         "204":
           description: Author deleted successfully
 
-  /books/{bookId}/authors/{authorId}:
+  /books/{bookID}/authors/{authorID}:
     put:
-      tags:
-        - "Books"
       parameters:
-        - name: bookId
+        - name: bookID
           in: path
           schema:
             type: string
           required: true
 
-        - name: authorId
+        - name: authorID
           in: path
           schema:
             type: string
@@ -149,8 +137,6 @@ paths:
 
   /books/authors:
     put:
-      tags:
-        - "Books"
       summary: Update Book authors
       description: Update the authors of multiple books
       requestBody:
@@ -165,139 +151,6 @@ paths:
         "200":
           description: Authors updated successfully
 
-  /topics:
-    get:
-      tags:
-        - "Topics"
-      summary: Get all topics
-      description: Retrieve a list of all topics
-      responses:
-        "200":
-          description: List of topics
-
-    put:
-      tags:
-        - "Topics"
-      summary: Create or update a topic
-      description: Create or update a topic
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Topic"
-      responses:
-        "200":
-          description: Topic created or updated successfully
-
-    delete:
-      tags:
-        - "Topics"
-      summary: Delete a topic by ID
-      description: Delete a topic by ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: Topic deleted successfully
-
-  /books/{bookId}/topics/{topicId}:
-    put:
-      tags:
-        - "Topics"
-      summary: Update the topic of a book
-      description: Update the topic of a book by book ID and topic ID
-      parameters:
-        - name: bookId
-          in: path
-          schema:
-            type: string
-          required: true
-        - name: topicId
-          in: path
-          schema:
-            type: string
-          required: true
-      responses:
-        "200":
-          description: The updated book with the new topic
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Book"
-
-  /books/topics:
-    put:
-      tags:
-        - "Topics"
-      summary: Update topics for multiple books
-      description: Update the topics of multiple books
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/UpdateBookTopic"
-
-      responses:
-        "200":
-          description: Topics updated successfully
-
-  /topic:
-    get:
-      tags:
-        - "Topics"
-      summary: Get all topics with pagination
-      description: Retrieve a list of all topics with pagination
-      parameters:
-        - in: query
-          name: page
-          description: Page number for pagination
-          required: false
-          schema:
-            type: integer
-            default: 1
-
-        - in: query
-          name: pageSize
-          description: Page size for pagination
-          required: false
-          schema:
-            type: integer
-            default: 50
-
-      responses:
-        "200":
-          description: List of topics
-
-  /authors/topics:
-    get:
-      tags:
-        - "Topics"
-      summary: Get topics for all authors
-      description: Retrieve topics for all authors
-      responses:
-        "200":
-          description: List of objects containing authorName, authorId, and topicName
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    authorName:
-                      type: string
-                    authorId:
-                      type: string
-                    topicName:
-                      type: string
 components:
   schemas:
     Book:
@@ -311,8 +164,8 @@ components:
     Author:
       type: object
       properties:
-        authorId:
-          type: string
+        id:
+          type: integer
         name:
           type: string
         sex:
@@ -323,7 +176,7 @@ components:
     CrupdateBook:
       type: object
       properties:
-        bookId:
+        id:
           type: string
         bookName:
           type: string
@@ -342,23 +195,15 @@ components:
     UpdateBookAuthor:
       type: object
       properties:
-        bookId:
+        bookID:
           type: string
-        authorId:
-          type: string
-
-    Topic:
-      type: object
-      properties:
-        id:
-          type: string
-        topicName:
+        authorID:
           type: string
 
-    UpdateBookTopic:
-      type: object
-      properties:
-        bookId:
-          type: string
-        topicId:
-          type: string
+#Reponse à la question de la vidéo: 
+          
+#Créez un schéma "Author" distinct.
+#Ajoutez une liste d'auteurs au schéma "Book".
+#Utilisez un schéma "BookWithAuthors" pour représenter les détails du livre avec les auteurs.
+#Modifiez l'opération get pour récupérer des livres avec les auteurs associés.
+#Modifiez l'opération put pour permettre la spécification des auteurs lors de la création ou de la mise à jour d'un livre.
