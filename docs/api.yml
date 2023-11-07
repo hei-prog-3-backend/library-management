@@ -8,6 +8,8 @@ servers:
 paths:
   /books:
     get:
+      tags:
+        - "Books"    
       summary: Get all books
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
@@ -53,6 +55,8 @@ paths:
                 items:
                   $ref: "#/components/schemas/Book"
     put:
+      tags:
+        - "Books"
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
@@ -73,6 +77,8 @@ paths:
                   $ref: "#/components/schemas/Book"
   /authors:
     get:
+      tags:
+        - "Authors"
       summary: Get all authors
       description: Get all the authors in the database
       responses:
@@ -80,10 +86,12 @@ paths:
           description: The author's list
 
     put:
+      tags:
+        - "Authors"
       summary: Update author by id
       description: Update information according by id
       parameters:
-        - name: id
+        - name: authorId
           in: path
           required: true
           content:
@@ -101,28 +109,32 @@ paths:
           description: Author updated successfully
 
     delete:
+      tags:
+        - "Authors"
       summary: Delete author by id
       description: Deleting an author by id
       parameters:
-        - name: id
+        - name: authorId
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         "204":
           description: Author deleted successfully
 
-  /books/{bookID}/authors/{authorID}:
+  /books/{bookId}/authors/{authorId}:
     put:
+      tags:
+        - "Books"
       parameters:
-        - name: bookID
+        - name: bookId
           in: path
           schema:
             type: string
           required: true
 
-        - name: authorID
+        - name: authorId
           in: path
           schema:
             type: string
@@ -137,6 +149,8 @@ paths:
 
   /books/authors:
     put:
+      tags:
+        - "Books"
       summary: Update Book authors
       description: Update the authors of multiple books
       requestBody:
@@ -151,8 +165,10 @@ paths:
         "200":
           description: Authors updated successfully
 
-  / topics:
+  /topics:
     get:
+      tags:
+        - "Topics"
       summary: Get all topics
       description: Retrieve a list of all topics
       responses:
@@ -160,6 +176,8 @@ paths:
           description: List of topics
 
     put:
+      tags:
+        - "Topics"
       summary: Create or update a topic
       description: Create or update a topic
       requestBody:
@@ -173,6 +191,8 @@ paths:
           description: Topic created or updated successfully
 
     delete:
+      tags:
+        - "Topics"
       summary: Delete a topic by ID
       description: Delete a topic by ID
       parameters:
@@ -187,6 +207,8 @@ paths:
 
   /books/{bookId}/topics/{topicId}:
     put:
+      tags:
+        - "Topics"
       summary: Update the topic of a book
       description: Update the topic of a book by book ID and topic ID
       parameters:
@@ -210,6 +232,8 @@ paths:
 
   /books/topics:
     put:
+      tags:
+        - "Topics"
       summary: Update topics for multiple books
       description: Update the topics of multiple books
       requestBody:
@@ -220,18 +244,21 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/UpdateBookTopic"
+
       responses:
         "200":
           description: Topics updated successfully
 
-  /topics:
+  /topic:
     get:
+      tags:
+        - "Topics"
       summary: Get all topics with pagination
       description: Retrieve a list of all topics with pagination
       parameters:
         - in: query
           name: page
-          description: Page number for pagination 
+          description: Page number for pagination
           required: false
           schema:
             type: integer
@@ -251,6 +278,8 @@ paths:
 
   /authors/topics:
     get:
+      tags:
+        - "Topics"
       summary: Get topics for all authors
       description: Retrieve topics for all authors
       responses:
@@ -282,8 +311,8 @@ components:
     Author:
       type: object
       properties:
-        id:
-          type: integer
+        authorId:
+          type: string
         name:
           type: string
         sex:
@@ -294,7 +323,7 @@ components:
     CrupdateBook:
       type: object
       properties:
-        id:
+        bookId:
           type: string
         bookName:
           type: string
@@ -313,9 +342,9 @@ components:
     UpdateBookAuthor:
       type: object
       properties:
-        bookID:
+        bookId:
           type: string
-        authorID:
+        authorId:
           type: string
 
     Topic:
