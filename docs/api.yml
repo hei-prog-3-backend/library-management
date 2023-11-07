@@ -5,9 +5,17 @@ info:
   description: STD22001
 servers:
   - url: https://library.com
+tags:
+  - name: Authors
+    description: Operations related to managing authors
+  - name: Books
+    description: Operations related to managing books
+
 paths:
   /books:
     get:
+      tags:
+        - Books
       summary: Get all books
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
@@ -44,6 +52,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
     put:
+      tags:
+        - Books
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
@@ -65,6 +75,8 @@ paths:
     #TODO2: complete GET (can be filtered by name) - PUT - DELETE
   /authors:
      get:
+      tags:
+        - Authors
       summary: get author by name
       description: The returned authors are filtered by name .
       operationId: getAuthor
@@ -86,6 +98,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Author'
      put:
+       tags:
+         - Authors
        summary: Create or update a  Author
        operationId: crupdateAuthor
        requestBody:
@@ -105,6 +119,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Author'
      delete:
+      tags:
+        - Authors
       summary: Delete an author
       description: Delete an author by their ID
       operationId: deleteAuthor
@@ -120,6 +136,43 @@ paths:
         description: Author successfully deleted
        404:
         description: Author not found
+  #update Auhtor
+  /books/{bookId}/authors/{authorId}:
+      put:
+       tags:
+         - Authors
+       summary: update author
+       operationId: UpdateAuthor
+       parameters:
+        - in: path
+          name: bookId
+          description: Id of book
+          required: true
+          schema:
+             type: string
+        - in: path
+          name: authorId
+          description: Id of Auhtor to update
+          required: true
+          schema: 
+            type: string
+
+       requestBody:
+          content:
+            application/json:
+             schema:
+                 type: array
+                 items:
+                    $ref: '#/components/schemas/Author'
+       responses:
+          200:
+            description: Auhtor updated
+            content:
+               application/json:
+                 schema:
+                   type: array
+                   items:
+                     $ref: '#/components/schemas/Author'
 
 components:
   schemas:
@@ -165,3 +218,5 @@ components:
             type: string
             format: date
  
+  
+    
