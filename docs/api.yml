@@ -256,6 +256,27 @@ paths:
                  type: array
                  items:
                    $ref: "#/components/schemas/topic"
+  /topic/{tId}:
+     delete:
+        summary: delete an topic 
+        operationId: deleteTopic
+        tags:
+           - Topic
+        parameters:
+           - name: tId
+             in: path
+             description: id of topic to deleted
+             schema:
+               type: string
+             required: true
+        responses:
+          200:
+            description: topic deleted
+            content:
+              application/json:
+               schema: 
+                 $ref: "#/components/schemas/topic"
+           
 components:
   schemas:
     crupdateBook:
@@ -272,6 +293,8 @@ components:
     topic:
           type: object
           properties:
+            TopicId:
+              type: string
             genre:
              type: string
              enum:
