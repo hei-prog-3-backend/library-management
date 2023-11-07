@@ -118,17 +118,33 @@ paths:
           required: true
           schema:
             type: string
-          example: "123"
+          example: "46"
         - in: path
           name: authorId
           description: ID of the author
           required: true
           schema:
             type: string
-          example: "456"
+          example: "3"
       responses:
         '200':
           description: Author of the book updated successfully
+
+  /books/authors:
+    put:
+      summary: Update authors of multiple books
+      operationId: updateAuthorsOfMultipleBooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateBookAuthor'
+      responses:
+        '200':
+          description: Authors of the books updated successfully
 
 components:
   schemas:
@@ -180,3 +196,14 @@ components:
           enum:
             - M
             - F
+    UpdateBookAuthor:
+      type: object
+      properties:
+        bookId:
+          type: string
+          description: ID of the book
+          example: "46"
+        authorId:
+          type: string
+          description: ID of the author
+          example: "3"
