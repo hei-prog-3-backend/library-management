@@ -1,13 +1,18 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.0.0
+  version: 3.0.3
   description: STD22001
 servers:
   - url: https://library.com
+tags:
+  - name: Books  
+  - name: Author
 paths:
   /books:
     get:
+      tags:
+        - Books
       summary: Get all books
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
@@ -43,6 +48,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
     put:
+      tags:
+        - Books
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
@@ -67,6 +74,8 @@ paths:
       summary: Get all author
       description: The returned author
       operationId: get author
+      tags:
+        - Author
       responses:
         200:
           description: The list of filtered author
@@ -79,6 +88,8 @@ paths:
     put:
       summary: Create or update a list of author
       operationId: crupdateAuthor
+      tags:
+        - Author
       requestBody:
         content:
           application/json:
@@ -99,6 +110,8 @@ paths:
     delete:
       summary: Delete author 
       operationId: deletedAuthor 
+      tags:
+        - Author
       parameters:
         - name: aId
           in: path
@@ -128,7 +141,12 @@ components:
         authorname:
           type: string
         sex:
-          type: string  
+          $ref: '#/components/schemas/Sex'
+    Sex:
+      type: string
+      enum:
+        - M
+        - F
     crupdateBook:
       properties:
         id:
