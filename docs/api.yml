@@ -151,6 +151,34 @@ paths:
           description: failed, request fail
         404:
           description: not found      
+
+  /books/authors:
+    put:
+      summary: update author's book 
+      tags:
+        - Author
+      requestBody:
+        description: request body for update author's book
+        required: true
+        content:
+          application/json:
+            schema:   
+              type: array
+              items:
+                type: object
+              properties:
+                bookId:
+                  type: integer
+                  description: id book updated 
+                authoursId:
+                  type: integer
+                  description: id new author
+      responses:
+        200:
+          description: succes, updated book's author
+        400:
+          description: request failed              
+                    
        
         
 
