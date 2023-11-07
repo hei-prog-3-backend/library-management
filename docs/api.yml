@@ -276,7 +276,32 @@ paths:
               application/json:
                schema: 
                  $ref: "#/components/schemas/topic"
-           
+  /books/{bookId}/topic/{topicId}:  
+      put:
+        summary: updated topic of book per id 
+        operationId: update book
+        tags:
+        - Topic
+        parameters:
+          - name: bookId
+            in: path
+            description: id of books to updated
+            schema:
+              type: string
+            required: true
+          - name: topicId
+            in: path
+            description: id of topic
+            schema:
+              type: string
+            required: true
+        responses:
+         200: 
+          description: updated successfuly
+          content:
+           application/json:
+             schema: 
+               $ref: "#/components/schemas/topic"    
 components:
   schemas:
     crupdateBook:
@@ -291,7 +316,8 @@ components:
         pageNumbers:
           type: integer
     topic:
-          type: object
+          allOf:
+            - $ref: "#/components/schemas/Book"
           properties:
             TopicId:
               type: string
