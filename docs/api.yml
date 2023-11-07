@@ -124,9 +124,12 @@ paths:
 components:
   schemas:
     Book:
+      type: object
+      properties:
+         author:
+            $ref: '#/components/schemas/Author'
       allOf:
         - $ref: '#/components/schemas/CrupdateBook'
-        - $ref: '#/components/schemas/Author'
       
     Author:
       type: object
