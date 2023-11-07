@@ -138,7 +138,7 @@ paths:
                 $ref: '#/components/schemas/Author'
 components:
   schemas:
-    Book:
+    crupdateBook:
       type: object
       properties:
         id:
@@ -172,3 +172,9 @@ components:
       enum:
         - M
         - F
+    Book:
+      allOf:
+        - $ref: '#/components/schemas/crupdateBook'
+      properties:
+       author:
+          $ref: '#/components/schemas/Author'
