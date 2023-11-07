@@ -61,6 +61,26 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+  /books/{bookId}/authors/{authorId}:
+    put:
+      summary: Update the author of a book
+      operationId: updateBookAuthor
+      parameters:
+        - in: path
+          name: bookId
+          required: true
+          schema:
+            type: string 
+          description: ID of the book to update
+        - in: path
+          name: authorId
+          required: true
+          schema:
+            type: string 
+          description: ID of the author to associate with the book
+      responses:
+        200:
+          description: Author of the book updated successfully
   /authors:
   #TODO2: complete GET (can be filtered by name) - PUT - DELETE
     get: 
