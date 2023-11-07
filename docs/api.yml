@@ -2,12 +2,10 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.0.0
-  description: STD22001
+  description: STD22109
 servers:
   - url: https://library.com
-tags:
-  - Books
-  - Authors
+
 paths:
   /books:
     get:
@@ -49,7 +47,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'
+                  $ref: '#/components/schemas/book'
     put:
       tags:
         - Books
@@ -61,7 +59,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Book'
+                $ref: '#/components/schemas/Cupdatebook'
       responses:
         200:
           description: The list of created or updated books
@@ -70,7 +68,10 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'
+                  $ref: '#/components/schemas/book'
+
+
+
   /authors:
     get:
       summary: Get all authors
@@ -136,17 +137,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Author'
+
+
+  /books/{bookId}/authors/{authorId}:
+    put :
+      summary: associate a book with an author
+      operationId: combine
+      tags:
+        - Books
+      parameters:
+        - name: bookId
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: authorId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: associated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/book'
+
+
+
+
+
+
+
+
 components:
   schemas:
-    Book:
+    Cupdatebook:
       type: object
       properties:
         id:
           type: string
         bookName:
           type: string
-        author:
-          $ref: '#/components/schemas/Author'
+
         pageNumbers:
           type: integer
         topic:
@@ -158,6 +192,19 @@ components:
         releaseDate:
           type: string
           format: date
+    book:
+      properties:
+        author:
+          type: object
+          items:
+            $ref: '#/components/schemas/Author'
+      allOf:
+        - $ref: '#/components/schemas/Cupdatebook'
+
+
+
+
+
     Author:
       type: object
       properties:
