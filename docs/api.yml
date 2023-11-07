@@ -38,6 +38,20 @@ paths:
             type: string
             format: date
           required: false
+        - in: query
+          name: page
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pageSize
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            default: 50
       responses:
         200:
           description: The list of filtered books
@@ -218,3 +232,10 @@ components:
       enum:
         - M
         - F
+
+
+# Pourquoi UpdateBookAuthor possède uniquement l’identifiant de CrupdateBook et l’identifiant de Author, mais sans les autres propriétés telles que bookName et authorName comme dans leur composant respectif ? 
+# Pour eviter de transmettre des données redondantes
+
+# Dans quel cas, UpdateBookAuthor devrait avoir les propriétés de CrupdateBook et de Author ?
+# Au cas où on fusionne les propriétés des livres ou auteurs en un seul
