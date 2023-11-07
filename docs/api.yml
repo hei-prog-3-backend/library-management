@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.0.0
-  description: STD22093
+  description: STD22001
 servers:
   - url: https://library.com
 paths:
@@ -15,18 +15,6 @@ paths:
         - in: query
           name: bookName
           description: Filter return books by given name
-          required: false
-          schema:
-            type: string
-        - in: query
-          name: releaseDate
-          description:  Start date of the release date interval (YYYY-MM-DD)
-          required: false
-          schema:
-            type: string
-        - in: query
-          name: endDate
-          description:  End date of the release date interval (YYYY-MM-DD)
           required: false
           schema:
             type: string
@@ -61,59 +49,6 @@ paths:
                   $ref: '#/components/schemas/Book'
   /authors:
   #TODO2: complete GET (can be filtered by name) - PUT - DELETE
-   get:
-    summary: get author filtered by name
-    operationId: getAuthor
-    parameters:
-      - name: name
-        in: query
-        description: filtered author by name
-        required: false
-        schema:
-         type: string
-    responses:
-     200:
-      description: The list of author filter by name
-      content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/author'
-   put:
-    summary: Create or update a list of author
-    operationId: create or update
-    requestBody:
-      content:
-        application/json:
-          schema:
-           type: array
-           items:
-             $ref: '#/components/schemas/author'
-    responses:
-      200:
-        description: The list of created or updated books
-        content:
-          application/json:
-           schema:
-            type: array
-            items:
-               $ref: '#/components/schemas/author'
-   delete:
-     summary: delete author by id
-     parameters:
-      - name: id
-        in: path
-        description: id of author
-        required: true
-        schema:
-          type: integer
-     responses:
-       204:
-        description: author deleted successfuly
-       205:
-        description: author not found
-       
 components:
   schemas:
     Book:
@@ -137,15 +72,3 @@ components:
         releaseDate:
           type: string
           format: date
-    author:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        sex:
-          type: string
-          enum:
-            - M
-            - F
