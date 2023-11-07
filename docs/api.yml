@@ -95,24 +95,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Author'
+  /authors/{aId}:                
     delete:
       summary: Delete author 
-      operationId: deletedAuthor
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Author'
+      operationId: deletedAuthor 
+      parameters:
+        - name: aId
+          in: path
+          description: author identifier to be deleted
+          schema:
+            type: string
+          required: true
       responses:
         200:
           description: The list of deleted author
           content:
             application/json:
               schema:
-                type: array
-                items:
                   $ref: '#/components/schemas/Author'                         
 
 components:
