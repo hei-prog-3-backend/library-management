@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.1.0
+  version: 1.0.1
   description: STD22119
 servers:
   - url: https://library.com
@@ -77,10 +77,24 @@ paths:
     get:
       summary: Get all authors
       description: Get all the authors in the database
+      parameters:
+        - in: query
+          name: page
+          description: Page number for pagination (default:1)
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pageSize
+          description: Number of items per page for pagination (default:50)
+          required: false
+          schema:
+            type: integer
+            default: 50
       responses:
         "200":
           description: The list of authors
-
     put:
       summary: Update author by ID
       description: Update author information based on the provided ID
@@ -199,11 +213,18 @@ components:
           type: string
         authorID:
           type: string
+#Reponse à la question de la vidéo:
 
-#Reponse à la question de la vidéo: 
-          
 #Créez un schéma "Author" distinct.
 #Ajoutez une liste d'auteurs au schéma "Book".
 #Utilisez un schéma "BookWithAuthors" pour représenter les détails du livre avec les auteurs.
 #Modifiez l'opération get pour récupérer des livres avec les auteurs associés.
 #Modifiez l'opération put pour permettre la spécification des auteurs lors de la création ou de la mise à jour d'un livre.
+
+#Réponse des questions du TD2:
+
+#i)UpdateBookAuthor ne contient que les identifiants car il se concentre sur la mise à jour des relations entre les livres et les auteurs, pas sur leurs détails.
+#ii)UpdateBookAuthor devrait inclure les propriétés de CrupdateBook et de Author lorsque la mise à jour nécessite également des détails spécifiques sur le livre ou l'auteur.
+#3.a)La pagination est nécessaire pour gérer efficacement de grandes quantités de données.
+#4.a) Oui, la pagination peut être gérée via les entêtes de requête.
+#4.b) La gestion de la pagination via les entêtes dépend des besoins de l'API et de l'expérience utilisateur. Ce n'est pas obligatoire, mais c'est une pratique courante.
