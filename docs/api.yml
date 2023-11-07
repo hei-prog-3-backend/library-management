@@ -261,3 +261,6 @@ components:
 
 #Est-ce qu’on doit gérer la pagination à travers les entêtes de la requête ?
 #L'utilisation de paramètres de requête pour la pagination est une pratique courante dans les API REST, et cela suit les conventions établies.
+
+#comment est ce que vous feriez si c'est plusieurs auteurs en meme temps
+#ajoutez des paramètres de requête à votre point d'entrée GET /authors
