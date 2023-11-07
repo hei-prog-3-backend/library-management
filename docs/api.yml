@@ -41,6 +41,27 @@ paths:
             type: string
             format: date
           required: false
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: false
+          default: 1
+            - in: query
+              name: pageSize
+              schema:
+                type: integer
+              required: false
+              default: 50
+          responses:
+            200:
+              description: The books have been successfully returned
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Book'
       responses:
         200:
           description: The list of filtered books
@@ -86,6 +107,27 @@ paths:
           schema:
             type: string
           required: false
+        - in: path
+          name: page
+          schema:
+            type: integer
+          required: false
+          default: 1
+            - in: path
+              name: pageSize
+              schema:
+                type: integer
+              required: false
+              default: 50
+            responses:
+              200:
+                description: The authors have been successfully returned
+                content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Author'
       responses:
         200:
           description: The list of filtered authors
