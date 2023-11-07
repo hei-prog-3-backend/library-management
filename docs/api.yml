@@ -5,12 +5,17 @@ info:
   description: STD22001
 servers:
   - url: https://library.com
+tags:
+  - name: Books
+  - name: Authors
 paths:
   /books:
     get:
       summary: Get all books
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
+      tags:
+        - Books
       parameters:
         - in: query
           name: bookName
@@ -44,6 +49,8 @@ paths:
     put:
       summary: Create or update a list of books
       operationId: crupdateBooks
+      tags:
+        - Books
       requestBody:
         content:
           application/json:
@@ -60,11 +67,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+  /books/{bookId}:
+    get:
+      summary: Get a specific book
+      description: Get a specific book by its ID
+      operationId: getBookById
+      tags:
+        - Books
+      parameters:
+        - in: path
+          name: bookId
+          description: ID of the book to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: The requested book
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
   /authors:
     get:
       summary: Get all authors
       description: Get all authors or filter by name
       operationId: getAuthors
+      tags:
+        - Authors
       parameters:
         - in: query
           name: authorName
@@ -84,6 +114,8 @@ paths:
     put:
       summary: Create or update an author
       operationId: crupdateAuthor
+      tags:
+        - Authors
       requestBody:
         content:
           application/json:
@@ -99,6 +131,8 @@ paths:
     delete:
       summary: Delete an author
       operationId: deleteAuthor
+      tags:
+        - Authors
       parameters:
         - in: query
           name: authorId
@@ -113,25 +147,6 @@ paths:
           description: The author with the specified ID was not found
         500:
           description: An internal server error occurred
-  /books/{bookId}:
-    get:
-      summary: Get a specific book
-      description: Get a specific book by its ID
-      operationId: getBookById
-      parameters:
-        - in: path
-          name: bookId
-          description: ID of the book to return
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: The requested book
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Book'
 components:
   schemas:
     Author:
