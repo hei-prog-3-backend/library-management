@@ -19,6 +19,18 @@ paths:
           schema:
             type: string
         #TODO3: add parameter to filter books by intervals of dates of the releaseDate
+        - in: query
+          name: releaseDateMin
+          schema:
+            type: string
+            format: date
+          required: false
+        - in: query
+          name: releaseDateMax
+          schema:
+            type: string
+            format: date
+          required: false
       responses:
         200:
           description: The list of filtered books
