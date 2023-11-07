@@ -261,3 +261,5 @@ components:
 #3.a. Les paginations sont nécessaires parce que: les Performances sont améliorées, il y a l'évolutivité et l'expérience utilisateur est améliorée.
 #4.a. On peut gérer la pagination à travers les entêtes de la requête parce que: c'est claire et simple, Les paramètres de requête peuvent être facilement testés et 
 # manipulés directement dans l'URL et Les paramètres de requête sont pris en charge par la plupart des bibliothèques client HTTP et sont facilement intégrés dans les applications frontales.
+#4.b. on ne doit pas gérer la pagination  à travers les entêtes de la requête parce que pagination est généralement gérée via des paramètres de requête dans les API RESTful,
+# Les paramètres de requête assurent la transparence et la lisibilité de l'URL et l'utilisation d'en-têtes de requête peut rendre la compréhension des paramètres de pagination moins visible et moins intuitive.
