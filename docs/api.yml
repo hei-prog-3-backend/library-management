@@ -125,7 +125,35 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/Author'                         
+                  $ref: '#/components/schemas/Author'    
+  /books/{bookId}/authors/{authoursId}:
+    put:
+      summary: update books's author
+      tags:
+        - Author
+      parameters:
+        - name: bookId
+          in: path
+          description: id book update 
+          required: true
+          schema:
+            type: integer
+        - name: authoursId
+          in: path
+          description: id author 
+          required: true
+          schema: 
+            type: integer
+      responses:
+        200:
+          description: succes update books's author
+        400:
+          description: failed, request fail
+        404:
+          description: not found      
+       
+        
+
 
 components:
   schemas:
