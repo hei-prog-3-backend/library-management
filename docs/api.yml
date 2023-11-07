@@ -164,8 +164,90 @@ paths:
               schema:
                 $ref: '#/components/schemas/book'
 
+  /topic:
+
+    get:
+
+      summary: get all topic
+      operationId: get
+      tags:
+        - topic
+      parameters:
+        - name: topicName
+          in: query
+          required: false
+          description: |
+           get all topic by its name if there is no parameters get all
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: get topics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
 
 
+    put:
+      summary: create or update a topic
+      operationId: crupdate
+      tags:
+        - topic
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Topic'
+      responses:
+        200:
+          description: new topic
+
+
+  /topic/{topicId}:
+    delete:
+      summary: delete a topic
+      operationId: delete
+      tags:
+        - topic
+      parameters:
+        - name: topicId
+          in: path
+          description: topic identifier to delete
+
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: the deleted topic
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topic'
+
+
+  /book/{bookId}/topic/{topicId}:
+    put:
+      summary: associate a topic to all books
+      operationId: combine
+      tags:
+        - topic
+      parameters:
+        - name: bookId
+          in: path
+          schema:
+            type: string
+            required: true
+        - name: topicId
+          in: path
+          schema:
+            type: string
+            required: true
+      responses:
+        200:
+          description: done
 
 
 
@@ -183,12 +265,8 @@ components:
 
         pageNumbers:
           type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
+
+
         releaseDate:
           type: string
           format: date
@@ -219,3 +297,11 @@ components:
       enum:
         - M
         - F
+
+    Topic:
+      type: object
+      properties:
+        topicId:
+          type: string
+        topicName:
+          type: string
