@@ -255,9 +255,27 @@ paths:
                   description: Status of the operation
                   schema:
                     $ref: '#/components/schemas/reponse200'
-     
+  /authors/import:
+       post: 
+        tags:
+          - Authors
+        summary: return lisf of authors
+        operationId: PostAuhtor
+        responses:
+          200:
+            description: List of authors  successfully
+            content:
+              application/json:
+               schema: 
+                 type: array
+                 items:
+                   $ref: '#/components/schemas/Author'
+            headers:
+               status:
+                  description: Status of the operation
+                  schema:
+                    $ref: '#/components/schemas/reponse200'
               
-
 components:
   parameters:
     queryPagination:
