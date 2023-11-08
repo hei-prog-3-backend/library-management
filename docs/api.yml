@@ -164,7 +164,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Author'
-
+  /authors/topics:
+      get:
+         summary: get all author wiht list of topics
+         operationId: getAuthorsTopics
+         tags:
+           - Authors
+         responses:
+          200:
+           description: list of auhtors with topics
+         requestBody:
+           content:
+            application/json:
+             schema: 
+               type: array
+               items:
+                 $ref: "#/components/schemas/AuthorsTopic"
   /books/{bookId}/authors/{authorId}:
     put:
        summary: updated auhtor of book specified by id
@@ -243,7 +258,7 @@ paths:
         description: get all topic specified name
         parameters:
           - in: query
-            name: genre
+            name: topicName
             required: false
             schema:
               type: string
@@ -350,12 +365,11 @@ components:
         pageNumbers:
           type: integer
     topic:
-          allOf:
-            - $ref: "#/components/schemas/Book"
+          type: object
           properties:
             TopicId:
               type: string
-            genre:
+            topicName:
              type: string
              enum:
               - ROMANCE
@@ -398,7 +412,15 @@ components:
            type: string
          TopicId:
            type: string
-           
+    AuthorsTopic:
+        type: object
+        properties:
+          author:
+            $ref: "#/components/schemas/Author"  
+          topic:
+             type: array
+             items:
+               $ref: "#/components/schemas/topic"     
            # Question reponses
            # a . Pourquoi les paginations sont-elles nécessaires ?
 
