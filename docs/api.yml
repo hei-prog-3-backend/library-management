@@ -252,15 +252,22 @@ components:
       anyOf:
         - type: object
           properties:
-            authorName:
-              type: string
-            sex:
-              $ref: "#/components/schemas/Sex"
+            items:
+              $ref: "#/components/schemas/Author"
         - type: object
           properties:
             excel:
               type: string
-        
+    ImportBook:
+      anyOf:
+        - type: object
+          properties:
+            items:
+              $ref: "#/components/schemas/Book"
+        - type: object
+          properties:
+            excel:
+              type: string
   parameters:       
       Page:
          name: page
