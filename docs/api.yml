@@ -57,6 +57,30 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+    post: 
+      tags:
+        - Books
+      summary: returned books import
+      operationId: postBook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/Book'
+                  - $ref: '#/components/schemas/ImportBook'
+      responses:
+        200:
+          description: The list of books 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+       
     put:
       tags:
         - Books
@@ -79,6 +103,30 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
   /authors:
+    post: 
+      tags:
+        - Authors
+      summary: returned Author import
+      operationId: postAuthor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/Author'
+                  - $ref: '#/components/schemas/ImportAuthor'
+      responses:
+        200:
+          description: The list of Author 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+       
     get:
       summary: Get all authors
       operationId: getAuthors
@@ -179,6 +227,8 @@ paths:
     put:
       summary: Update a author's book by given id 
       operationId: UpdateBook
+      tags:
+        - Books
       responses:
         200:
           description: The list of updated books
@@ -191,6 +241,8 @@ paths:
   /books/authors:
     put: 
       summary: Update book Author 
+      tags:
+        - Books
       parameters:
         - in: query
           name: UpdateBookAuthor
@@ -275,6 +327,33 @@ components:
         releaseDate:
           type: string
           format: date
+    ImportAuthor:
+      type: object
+      properties:
+        authorName:
+          type: string
+        sex:
+          $ref: '#/components/schemas/Sex'
+    ImportBook:
+      type: object
+      properties:
+        idAuthor:
+          type: string
+        bookName:
+          type: string
+        author:
+          $ref: '#/components/schemas/Author'
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER
+        releaseDate: 
+          type: string
+          format: date
   parameters:
     queryPagination: 
         type: integer 
@@ -286,3 +365,4 @@ components:
         name: queryPagination
         in:  path
         $ref: '#/components/parameters/pathPagination'
+
