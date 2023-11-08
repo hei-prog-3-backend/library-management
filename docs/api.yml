@@ -5,9 +5,15 @@ info:
   description: STD22001
 servers:
   - url: https://library.com
+tags:
+  - name: books
+  - name: authors
+  - name: topics
 paths:
   /books:
     get:
+      tags:
+        - "books"
       summary: Get all books
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
@@ -43,6 +49,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
     put:
+      tags:
+        - "books"
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
@@ -63,6 +71,8 @@ paths:
                   $ref: '#/components/schemas/Book'
   /books/{bookId}/authors/{authorId}:
     put:
+      tags:
+        - "books"
       summary: Update the author of a book
       operationId: updateBookAuthor
       parameters:
@@ -83,6 +93,8 @@ paths:
           description: Author of the book updated successfully
   /books/authors:
     put:
+      tags:
+        - "books"
       summary: Update authors for multiple books
       operationId: updateMultipleBookAuthors
       requestBody:
@@ -98,6 +110,8 @@ paths:
   /authors:
   #TODO2: complete GET (can be filtered by name) - PUT - DELETE
     get: 
+      tags:
+        - "authors"
       summary: Get all authors
       description: Show all authors filter by  name.
       operationId: getAuthors
@@ -118,6 +132,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/author'
     put:
+      tags:
+        - "authors"
       summary: Create || update a author
       operationId: crupdateAuthors
       requestBody:
@@ -137,10 +153,63 @@ paths:
                 items:
                   $ref: '#/components/schemas/author'
     delete:
+      tags:
+        - "authors"
       summary: Delete list of authors
       responses:
         200:
           description: Deleting author successfully !
+  /Topic:
+    get:
+      tags:
+        - "topics"
+      summary: Get all topics
+      description: Show all topics.
+      operationId: getTopics
+      parameters:
+        - in: query
+          name: topicName
+          description: Return topic
+          required: false
+          schema: 
+            type: string
+      responses:
+        200:
+          description: Topics showed
+          content:
+            application/json:
+              schema :
+                type: array
+                items:
+                  $ref: '#/components/schemas/topic'
+    put:
+      tags:
+        - "topics"
+      summary: Create or update topic
+      operationId: crupdateTopics
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/CrupDateTopic'
+      responses:
+        200:
+          description: The list of created or updated topic
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/topic'
+    delete:
+      tags:
+        - "topics"
+      summary: delete list of topic
+      responses:
+        200:
+          description: Deleting topic successfully 
 components:
   schemas:
     Book:
@@ -171,12 +240,6 @@ components:
           type: string
         pageNumbers:
           type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
         releaseDate:
           type: string
           format: date
@@ -189,3 +252,15 @@ components:
         authorId:
           type: string
           description: the author ID
+    CrupDateTopic:
+      type: object
+      properties:
+        topicName:
+          type: string
+    topic:
+      type: object
+      properties:
+        id:
+          type: string
+        topicName:
+          type: string
