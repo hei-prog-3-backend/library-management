@@ -49,7 +49,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/CreatedUpdatedBooks'
+                $ref: '#/components/schemas/CrupdatedBook'
       responses:
         200:
           description: The list of created or updated books
@@ -122,9 +122,41 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/Author'
+                
+  /books/{bookId}/authors/{authorsId}:
+    put:
+      tags:
+        - Books
+      summary: created and updated a book
+      description: The returned books are ordered by updated datetime.
+      operationId: getBooksAndAuthors
+      parameters:
+        - in: path
+          name: bookId
+          description: Filter return books
+          required: true
+          schema:
+            type: string
+
+        - in: path
+          name:  authorsId  
+          description: filter books
+          schema:
+            type: string
+          required: true  
+
+      responses:
+        200:
+          description: Returned  list of  books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
 components:
   schemas:
-    CreatedUpdatedBooks:
+    CrupdatedBook:
       type: object
       properties:
         id:
@@ -140,7 +172,7 @@ components:
     Book:
       type: object
       allOf:
-        - $ref: "#/components/schemas/CreatedUpdatedBooks"
+        - $ref: "#/components/schemas/CrupdatedBook"
       properties:
         author:
           $ref:
