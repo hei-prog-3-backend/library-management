@@ -2,12 +2,12 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.1.0
-  description: STD22001
+  description: STD22100
 servers:
   - url: https://library.com
 tags:
-  - Books
-  - Authors
+  - name: Books
+  - name: Authors
 paths:
   /books:
     get:
@@ -41,6 +41,13 @@ paths:
             type: string
             format: date
           required: false
+        - in: path
+          name: pathPagination
+          schema:
+            type: integer
+            items:
+              $ref: '#/components/parameters/pathPagination'
+          required: true
       responses:
         200:
           description: The list of filtered books
@@ -86,6 +93,12 @@ paths:
           schema:
             type: string
           required: false
+        - name: queryPagination
+          in: query 
+          schema:
+            type: array
+            items:
+               $ref: '#/components/parameters/queryPagination'
       responses:
         200:
           description: The list of filtered authors
@@ -136,6 +149,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Author'
+  /books/authors/{bookId}/authors/{authorid}:
+    put:
+      summary: Update a author's book by given id 
+      operationId: UpdateBook
+      responses:
+        200:
+          description: The list of updated books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+  /books/authors:
+    put: 
+      summary: Update book Author 
+      parameters:
+        - in: query
+          name: UpdateBookAuthor
+          description: Filter return books by given name
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Author'
+      responses:
+        200:
+          description: The list of created or updated books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
 components:
   schemas:
     Book:
@@ -172,3 +224,32 @@ components:
       enum:
         - M
         - F
+    CrupdateBook:
+      type: object
+      properties:
+        id:
+          type: string
+        bookName:
+          type: string
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER
+        releaseDate:
+          type: string
+          format: date
+  parameters:
+    queryPagination: 
+        type: integer 
+        name: queryPagination
+        in:  query
+        $ref: '#/components/parameters/queryPagination'
+    pathPagination: 
+        type: integer 
+        name: queryPagination
+        in:  path
+        $ref: '#/components/parameters/pathPagination'
