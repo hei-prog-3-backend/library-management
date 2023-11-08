@@ -130,6 +130,51 @@ paths:
                 type: array
                 items:
                  $ref: '#/components/schemas/Author'
+#TD2 2-a
+ /books/{bookId}/authors/{authorId}:
+    put:
+      tags:
+        - Book
+      summary: Update the author of a book
+      operationId: updateBookAuthor
+      parameters:
+        - in: path
+          name: bookId
+          description: ID of the book to update
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: authorId
+          description: ID of the new author to associate with the book
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: The book author has been updated successfully
+#TD2 2-b 
+ /books/authors:
+    put:
+      tags:
+        - Book
+      summary: Update authors for multiple books
+      operationId: updateBooksAuthors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  bookId:
+                    type: string
+                  authorId:
+                    type: string
+      responses:
+        200:
+          description: The authors for the specified books have been updated successfully
 components:
  schemas:
     #TD2 use heritage
