@@ -317,7 +317,25 @@ paths:
              application/xml:
               schema:
                $ref: "#/components/schemas/updateTopicBook"        
-  
+  /author/topic:
+      get: 
+        tags:
+          - Authors
+        summary: Associate author to a topic
+        operationId: associateAuthorTopic
+        parameters:
+          - in: query
+            name: authorName 
+            schema: 
+               type: string
+            required: false   
+        responses:
+          "200":
+             description: get author and his topic 
+             content:
+               application/json:
+                 schema: 
+                   $ref: '#/components/schemas/authorWithTopic'  
 components:
   schemas:
     CrupdateBook:
