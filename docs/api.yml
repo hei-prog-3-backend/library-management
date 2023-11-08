@@ -293,6 +293,7 @@ paths:
                 $ref: '#/components/schemas/Topic'
 
 
+
   /book/{bookId}/topic/{topicId}:
     put:
       summary: associate a topic to all books
@@ -313,6 +314,31 @@ paths:
       responses:
         200:
           description: done
+
+
+  /book/topic:
+    put:
+      summary: associate books to topics
+      operationId: combine
+      tags:
+        - topic
+      description: this combine some books to topics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/updateBookTopic'
+      responses:
+        200:
+          description: list of updated books
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/updateBookTopic'
+
+
 
 
 
@@ -374,4 +400,13 @@ components:
         topicId:
           type: string
         topicName:
+          type: string
+
+
+    updateBookTopic:
+      type: object
+      properties:
+        topicId:
+          type: string
+        bookId:
           type: string
