@@ -26,35 +26,23 @@ paths:
           required: false
           schema:
             type: string
-        #TODO3: add parameter to filter books by intervals of dates of the releaseDate
+
         - in: query
           name: startDate
           description: Filter books with release dates after this date
           required: false
           schema:
-           type: string
-           format: date
+            type: string
+            format: date
         - in: query
           name: endDate
           description: Filter books with release dates before this date
           required: false
           schema:
-           type: string
-           format: date
-        - in: query
-          name: page
-          description: The page number for pagination (default 1)
-          required: false
-          schema: 
-           type: integer
-           default: 1
-        - in: query
-          name: pageSize
-          description: The number of items per page (default 50)
-          required: false
-          schema: 
-            type: integer
-            default: 50
+            type: string
+            format: date
+        - $ref: "#/components/parameters/queryPaginationPage"
+        - $ref: "#/components/parameters/queryPaginationPageSize"
       responses:
         200:
           description: A list of books
@@ -63,7 +51,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'
+                  $ref: "#/components/schemas/Book"
 
     put:
       tags:
@@ -76,7 +64,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Book'
+                $ref: "#/components/schemas/Book"
       responses:
         200:
           description: The list of created or updated books
@@ -85,10 +73,10 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'
-    #TODO2: complete GET (can be filtered by name) - PUT - DELETE
+                  $ref: "#/components/schemas/Book"
+
   /authors:
-     get:
+    get:
       tags:
         - Authors
       summary: get author by name
@@ -105,13 +93,13 @@ paths:
           name: page
           description: The page number for pagination (default 1)
           required: true
-          schema: 
-             type: integer
-        - in : path
+          schema:
+            type: integer
+        - in: path
           name: pageSize
           description: The number of items per page (default 50)
           required: true
-          schema: 
+          schema:
             type: integer
 
       responses:
@@ -122,166 +110,179 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Author'
-     put:
-       tags:
-         - Authors
-       summary: Create or update a  Author
-       operationId: crupdateAuthor
-       requestBody:
+                  $ref: "#/components/schemas/Author"
+    put:
+      tags:
+        - Authors
+      summary: Create or update a  Author
+      operationId: crupdateAuthor
+      requestBody:
         content:
           application/json:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Author'
-       responses:
-         200:
+                $ref: "#/components/schemas/Author"
+      responses:
+        200:
           description: The Author created or updated Author
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Author'
-     delete:
+                  $ref: "#/components/schemas/Author"
+    delete:
       tags:
         - Authors
       summary: Delete an author
       description: Delete an author by their ID
       operationId: deleteAuthor
       parameters:
-      - in: query
-        name: authorId
-        description: ID of the author to delete
-        required: true
-        schema:
-          type: string
+        - in: query
+          name: authorId
+          description: ID of the author to delete
+          required: true
+          schema:
+            type: string
       responses:
-       200:
-        description: Author successfully deleted
-       404:
-        description: Author not found
-  #update Auhtor
+        200:
+          description: Author successfully deleted
+        404:
+          description: Author not found
+
   /books/{bookId}/authors/{authorId}:
-      put:
-       tags:
-         - Authors
-       summary: update author
-       operationId: UpdateAuthor
-       parameters:
+    put:
+      tags:
+        - Authors
+      summary: update author
+      operationId: UpdateAuthor
+      parameters:
         - in: path
           name: bookId
           description: Id of book
           required: true
           schema:
-             type: string
+            type: string
         - in: path
           name: authorId
           description: Id of Auhtor to update
           required: true
-          schema: 
+          schema:
             type: string
 
-       requestBody:
-          content:
-            application/json:
-             schema:
-                 type: array
-                 items:
-                    $ref: '#/components/schemas/Author'
-       responses:
-          200:
-            description: Auhtor updated
-            content:
-               application/json:
-                 schema:
-                   type: array
-                   items:
-                     $ref: '#/components/schemas/Author'
-  /books/authors :
-      put:
-        tags:
-          - Authors 
-        summary: Update book-author link
-        operationId: UpdateBookAuthor
-        parameters:
-          - in: query
-            name: UpdateBookAuthor
-            description: Updates the association between books and authors.
-            required: true
+      requestBody:
+        content:
+          application/json:
             schema:
-              type: string
-  
-        requestBody:
+              type: array
+              items:
+                $ref: "#/components/schemas/Author"
+      responses:
+        200:
+          description: Auhtor updated
           content:
             application/json:
-               schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/UpdateBookAuthor'
-        responses:
-          200:
-            description: updated the association between books and authors.
-            content:
-              application/json:
-                  schema: 
-                    type: array
-                    items: 
-                      $ref: '#/components/schemas/UpdateBookAuthor'
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Author"
+  /books/authors:
+    put:
+      tags:
+        - Authors
+      summary: Update book-author link
+      operationId: UpdateBookAuthor
+      parameters:
+        - in: query
+          name: UpdateBookAuthor
+          description: Updates the association between books and authors.
+          required: true
+          schema:
+            type: string
 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/UpdateBookAuthor"
+      responses:
+        200:
+          description: updated the association between books and authors.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UpdateBookAuthor"
 
 components:
+  parameters:
+    queryPaginationPage:
+      in: query
+      name: page
+      description: The page number for pagination (default 1)
+      required: false
+      schema:
+        type: integer
+        default: 1
+    queryPaginationPageSize:
+      in: query
+      name: pageSize
+      description: The number of items per page (default 50)
+      required: false
+      schema:
+        type: integer
+        default: 50
+
   schemas:
     Book:
       type: object
       properties:
-         author:
-            $ref: '#/components/schemas/Author'
-            nullable : true
+        author:
+          $ref: "#/components/schemas/Author"
+          nullable: true
       allOf:
-        - $ref: '#/components/schemas/CrupdateBook'
-      
+        - $ref: "#/components/schemas/CrupdateBook"
+
     Author:
       type: object
       properties:
         id:
           type: string
-        name: 
+        name:
           type: string
         sex:
           type: string
           enum:
             - M
             - F
-    
-    #create component CrupdateBook
-    CrupdateBook:
-       type: object
-       properties:
-         id:
-           type: string
-         bookName:
-            type: string
-         pageNumbers:
-            type: integer
-         topic:
-            type: string
-            enum:
-                 - ROMANCE
-                 - COMEDY
-                 - OTHER
-         releaseDate:
-            type: string
-            format: date
 
-    #create component UpdateBookAuthor
+    CrupdateBook:
+      type: object
+      properties:
+        id:
+          type: string
+        bookName:
+          type: string
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER
+        releaseDate:
+          type: string
+          format: date
+
     UpdateBookAuthor:
-         type: object
-         properties:
-           bookId:
-              type: string
-           authorId:
-              type: string 
-  
-    
+      type: object
+      properties:
+        bookId:
+          type: string
+        authorId:
+          type: string
