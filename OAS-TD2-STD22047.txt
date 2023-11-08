@@ -1,0 +1,34 @@
+2)
+i. Pourquoi UpdateBookAuthor a uniquement les identifiants (ID) de CrupdateBook et d'Author, sans les autres propriétés telles que bookName et 
+authorName comme dans leurs composants respectifs :
+
+Cela peut simplifier l'opération de mise à jour en se concentrant uniquement sur les relations entre les entités.
+Permet une conception modulaire et la réutilisation de l'API.
+
+
+ii. Dans quel cas UpdateBookAuthor devrait avoir les propriétés de CrupdateBook et d'Author :
+
+Si l'opération de mise à jour nécessite la modification d'autres propriétés spécifiques du livre ou de l'auteur en plus de la relation entre eux.
+Si l'API doit prendre en charge la mise à jour simultanée des propriétés du livre ou de l'auteur lors de l'établissement ou 
+de la modification de la relation.
+
+
+3) a) les paginations sont nécessaires car: 
+- Gestion des performances 
+- Expérience utilisateur
+- Économie de ressources
+- Facilitation de la mise en cache
+- Réduction des problèmes de latence
+- Contrôle sur la navigation
+
+
+4) a. Oui, il est techniquement possible de gérer la pagination à travers les entêtes de la requête, 
+mais il n'est généralement pas la meilleure pratique pour le faire.
+
+
+b. En général, il est recommandé de ne pas gérer la pagination à travers les entêtes de la requête, 
+mais plutôt d'utiliser des paramètres de requête (query parameters) pour cette tâche. Les raisons sont les suivantes :
+		- Clarté et convention
+		- Visibilité 
+		- Facilité d'utilisation
+		- Interopérabilité
