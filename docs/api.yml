@@ -323,6 +323,18 @@ components:
                    error:
                       type: string
                       description: Error message for response 400
+    Response403:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/status'
+        body:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Access denied message for response 403
+
     
 
     
