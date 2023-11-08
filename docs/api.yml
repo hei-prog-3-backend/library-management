@@ -9,6 +9,64 @@ tags:
   - name: Books  
   - name: Author
 paths:
+  /books/import:
+    post:
+      tags:
+        - Books
+      summary: Import books from Excel or JSON
+      operationId: importBooks
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                fileType:
+                  type: string
+                  enum: [excel, json]
+      responses:
+        200:
+          description: List of imported books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Book'
+  /authors/import:
+    post:
+      tags:
+        - Authors
+      summary: Import authors from Excel or JSON
+      operationId: importAuthors
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                fileType:
+                  type: string
+                  enum: [excel, json]
+      responses:
+        200:
+          description: List of imported authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Author'                  
   /books:
     get:
       tags:
@@ -181,7 +239,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/responses/badRequestResponses"
-  /authors/import:
+  /authors/importa:
     post:
       tags:
         - Authors
