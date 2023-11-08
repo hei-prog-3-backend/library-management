@@ -248,6 +248,19 @@ components:
       required:
         - bookId
         - authorId
+    ImportAuthor:
+      anyOf:
+        - type: object
+          properties:
+            authorName:
+              type: string
+            sex:
+              $ref: "#/components/schemas/Sex"
+        - type: object
+          properties:
+            excel:
+              type: string
+        
   parameters:       
       Page:
          name: page
@@ -293,7 +306,6 @@ components:
             properties:
               status:
                 type: object
-              properties:
               codeOfStatus:
                 type: integer
               messages:
@@ -324,6 +336,7 @@ components:
                         type: array
                         items:
                           $ref: "#/components/schemas/Book" 
+
 
 
 
