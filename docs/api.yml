@@ -156,6 +156,28 @@ paths:
                 items:
                   $ref: '#/components/schemas/Topics'
 
+    put:
+      tags:
+        - Topics
+      summary: Create or update a list of topics
+      operationId: crupdateTopics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Topics'
+      responses:
+        200:
+          description: The list of created or updated Topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Topics'
+
   /books/authors:
     put:
       tags:
