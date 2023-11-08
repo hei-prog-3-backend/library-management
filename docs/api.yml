@@ -120,6 +120,26 @@ paths:
                 type: array
                 items: 
                   $ref: "#/components/schemas/Book"
+  /books/import:
+    post:
+      tags:
+        - Book
+      summary: Import books from Excel or JSON
+      operationId: importBooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/ImportBook'
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:  
+            schema:
+              type: object
+              properties:
+                excel:  
+                  type: string 
+        description: Excel or JSON file for book import
   /author:
     get:
       tags:
