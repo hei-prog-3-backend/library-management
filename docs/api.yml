@@ -107,7 +107,33 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Author'
+                  allOf:
+                    - $ref: '#/components/schemas/Author'
+                    - $ref: '#/components/schemas/AuthorError'
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#/components/schemas/AuthorError'
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#/components/schemas/AuthorError'
+        500:
+          description: INTERNAL SERVER ERROR
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                   $ref: '#/components/schemas/AuthorError'
     put:
       summary: Create or update authors
       operationId: crupdateAuthors
@@ -219,6 +245,13 @@ components:
           type: string
         sex:
           $ref: '#/components/schemas/Sex'
+    AuthorError: 
+       type: integer
+       enum:
+         - 200
+         - 400
+         - 403
+         - 500
     Sex:
       type: string
       enum:
