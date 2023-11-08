@@ -206,6 +206,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Book'
+  /books/authors:
+    put:
+      summary: associate somme books with some authors
+      tags:
+        - Books
+      operationId: associateBooksWithAuthors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateBookAuthor'
+      responses:
+        200:
+          description: book successfully associate to an author
 
 components:
   schemas:
