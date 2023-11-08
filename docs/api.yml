@@ -69,6 +69,31 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+  /books/{bookId}/authors/{authorId}:
+    put:
+      tags: 
+        - Books
+      operationId: addAuthorIntoBoook
+      parameters:
+       - in: path
+         name: bookId
+         schema:
+          type: string
+         required: true
+       - in: path
+         name: authorId
+         schema:
+          type: string
+         required: true
+      responses:
+        200:
+          description: The list of created or updated books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
   /author:
     get:
       tags:
