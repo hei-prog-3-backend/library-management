@@ -170,7 +170,7 @@ paths:
        summary: updated auhtor of book specified by id
        operationId: update book
        tags:
-        - Authors
+        - Books
        parameters:
           - name: bookId
             in: path
@@ -196,7 +196,7 @@ paths:
        summary: updated books 
        operationId: UpdateBookAuthor
        tags:
-         - Authors
+         - Books
        requestBody:
         content:
           application/json:
@@ -293,7 +293,7 @@ paths:
         summary: updated topic of book per id 
         operationId: update book
         tags:
-        - Topic
+        - Books
         parameters:
           - name: bookId
             in: path
@@ -319,7 +319,7 @@ paths:
           summary:  updated book
           operationId: UpdateBookTopic
           tags:
-           - Topic
+           - Books
           requestBody:
            content:
             application/json:
