@@ -116,7 +116,26 @@ paths:
                 items:
                   $ref: '#/components/schemas/book'
 
-
+  /books/authors:
+    put:
+      summary: associate more than one book and authors
+      operationId: combine
+      tags:
+        - Books
+      description: update more than one books and authors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/updateBookAuthor'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/updateBookAuthor'
 
   /authors:
     get:
@@ -325,7 +344,12 @@ components:
       allOf:
         - $ref: '#/components/schemas/Cupdatebook'
 
-
+    updateBookAuthor:
+      properties:
+        idBook:
+          type: string
+        idAuthor:
+          type: string
 
 
 
