@@ -15,4 +15,9 @@ dans des cas où l'opération de mise à jour exige des modifications simultané
  en transmettant des informations de pagination dans les entêtes, telles que le numéro de page et la taille de la page.
  Cependant, bien que cela soit possible, ce n'est pas une méthode couramment adoptée pour gérer la pagination dans les API RESTful.
 
-4.b ) 
+4.b ) non , Bien que la gestion de la pagination via les entêtes de requête soit techniquement réalisable, 
+ce n'est pas la méthode recommandée pour la gestion de la pagination dans une API RESTful.
+
+En résumé, bien que la gestion de la pagination à travers les entêtes de requête soit possible,
+ il est préférable et plus standard d'utiliser des paramètres d'URL dédiés pour la pagination dans une API RESTful, 
+ offrant une approche plus claire, plus standardisée et plus facile à utiliser pour les développeurs.
