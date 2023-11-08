@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
  title: Library API
- version: 1.0.0
+ version: 1.0.3
  description: STD22001
 servers:
  - url: https://library.com
@@ -122,13 +122,14 @@ paths:
                  $ref: '#/components/schemas/Author'
 components:
  schemas:
-     # TD2 use heritage
+    #TD2 use heritage
     Book:
       allOf:
         - $ref: '#/components/schemas/crupdateBook'
-        - properties: 
-            Author: 
+        - properties:
+            Author:
               $ref: '#/components/schemas/Author'
+      
     Author:
       type: object
       properties:
