@@ -8,6 +8,7 @@ servers:
 tags:
   - name: Books
   - name: Authors
+  - name: Topics
 paths:
   /books:
     get:
@@ -136,6 +137,24 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/Author'
+
+  /topics:
+    get:
+      tags:
+        - Topics
+      summary: get Topics  
+      operationId: getTopics
+      description: The returned of list Topics.
+    
+      responses:
+        200:
+          description: The list of filtered topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Topics'
 
   /books/authors:
     put:
