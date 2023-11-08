@@ -254,6 +254,65 @@ components:
         authorId:
           type: string
           description: the id of the new author for the book
+    responses:
+      Status:
+        type: object
+        properties:
+          code:
+            type: integer
+            description: Status code
+          message:
+            type: string
+            description: Status message
+      Body:
+        type: object
+        properties:
+          data:
+            type: object
+            description: Response data
+      Response200:
+        description: The successful responses
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/coponents/responses/Status'
+                - properties:
+                  data:
+                    $ref: '#/components/schemas/Book'
+      Response400:
+        description: Bad request response
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/responses/Status'
+                - properties:
+                  data:
+                    type: object
+                    description: Additional error data
+      Response403:
+        description: Forbidden response
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/responses/Status'
+                - properties:
+                    data:
+                      type: object
+                      description: Additional error data
+      Response500:
+        description: Internal server error response
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/responses/Status'
+                - properties:
+                    data:
+                      type: object
+                      description: Additional error data
   parameters:
     queryPagination:
       name: page
@@ -271,19 +330,5 @@ components:
       schema:
         type: integer
         default: 1
-    responses:
-      Status:
-        type: object
-        properties:
-          code:
-            type: integer
-            description: Status code
-          message:
-            type: string
-            description: Status message
-    Body:
-      type: object
-      properties:
-        data:
-          type: object
-          description: Response data
+    
+    
