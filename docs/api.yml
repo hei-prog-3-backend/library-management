@@ -32,7 +32,14 @@ paths:
             type: string 
         - in: query
           name: page 
-          description: "Page number for pagination"
+          description: "Min Page number for pagination"
+          required: true
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pageSize
+          description: "Max Page number for pagination"
           required: true
           schema:
             type: integer
@@ -67,140 +74,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
-  /authors:
-    get:
-      tags:
-        - Authors
-      summary: Get all authors
-      description: The returned author are ordered by name.
-      operationId: getAuthorByName
-      parameters:
-        - name: AuthorName
-          in: query
-          description: Filter author by name
-          required: false
-          schema:
-            type: string
-        - in: path
-          name: page 
-          description: "Page number for pagination"
-          required: true
-          schema:
-            type: integer
-            default: 50
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Author'
-    
-    put: 
-      tags:
-        - Authors
-      summary: update author
-      description: update author by ID
-      operationId: updateAuthor
-      parameters:
-        - name: AuthorName
-          in: query
-          description: name that need to be update
-          required: true
-          schema: 
-            type: string
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/Author'
-    
-    delete:
-      tags:
-        - Authors
-      summary: delete author
-      description: delete author by ID 
-      operationId: deleteAuthor
-      parameters:
-        - name: AuthorName
-          in: query
-          description: The name that needs to be delete
-          required: true
-          schema: 
-            type: string
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/Author'
-
-  /topics:
-    get:
-      tags:
-        - Topics
-      summary: get Topics  
-      operationId: getTopics
-      description: The returned of list Topics.
-    
-      responses:
-        200:
-          description: The list of filtered topics
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Topics'
-
-    put:
-      tags:
-        - Topics
-      summary: Create or update a list of topics
-      operationId: crupdateTopics
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Topics'
-      responses:
-        200:
-          description: The list of created or updated Topics
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Topics'
-
-    delete:
-      tags:
-        - Topics
-      summary: Removed a list of topics
-      operationId: removeTopics
-      parameters:
-        - in: query
-          name: id
-          description: removed topics by id
-          required: false
-          schema:
-            type: string
-
-      responses:
-        200:
-          description: The list of removed topics
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Topics'
-
   /books/authors:
     put:
       tags:
@@ -324,6 +197,162 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+  /authors:
+    get:
+      tags:
+        - Authors
+      summary: Get all authors
+      description: The returned author are ordered by name.
+      operationId: getAuthorByName
+      parameters:
+        - name: AuthorName
+          in: query
+          description: Filter author by name
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: page 
+          description: "Min Page number for pagination"
+          required: true
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pageSize
+          description: "Max Page number for pagination"
+          required: true
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+    
+    put: 
+      tags:
+        - Authors
+      summary: update author
+      description: update author by ID
+      operationId: updateAuthor
+      parameters:
+        - name: AuthorName
+          in: query
+          description: name that need to be update
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Author'
+    
+    delete:
+      tags:
+        - Authors
+      summary: delete author
+      description: delete author by ID 
+      operationId: deleteAuthor
+      parameters:
+        - name: AuthorName
+          in: query
+          description: The name that needs to be delete
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Author'
+
+  /topics:
+    get:
+      tags:
+        - Topics
+      summary: get Topics  
+      operationId: getTopics
+      description: The returned of list Topics.
+      parameters:
+        - in: query
+          name: page 
+          description: "Min Page number for pagination"
+          required: true
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: pageSize
+          description: "Max Page number for pagination"
+          required: true
+          schema:
+            type: integer
+            default: 50
+    
+      responses:
+        200:
+          description: The list of filtered topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Topics'
+
+    put:
+      tags:
+        - Topics
+      summary: Create or update a list of topics
+      operationId: crupdateTopics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Topics'
+      responses:
+        200:
+          description: The list of created or updated Topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Topics'
+
+    delete:
+      tags:
+        - Topics
+      summary: Removed a list of topics
+      operationId: removeTopics
+      parameters:
+        - in: query
+          name: id
+          description: removed topics by id
+          required: false
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: The list of removed topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Topics'
+
 components:
   schemas:
     CrupdatedBook:
