@@ -282,5 +282,24 @@ components:
           default: 50
           minimum: 1
         required: false
+  responses:
+   BaseResponse : 
+    description: response structure 
+    content:
+      application/json:
+        schema:   
+          type: object
+          properties:
+            status:
+             type: object
+             properties:
+               codeOfStatus:
+                type: integer
+               messages:
+                type: string
+            body: 
+              type: string
+
+
 
    
