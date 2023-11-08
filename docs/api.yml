@@ -334,6 +334,18 @@ components:
             message:
               type: string
               description: Access denied message for response 403
+    Response500:
+      type: object
+      properties:
+        status:
+           $ref: '#/components/schemas/status'
+        body:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Internal error message for response 500
+
 
     
 
