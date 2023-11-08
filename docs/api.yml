@@ -275,6 +275,22 @@ paths:
               schema: 
                 $ref: '#/components/schemas/Author'
 
+  /authors/topics:
+    get:
+      tags:
+        - Authors
+      summary: get all author wiht list of topics
+      operationId: getAuthorsTopics
+      responses:
+        200:
+          description: list of auhtors with topics
+          content:
+            application/json:
+             schema: 
+               type: array
+               items:
+                 $ref: "#/components/schemas/AuthorsTopic"
+
   /topics:
     get:
       tags:
@@ -399,3 +415,13 @@ components:
               type: string
             topicsName:
               type: string
+
+    AuthorsTopic:
+            type: object
+            properties:
+              author:
+                $ref: "#/components/schemas/Author"  
+              topic:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Topics"
