@@ -132,6 +132,7 @@ paths:
           schema: 
             type: string
           required: false
+        - $ref: "#/components/parameters/QueryPagination"
       responses:
         200:
          description: the list of author
