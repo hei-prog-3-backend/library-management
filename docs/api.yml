@@ -218,29 +218,29 @@ components:
       allOf:
         - $ref: "#/components/schemas/CrupdatedBook"
       properties:
-        author:
-          $ref:
-            '#/components/schemas/Author'
-        pageNumbers:
-          type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: date
-    Author:
+        Author:
+          $ref: "#/components/schemas/Author"
+        Topics:
+          $ref: "#/components/schemas/Topics"   
+      
+      
+    Author: 
       type: object
       properties:
-        id: 
+        id:
           type: string
-        name: 
+        authorName:
           type: string
-        sex: 
+        sex:
           type: string
           enum:
             - M
-            - F
+            - F  
+  
+    Topics:
+          type: object
+          properties:
+            id:
+              type: string
+            topicsName:
+              type: string
