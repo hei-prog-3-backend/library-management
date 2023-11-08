@@ -312,7 +312,18 @@ components:
                 Property:
                  type: string
                  description: Indicates whether the operation was successful
-          
+    Response400:
+           type: object
+           properties:
+              status:
+                $ref: '#/components/schemas/status'
+              body:
+                type: object
+                properties:
+                   error:
+                      type: string
+                      description: Error message for response 400
+    
 
     
 
