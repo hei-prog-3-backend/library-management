@@ -301,7 +301,20 @@ components:
           type: string
           description: Message associated with the status code
   
+    reponse200:
+        type: object
+        properties:
+          status:
+            $ref: '#/components/schemas/status'
+          body: 
+              type: object
+              properties:
+                Property:
+                 type: string
+                 description: Indicates whether the operation was successful
+          
 
+    
 
 
 
