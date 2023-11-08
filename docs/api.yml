@@ -1,48 +1,58 @@
-openapi: 3.0.3
+openapi: '3.0.2'
 info:
-  title: Library API
-  version: 1.0.0
-  description: STD22001
+  title: Specification open api 
+  version: '1.0'
 servers:
-  - url: https://library.com
+  - url: https://api.server.test/v1
+tags:
+  - Books
+  - Author
 paths:
-  /books:
+  /book:
     get:
-      summary: Get all books
-      description: The returned books are ordered by updated datetime.
+      tags:
+        - Books  
+      summary: get all books
       operationId: getBooks
       parameters:
-        - in: query
-          name: bookName
-          description: Filter return books by given name
-          required: false
-          schema:
-            type: string
-        #TODO3: add parameter to filter books by intervals of dates of the releaseDate
-        - in: query
-          name: releaseDateMin
-          schema:
-            type: string
-            format: date
-          required: false
-        - in: query
-          name: releaseDateMax
-          schema:
-            type: string
-            format: date
-          required: false
+      - in: query
+        name: bookname
+        description: filter a bookName order by realise date 
+        schema:
+          type: array
+        required: false
+      - in: query
+        name: releaseDateMin
+        description: |
+            If  `releaseDateMax` is not provided, `releaseDateMin` is ignored.
+            `releaseDateMin` can not be after `releaseDateMax`.
+        schema:
+          type: string
+          format: date
+        required: false  
+      - in: query
+        name: releaseDateMax
+        description: |
+            If  `releaseDateMin` is not provided, `releaseDateMax` is ignored.
+            `releaseDateMax` can not be after `releaseDateMin`.
+        schema:
+          type: string
+          format: date
+        required: false      
       responses:
-        200:
-          description: The list of filtered books
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
+       200:
+        description: the list of bookname order by release date given 
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Book'
     put:
-      summary: Create or update a list of books
-      operationId: crupdateBooks
+      tags:
+        - Books
+      summary: Create or update a books 
+      operationId: crupdateBook
       requestBody:
         content:
           application/json:
@@ -52,111 +62,111 @@ paths:
                 $ref: '#/components/schemas/Book'
       responses:
         200:
-          description: The list of created or updated books
+          description: the list of created or updated books 
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+  /author:
+    get:
+      tags:
+        - Author
+      summary: get all author
+      operationId: getAuthor
+      parameters:
+        - in: query
+          name: authorName
+          description: filter a author by authorName
+          schema: 
+            type: string
+          required: false
+      responses:
+        200:
+         description: the list of author
+         content:
+           application/json:
+            schema: 
+              type: array
+              items:
+                $ref: "#/components/schemas/Author"
+    put:
+      tags:
+        - Author
+      summary: create or update author
+      operationId: crupdateAuthor
+      requestBody:
+       content:
+         application/json:
+          schema: 
+            type: array
+            items:
+              $ref: "#/components/schemas/Author"
+      responses:
+        200:
+          description: the list of craeted or updated author
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'
+                  $ref: "#/components/schemas/Author"
   /authors/{aId}:
     delete:
-      summary: Delete an author
+      tags:
+        - Author
+      summary: delete an  author
       operationId: deleteAuthor
       parameters:
-        - name: aId
-          in: path
-          description: Author identifie to be deleted 
-          schema:
-           type: string
+        - in: path
+          name: authorId
+          description: author identifier to be deleted
+          schema: 
+            type: array
           required: true
       responses:
         200:
-         description: the author deleted
-         content:
-           application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Author'
-  /authors:
-  #TODO2: complete GET (can be filtered by name) - PUT - DELETE
-    get:
-      summary: get all author
-      operationId: getAuthors
-      parameters:
-        - in: query
-          name: AuthorName
-          description: Filter returned author by given name 
-          schema:
-            type: string
-          required: false
-      responses:
-        200:
-          description: the list of filtered authors
+          description: the author deleted 
           content:
             application/json:
-             schema:
-               type: array
-               items:
-                 $ref: "#/components/schemas/Author"
-    put:
-      summary:  update authors
-      operationId: crupdateAuthors
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Author'
-      responses:
-        200:
-          description: updated authors
-          content:
-           application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Author'
+              schema: 
+                type: array
+                items:
+                  $ref: "#/components/schemas/Author"
+
 components:
   schemas:
     Book:
       type: object
       properties:
         id:
-          type: string
-        bookName:
-          type: string
+         type: string
+        bookname:
+         type: string
         author:
-          #TODO1: set it as a component with properties : id, name, sex (M or F)
-          type: string
-        pageNumbers:
-          type: integer
+         $ref: "#/components/schemas/Author"
+        pageNumber:
+         type: integer
         topic:
+         type: string
+         enum:
+           - ROMANCE
+           - COMEDY
+           - OTHER
+    Author: 
+      type: object
+      properties:
+        id: 
           type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: date
-    schema:
-    Author:
-       type: object
-       properties:
-        id:
-          type: object
-        name:
+        authorName:
           type: string
         sex:
           $ref: "#/components/schemas/Sex"
-       required:
-        - id
-    Sex:
+    Sex: 
       type: string
       enum:
         - M
-        - F
-  
+        - F          
+
+   
