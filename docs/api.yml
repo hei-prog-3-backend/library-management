@@ -164,6 +164,26 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
+  /author/import:
+    post : 
+      tags:
+        - Author
+      summary: Import author for excel or JSON 
+      operationId: ImportAuthor
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              oneOf:
+                - $ref: '#/components/schemas/ImportAuthor'
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+            schema:
+             type: object
+             properties:
+              excel:
+                  type: string
+        description: excel or JSON file for author Import
+
   /authors/{aId}:
     delete:
       tags:
