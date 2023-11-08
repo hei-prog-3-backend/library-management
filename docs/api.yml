@@ -178,6 +178,8 @@ paths:
   /books/{bookId}/authors/{authorId}:
     put:
       summary: Update Book Authors
+      tags:
+        - Books
       operationId: updateBookAuthors
       parameters:
         - name: bookId
