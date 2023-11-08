@@ -338,7 +338,19 @@ paths:
                 items:
                   $ref: '#/components/schemas/updateBookTopic'
 
-
+  /authorTopic:
+    get:
+      summary: get author and books
+      operationId: author and topic
+      tags:
+        - topic
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/authorsTopic'
 
 
 
@@ -364,8 +376,8 @@ components:
     book:
       properties:
         author:
-          type: object
-          items:
+
+
             $ref: '#/components/schemas/Author'
       allOf:
         - $ref: '#/components/schemas/Cupdatebook'
@@ -410,3 +422,11 @@ components:
           type: string
         bookId:
           type: string
+
+    authorsTopic:
+      allOf:
+        - $ref: '#/components/schemas/Topic'
+          type: object
+      properties:
+        author:
+          $ref: '#/components/schemas/Author'
