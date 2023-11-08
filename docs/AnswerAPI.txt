@@ -6,3 +6,7 @@ la modification du nom du livre ou du nom de l'auteur.
 
 2.b.ii ) La nécessité pour UpdateBookAuthor de contenir les propriétés de CrupdateBook et Author pourrait se présenter 
 dans des cas où l'opération de mise à jour exige des modifications simultanées des détails du livre et de l'auteur associé.
+
+3.a ) La pagination est nécessaire pour améliorer les performances en réduisant la charge des serveurs et
+ en offrant une expérience utilisateur plus fluide, en permettant la navigation à travers
+ de grandes quantités de données tout en économisant des ressources.
