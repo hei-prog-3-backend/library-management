@@ -23,8 +23,40 @@ b.	Est ce qu’on doit gérer la pagination  à travers les entêtes de la requ�
 Justifiez votre réponse.
 #### => Bien que la gestion de la pagination à travers les en-têtes de la requête soit possible, ce n'est pas une approche standard ou conventionnelle. En général, il est recommandé de suivre les pratiques de conception d'API standard, ce qui implique d'utiliser des paramètres d'URL ou des query parameters pour la pagination. L'utilisation de paramètres d'URL pour la pagination rend les requêtes plus explicites et facilite la lisibilité et la compréhension des utilisateurs de l'API. De plus, l'utilisation de paramètres d'URL est plus conforme aux conventions RESTful, ce qui rend l'API plus cohérente et plus facile à utiliser pour les développeurs tiers.
 
+### TD2- question vidéo :
+Comment faire pour suprimer plusieur livre ?
+#### => voici la reponse :
+## /books
 
+### DELETE
 
+- Tags: 
+  - Books
+
+- Summary: 
+  Delete multiple books
+
+- Description: 
+  Delete multiple books by providing a list of book IDs.
+
+- Operation ID: 
+  deleteBooks
+
+- Request Body:
+  - Description: List of book IDs to be deleted
+  - Required: true
+  - Content-Type: application/json
+  - Schema:
+    - Type: array
+    - Items Type: integer
+
+- Responses:
+  - 200:
+    - Description: Multiple books deleted successfully
+  - 400:
+    - Description: Invalid input, please provide a valid list of book IDs
+  - 404:
+    - Description: Book(s) not found
 
 
 
