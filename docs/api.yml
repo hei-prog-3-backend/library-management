@@ -122,26 +122,13 @@ paths:
                  $ref: '#/components/schemas/Author'
 components:
  schemas:
+     # TD2 use heritage
     Book:
-      type: object
-      properties:
-        id:
-          type: string
-        bookName:
-          type: string
-        author:
-          type: string
-        pageNumbers:
-          type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: date
+      allOf:
+        - $ref: '#/components/schemas/crupdateBook'
+        - properties: 
+            Author: 
+              $ref: '#/components/schemas/Author'
     Author:
       type: object
       properties:
@@ -154,4 +141,22 @@ components:
           enum:
             - M
             - F
-  
+  #TD2 create crupdateBook
+    crupdateBook : 
+      type: object
+      properties:
+        id:
+          type: string
+        bookName : 
+          type: string
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER
+        releaseDate:
+          type: string
+          format: date
