@@ -55,7 +55,7 @@ paths:
             status:
               description: Status of the operation
               schema:
-                $ref: '#/components/schemas/reponse200'
+                $ref: "#/components/schemas/reponse200"
 
     put:
       tags:
@@ -93,7 +93,7 @@ paths:
           required: false
           schema:
             type: string
-        - $ref: '#/components/parameters/pathPagination'
+        - $ref: "#/components/parameters/pathPagination"
       responses:
         200:
           description: The list of filtered Authors
@@ -107,7 +107,7 @@ paths:
             status:
               description: Status of the operation
               schema:
-                $ref: '#/components/schemas/reponse200'
+                $ref: "#/components/schemas/reponse200"
     put:
       tags:
         - Authors
@@ -133,7 +133,7 @@ paths:
             status:
               description: Status of the operation
               schema:
-                $ref: '#/components/schemas/reponse200'
+                $ref: "#/components/schemas/reponse200"
     delete:
       tags:
         - Authors
@@ -154,7 +154,7 @@ paths:
             status:
               description: Status of the operation
               schema:
-                $ref: '#/components/schemas/reponse200'
+                $ref: "#/components/schemas/reponse200"
         404:
           description: Author not found
 
@@ -198,7 +198,7 @@ paths:
             status:
               description: Status of the operation
               schema:
-                $ref: '#/components/schemas/reponse200'
+                $ref: "#/components/schemas/reponse200"
   /books/authors:
     put:
       tags:
@@ -233,49 +233,56 @@ paths:
             status:
               description: Status of the operation
               schema:
-                $ref: '#/components/schemas/reponse200'
+                $ref: "#/components/schemas/reponse200"
 
   /books/import:
-        post: 
-          tags:
-           - Books
-          summary: Return list of imported books
-          operationId: postBooks
-          responses:
-             200:
-               description: List of books imported successfully
-               content:
-                   application/json:
-                    schema:
-                      type: array
-                      items:
-                         $ref: "#/components/schemas/Book"
-               headers:
-                 status:
-                  description: Status of the operation
-                  schema:
-                    $ref: '#/components/schemas/reponse200'
+    post:
+      tags:
+        - Books
+      summary: Return list of imported books
+      operationId: postBooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ImportBook"
+                - type: string
+                  format: binary
+      responses:
+        200:
+          description: List of books imported successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+
   /authors/import:
-       post: 
-        tags:
-          - Authors
-        summary: return lisf of authors
-        operationId: PostAuhtor
-        responses:
-          200:
-            description: List of authors  successfully
-            content:
-              application/json:
-               schema: 
-                 type: array
-                 items:
-                   $ref: '#/components/schemas/Author'
-            headers:
-               status:
-                  description: Status of the operation
-                  schema:
-                    $ref: '#/components/schemas/reponse200'
-              
+    post:
+      tags:
+        - Authors
+      summary: Return list of imported authors
+      operationId: postAuthors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ImportAuthor"
+                - type: string
+                  format: binary
+      responses:
+        200:
+          description: List of authors imported successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Author"
+
 components:
   parameters:
     queryPagination:
@@ -283,7 +290,7 @@ components:
       name: queryPagination
       description: Parameters for pagination in the query
       required: false
-      schema: 
+      schema:
         type: object
         properties:
           page:
@@ -300,7 +307,7 @@ components:
       name: pathPagination
       description: Parameters for pagination in the path
       required: true
-      schema: 
+      schema:
         type: object
         properties:
           page:
@@ -361,44 +368,44 @@ components:
           type: string
         authorId:
           type: string
-    
+
     status:
-       type: object
-       properties:
+      type: object
+      properties:
         code:
           type: integer
           description: Response status code
         message:
           type: string
           description: Message associated with the status code
-  
+
     reponse200:
-        type: object
-        properties:
-          status:
-            $ref: '#/components/schemas/status'
-          body: 
-              type: object
-              properties:
-                Property:
-                 type: string
-                 description: Indicates whether the operation was successful
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/status"
+        body:
+          type: object
+          properties:
+            Property:
+              type: string
+              description: Indicates whether the operation was successful
     Response400:
-           type: object
-           properties:
-              status:
-                $ref: '#/components/schemas/status'
-              body:
-                type: object
-                properties:
-                   error:
-                      type: string
-                      description: Error message for response 400
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/status"
+        body:
+          type: object
+          properties:
+            error:
+              type: string
+              description: Error message for response 400
     Response403:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/status'
+          $ref: "#/components/schemas/status"
         body:
           type: object
           properties:
@@ -409,7 +416,7 @@ components:
       type: object
       properties:
         status:
-           $ref: '#/components/schemas/status'
+          $ref: "#/components/schemas/status"
         body:
           type: object
           properties:
@@ -444,12 +451,3 @@ components:
               type: string
         - type: string
           format: binary
-
-
-
-    
-
-    
-
-
-
