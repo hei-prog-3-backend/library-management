@@ -94,6 +94,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+  /books/authors:
+    put:
+      tags:
+        - Books
+      summary: associate multiple books to an author
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/UpdateBookAuthor"  
+
+      responses:
+        200:
+          description: A book has been associate to an author
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Book"
   /author:
     get:
       tags:
@@ -211,5 +234,32 @@ components:
         releaseDate:
           type: string
           format: date 
+    UpdateBookAuthor:
+      type: object
+      properties:
+        bookId: 
+           type: string
+        authorId:
+           type: string
+      required:
+        - bookId
+        - authorId
+  parameters:        
+      Page:
+         name: page
+         description: Page Number for pagination (default 1)
+         in: query
+         schema:
+           type: integer
+           default: 1
+         required: false
+      pageSize:
+         name: pageSize
+         description: Page size for pagination default 50
+         in: query
+         schema:
+          default: 50
+          type: integer
+         required: false
 
    
