@@ -70,9 +70,16 @@ paths:
         - name: AuthorName
           in: query
           description: Filter author by name
-          required: true
+          required: false
           schema:
             type: string
+        - in: path
+          name: page 
+          description: "Page number for pagination"
+          required: true
+          schema:
+            type: integer
+            default: 50
       responses:
         '200':
           description: successful operation
