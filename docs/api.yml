@@ -39,6 +39,20 @@ paths:
             type: string
             format: date
           required: false
+        - in : query
+          name: page
+          description: if `page` is not provided , the value will be 1 .
+          schema:
+            type: integer
+            required: false
+            default: 1
+        - in : query
+          name: pageSize
+          description: if `pageSize` is not provided , the value will be 50 .
+          schema:
+            type: integer
+            required: false
+            default: 50
       responses:
         200:
           description: The list of filtered books
@@ -63,6 +77,38 @@ paths:
       responses:
         200:
           description: The list of created or updated books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/book'
+
+  /book/{page}/{pageSize}:
+    get:
+      summary: get all book with the page specification
+      operationId: filter by page
+      tags:
+        - Books
+      description: the will be ordered by its page number
+      parameters:
+        - in: path
+          name: page
+          description: filter book its pages number
+          schema:
+            type: integer
+            required: false
+            default: 1
+        - in: path
+          name: pageSize
+          description: filter book by its page size
+          schema:
+            type: integer
+            required: false
+            default: 50
+      responses:
+        200:
+          description: the list of books
           content:
             application/json:
               schema:
