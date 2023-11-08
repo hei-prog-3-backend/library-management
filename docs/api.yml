@@ -271,3 +271,19 @@ components:
       schema:
         type: integer
         default: 1
+    responses:
+      Status:
+        type: object
+        properties:
+          code:
+            type: integer
+            description: Status code
+          message:
+            type: string
+            description: Status message
+    Body:
+      type: object
+      properties:
+        data:
+          type: object
+          description: Response data
