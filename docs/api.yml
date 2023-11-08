@@ -110,7 +110,7 @@ paths:
         - Books
       summary: created and updated a book
       description: The returned books are ordered by updated datetime.
-      operationId: getBooksAndAuthors
+      operationId: getBookIdAndAuthorsId
       parameters:
         - in: path
           name: bookId
@@ -172,7 +172,7 @@ paths:
         - Books
       summary: created and updated a book
       description: The returned books are ordered by updated datetime.
-      operationId: getBooksAndTopics
+      operationId: getBookIdAndTopicsId
       parameters:
         - in: path
           name: bookId
