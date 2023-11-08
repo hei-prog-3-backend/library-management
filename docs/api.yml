@@ -38,7 +38,9 @@ paths:
         schema:
           type: string
           format: date
-        required: false      
+        required: false 
+      - $ref: '#/components/parameters/QueryPagination'
+      - $ref: '#/components/parameters/PageSize'       
       responses:
        200:
         description: the list of bookname order by release date given 
