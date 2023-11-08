@@ -1,0 +1,8 @@
+2.b.i ) UpdateBookAuthor contient uniquement les identifiants de CrupdateBook et d'Author, 
+mais pas les autres propriétés telles que bookName et authorName présentes dans leurs composants respectifs,
+ car cette structure est conçue pour effectuer une mise à jour spécifique de l'auteur d'un livre sans nécessiter 
+la modification du nom du livre ou du nom de l'auteur.
+
+
+2.b.ii ) La nécessité pour UpdateBookAuthor de contenir les propriétés de CrupdateBook et Author pourrait se présenter 
+dans des cas où l'opération de mise à jour exige des modifications simultanées des détails du livre et de l'auteur associé.
