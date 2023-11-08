@@ -416,6 +416,25 @@ components:
             message:
               type: string
               description: Internal error message for response 500
+    ImportBook:
+      oneOf:
+        - type: object
+          properties:
+            bookName:
+              type: string
+            author:
+              type: string
+            pageNumbers:
+              type: integer
+            topic:
+              type: string
+            releaseDate:
+              type: string
+            idAuthor:
+              type: integer
+        - type: string
+          format: binary
+
 
 
     
