@@ -244,7 +244,7 @@ components:
       required:
         - bookId
         - authorId
-  parameters:        
+  parameters:       
       Page:
          name: page
          description: Page Number for pagination (default 1)
@@ -261,5 +261,23 @@ components:
           default: 50
           type: integer
          required: false
+      QueryPagination:
+        name: page
+        description: Page Number for pagination 
+        in: query
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        required: false
+      PageSize:
+        name: pageSize
+        description: Page size for pagination default 50
+        in: query
+        schema:
+          type: integer
+          default: 50
+          minimum: 1
+        required: false
 
    
