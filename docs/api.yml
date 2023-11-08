@@ -41,6 +41,20 @@ paths:
             type: string
             format: date
           required: false
+        - in: query
+          name: page
+          description: page number of pagination
+          schema: 
+            type: integer
+            default: 1
+          required: false
+        - in: query
+          name:  pageSize
+          description:  Number of items per page
+          schema:
+            type: integer
+            default: 50
+          required: false
       responses:
         200:
           description: The list of filtered books
@@ -86,6 +100,20 @@ paths:
           schema:
             type: string
           required: false
+        - name: page
+          in: path
+          description: page number of pagination
+          schema:
+            type: integer
+            default: 1
+          required: true
+        - name: pageSize
+          in: path
+          description: Number of items per page
+          schema: 
+            type: integer
+            default: 50
+          required: true
       responses:
         200:
           description: The list of filtered authors
@@ -136,9 +164,181 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Author'
+
+  /books/{bookId}/authors/{authorId}:
+    put:
+       summary: updated auhtor of book specified by id
+       operationId: update book
+       tags:
+        - Books
+       parameters:
+          - name: bookId
+            in: path
+            description: id of books to updated
+            schema:
+              type: string
+            required: true
+          - name: authorId
+            in: path
+            description: id of auhtor
+            schema:
+              type: string
+            required: true
+       responses:
+         200: 
+          description: updated successfuly
+          content:
+           application/json:
+             schema: 
+               $ref: "#/components/schemas/Book"
+  /books/authors:
+    put:
+       summary: updated books 
+       operationId: UpdateBookAuthor
+       tags:
+         - Books
+       requestBody:
+        content:
+          application/json:
+           schema: 
+            type: array
+            items:
+              $ref: "#/components/schemas/UpdateBookAuthor"
+       responses:
+         200:
+          description: updated successfuly
+          content:
+            application/json:
+             schema: 
+              type: array
+              items:
+                $ref: "#/components/schemas/UpdateBookAuthor"
+  /topic:
+    put:
+       summary: updated topic 
+       operationId: updateTopic
+       tags:
+         - Topic 
+       requestBody:
+         content:
+           application/json:
+            schema:
+             type: array
+             items:
+               $ref: "#/components/schemas/topic"
+       responses:
+         200:
+           description: updated successfuly
+           content:
+             application/json:
+              schema: 
+               type: array
+               items:
+                 $ref: "#/components/schemas/topic"
+    get:
+        summary: get all topics
+        operationId: getTopicbyName
+        tags:
+          - Topic
+        description: get all topic specified name
+        parameters:
+          - in: query
+            name: genre
+            required: false
+            schema:
+              type: string
+          - in: query
+            name: page
+            required: false
+            schema: 
+              type: integer
+              default: 1
+          - in: query
+            name: pageSize
+            required:  false 
+            schema:
+              type: integer
+              default: 50
+        responses:
+          200:
+            description: the liste of topics filtered
+            content:
+              application/json:
+               schema: 
+                 type: array
+                 items:
+                   $ref: "#/components/schemas/topic"
+  /topic/{tId}:
+     delete:
+        summary: delete an topic 
+        operationId: deleteTopic
+        tags:
+           - Topic
+        parameters:
+           - name: tId
+             in: path
+             description: id of topic to deleted
+             schema:
+               type: string
+             required: true
+        responses:
+          200:
+            description: topic deleted
+            content:
+              application/json:
+               schema: 
+                 $ref: "#/components/schemas/topic"
+  /books/{bookId}/topic/{topicId}:  
+      put:
+        summary: updated topic of book per id 
+        operationId: update book
+        tags:
+        - Books
+        parameters:
+          - name: bookId
+            in: path
+            description: id of books to updated
+            schema:
+              type: string
+            required: true
+          - name: topicId
+            in: path
+            description: id of topic
+            schema:
+              type: string
+            required: true
+        responses:
+         200: 
+          description: updated successfuly
+          content:
+           application/json:
+             schema: 
+               $ref: "#/components/schemas/topic"   
+  /books/topics:
+       put:
+          summary:  updated book
+          operationId: UpdateBookTopic
+          tags:
+           - Books
+          requestBody:
+           content:
+            application/json:
+             schema: 
+              type: array
+              items:
+               $ref: "#/components/schemas/UpdateBookTopic"
+          responses:
+           200:
+            description: updated successfuly
+            content:
+             application/json:
+              schema: 
+               type: array
+               items:
+                $ref: "#/components/schemas/UpdateBookTopic"
 components:
   schemas:
-    Book:
+    crupdateBook:
       type: object
       properties:
         id:
@@ -149,15 +349,21 @@ components:
           $ref: '#/components/schemas/Author'
         pageNumbers:
           type: integer
-        topic:
-          type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
-        releaseDate:
-          type: string
-          format: date
+    topic:
+          allOf:
+            - $ref: "#/components/schemas/Book"
+          properties:
+            TopicId:
+              type: string
+            genre:
+             type: string
+             enum:
+              - ROMANCE
+              - COMEDY
+              - OTHER
+            releaseDate:
+              type: string
+              format: date
     Author:
       type: object
       properties:
@@ -172,3 +378,45 @@ components:
       enum:
         - M
         - F
+    Book:
+      allOf:
+        - $ref: '#/components/schemas/crupdateBook'
+      properties:
+       author:
+          $ref: '#/components/schemas/Author'
+    UpdateBookAuthor:
+       type: object
+       properties:
+         bookId:
+          type: string
+         authorId:
+          type: string  
+    UpdateBookTopic:
+       type: object
+       properties:
+         bookId:
+           type: string
+         TopicId:
+           type: string
+           
+           # Question reponses
+           # a . Pourquoi les paginations sont-elles nécessaires ?
+
+           #, == la pagination est une technique essentielle pour gérer efficacement de grandes quantités de données, 
+           # améliorer les performances, économiser de la bande passante et offrir une meilleure expérience utilisateur.
+           # Elle est couramment utilisée dans les applications web, les API REST et d'autres systèmes pour garantir un
+           # fonctionnement fluide et efficace.
+
+           # 4 -a Est ce qu’on peut gérer la pagination à travers les entêtes de la requête ? Justifiez votre réponse
+
+           #bien que la gestion de la pagination à travers les en-têtes de la requête soit possible sur le plan technique,
+           # il est généralement préférable d'utiliser des paramètres de requête pour des raisons de conventions, 
+           #de simplicité et de compatibilité avec les clients existants.
+
+           # b Est ce qu’on doit gérer la pagination  à travers les entêtes de la requête ? Justifiez votre réponse.
+
+
+           #  bien que la gestion de la pagination à travers les en-têtes de la requête soit possible d'un point de vue technique,
+           # elle n'est généralement pas recommandée en raison de conventions, de lisibilité, de compatibilité avec les clients et 
+           # de facilité de test. Les paramètres de requête offrent une méthode plus courante et plus pratique pour gérer 
+           # la pagination dans les API REST.
