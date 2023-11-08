@@ -2,12 +2,17 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.0.0
-  description: STD22001
+  description: STD22047
 servers:
   - url: https://library.com
+tags:
+  - name: Books
+  - name: Authors
 paths:
   /books:
     get:
+      tags:
+        - Books
       summary: Get all books
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
@@ -18,7 +23,12 @@ paths:
           required: false
           schema:
             type: string
-        #TODO3: add parameter to filter books by intervals of dates of the releaseDate
+        - in: query
+          name: releaseDate
+          description: Filter return books by intervals of date of the releaseDate.
+          required: true
+          schema: 
+            type: string 
       responses:
         200:
           description: The list of filtered books
@@ -29,6 +39,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
     put:
+      tags:
+        - Books
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
@@ -37,7 +49,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Book'
+                $ref: '#/components/schemas/CreatedUpdatedBooks'
       responses:
         200:
           description: The list of created or updated books
@@ -48,19 +60,91 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
   /authors:
-  #TODO2: complete GET (can be filtered by name) - PUT - DELETE
+    get:
+      tags:
+        - Authors
+      summary: Get all authors
+      description: The returned author are ordered by name.
+      operationId: getAuthorByName
+      parameters:
+        - name: AuthorName
+          in: query
+          description: Filter author by name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+    
+    put: 
+      tags:
+        - Authors
+      summary: update author
+      description: update author by ID
+      operationId: updateAuthor
+      parameters:
+        - name: AuthorName
+          in: query
+          description: name that need to be update
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Author'
+    
+    delete:
+      tags:
+        - Authors
+      summary: delete author
+      description: delete author by ID 
+      operationId: deleteAuthor
+      parameters:
+        - name: AuthorName
+          in: query
+          description: The name that needs to be delete
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Author'
 components:
   schemas:
-    Book:
+    CreatedUpdatedBooks:
       type: object
       properties:
         id:
           type: string
         bookName:
           type: string
-        author:
-          #TODO1: set it as a component with properties : id, name, sex (M or F)
+        pageNumbers:
+          type: integer
+
+        releaseDate:
           type: string
+          format: date  
+    Book:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/CreatedUpdatedBooks"
+      properties:
+        author:
+          $ref:
+            '#/components/schemas/Author'
         pageNumbers:
           type: integer
         topic:
@@ -72,3 +156,15 @@ components:
         releaseDate:
           type: string
           format: date
+    Author:
+      type: object
+      properties:
+        id: 
+          type: string
+        name: 
+          type: string
+        sex: 
+          type: string
+          enum:
+            - M
+            - F
