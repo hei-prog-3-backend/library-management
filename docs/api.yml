@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.3
 info:
   title: Library API
   version: 3.0.3
@@ -147,6 +147,74 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Author'
+  /book/import:
+    post:  
+      tags:
+        - Books  
+      summary: Import books from Excel or JSON
+      operationId: Import books
+      requestBody:
+        required: true
+        content:
+          multpart/form-data:
+            schema: 
+              type: object
+              properties:
+                excelFile:
+                  type: string
+                  format: binary
+                jsonFile:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: List of imported books 
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        400:
+          description: Bad request 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/badRequestResponses"
+  /authors/import:
+    post:
+      tags:
+        - Authors
+      summary: Import authors from Excel or JSON
+      operationId: importAuthors
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                excelFile:
+                  type: string
+                  format: binary
+                jsonFile:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: List of imported authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/badRequestResponses'
   /authors/{aId}:                
     delete:
       summary: Delete author 
