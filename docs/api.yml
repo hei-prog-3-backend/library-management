@@ -43,6 +43,7 @@ paths:
       - $ref: '#/components/parameters/PageSize'       
       responses:
        200:
+        $ref: "#/components/responses/Response200"
         description: the list of bookname order by release date given 
         content:
           application/json:
