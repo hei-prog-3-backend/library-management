@@ -178,6 +178,29 @@ paths:
                 items:
                   $ref: '#/components/schemas/Topics'
 
+    delete:
+      tags:
+        - Topics
+      summary: Removed a list of topics
+      operationId: removeTopics
+      parameters:
+        - in: query
+          name: id
+          description: removed topics by id
+          required: false
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: The list of removed topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Topics'
+
   /books/authors:
     put:
       tags:
