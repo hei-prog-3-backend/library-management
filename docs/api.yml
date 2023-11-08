@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.0.0
-  description: STD22001
+  description: STD22060
 servers:
   - url: https://library.com
 paths:
@@ -12,13 +12,10 @@ paths:
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
       parameters:
-        - in: query
-          name: bookName
-          description: Filter return books by given name
-          required: false
-          schema:
-            type: string
-        #TODO3: add parameter to filter books by intervals of dates of the releaseDate
+        - $ref: '#/components/parameters/queryPagination'
+        - $ref: '#/components/parameters/queryPageSize'
+        - $ref: '#/components/parameters/pathPagination'
+        - $ref: '#/components/parameters/pathPageSize'
       responses:
         200:
           description: The list of filtered books
@@ -37,7 +34,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Book'
+                $ref: '#/components/schemas/CrupdateBook'
       responses:
         200:
           description: The list of created or updated books
@@ -48,7 +45,53 @@ paths:
                 items:
                   $ref: '#/components/schemas/Book'
   /authors:
-  #TODO2: complete GET (can be filtered by name) - PUT - DELETE
+    get:  
+      summary: Get all authors
+      description: Get a list of all authors or filter by name.
+      operationId: getAuthors
+      parameters:
+        - $ref: '#/components/parameters/queryPagination'
+        - $ref: '#/components/parameters/queryPageSize'
+        - $ref: '#/components/parameters/pathPagination'
+        - $ref: '#/components/parameters/pathPageSize'
+      responses:
+        200:
+          description: The list of authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+    put:
+      summary: Create or update an author
+      operationId: crupdateAuthor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        200:
+          description: The created or updated author
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+    delete:  
+      summary: Delete an author
+      description: Delete an author by ID.
+      operationId: deleteAuthor
+      parameters:
+        - in: path
+          name: authorId
+          description: ID of the author to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Author successfully deleted
 components:
   schemas:
     Book:
@@ -59,8 +102,7 @@ components:
         bookName:
           type: string
         author:
-          #TODO1: set it as a component with properties : id, name, sex (M or F)
-          type: string
+          $ref: '#/components/schemas/Author'  
         pageNumbers:
           type: integer
         topic:
@@ -72,3 +114,68 @@ components:
         releaseDate:
           type: string
           format: date
+    Author:  
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        sex:
+          type: string
+          enum:
+            - M
+            - F
+    CrupdateBook:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: object
+          properties:
+            ID:
+              type: integer
+            bookName:
+              type: string
+            pageNumbers:
+              type: integer
+            topic:
+              type: string
+              enum:
+                - ROMANCE
+                - COMEDY
+                - OTHER
+            releaseDate:
+              type: string
+              format: date
+  parameters:
+    queryPagination:
+      name: page
+      in: query
+      description: Page number for pagination (default is 1)
+      required: false
+      schema:
+        type: integer
+        default: 1
+    queryPageSize:
+      name: pageSize
+      in: query
+      description: Number of items per page (default is 50)
+      required: false
+      schema:
+        type: integer
+        default: 50
+    pathPagination:
+      name: page
+      in: path
+      description: Page number for pagination (default is 1)
+      required: true
+      schema:
+        type: integer
+        default: 1
+    pathPageSize:
+      name: pageSize
+      in: path
+      description: Number of items per page (default is 50)
+      required: true
+      schema:
+        type: integer
+        default: 50
