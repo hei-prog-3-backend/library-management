@@ -329,11 +329,35 @@ paths:
                application/json:
                  schema:
                     $ref: '#/components/schemas/Response400'
+  /books/borrowed:
+   get:
+    tags:
+      - Books
+    summary: Retrieve the list of currently borrowed books
+    operationId: getBorrowedBooks
+    responses:
+      200:
+        description: Successfully retrieved the list of borrowed books
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Book'
+
+  /books/available:
+   get:
+    tags:
+      - Books
+    summary: Retrieve the list of currently available books
+    operationId: getAvailableBooks
+    responses:
+      200:
+        description: Successfully retrieved the list of available books
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/Book'
+  
                   
-
-
-
-
 
 components:
   parameters:
@@ -439,6 +463,7 @@ components:
         releaseDate:
           type: string
           format: date
+
 
     UpdateBookAuthor:
       type: object
