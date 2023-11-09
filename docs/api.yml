@@ -33,12 +33,11 @@ paths:
         - $ref: '#/components/parameters/queryPage'
         - $ref: '#/components/parameters/queryPageSize'
       responses:
-        200:
+        '200':
           description: The list of filtered books
           content:
             application/json:
               schema:
-                type: array
                 items:
                   $ref: '#/components/schemas/Book'
     put:
@@ -405,7 +404,38 @@ components:
            $ref: '#/components/schemas/author'
         topic: 
           items:
-           $ref: '#/components/schemas/topic'           
+           $ref: '#/components/schemas/topic'  
+    responses:
+        type: object
+        properties:
+          status:
+            type: object
+            properties:
+               code:
+                 type: integer
+               message: 
+                 type: string
+          body: 
+            type: object                
+    200:  
+     allOf:
+       - $ref: "#/components/schemas/responses"   
+     description: success
+          
+    400:  
+     allOf:
+       - $ref: "#/components/schemas/responses"
+     description: client error
+
+    403:
+     allOf:
+      - $ref: "#/components/schemas/responses"
+     description: forbidden access
+
+    500:  
+     allOf:
+      - $ref: "#/components/schemas/responses"
+     description: server error 
   parameters:
     queryPage:
         in: query
@@ -439,3 +469,5 @@ components:
         schema:
           type: integer
           default: 50         
+   
+               
