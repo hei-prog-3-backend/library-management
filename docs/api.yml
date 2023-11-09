@@ -283,7 +283,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
-                  
+
   /visitors/{visitorId}/activities:
     get:
       summary: Get visitor activities for a specified period
@@ -504,6 +504,11 @@ components:
                         type: array
                         items:
                           $ref: "#/components/schemas/Book" 
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+
 
 
 
