@@ -389,26 +389,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/transaction'
-  /authors/{aId}:
-    delete:
-      summary: Delete an author
-      operationId: deleteAuthor
-      tags:
-        - Authors
-      parameters:
-        - name: aId
-          in: path
-          description: Author identifier to be deleted
-          schema:
-            type: string
-          required: true
-      responses:
-        200:
-          description: The author deleted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Author'
 components:
   parameters:
     queryPagination:
