@@ -61,6 +61,8 @@ paths:
                 $ref: "#/components/schemas/reponse200"
 
     put:
+      security:
+         - oauth2 : [admin]
       tags:
         - Books
       summary: Create or update a list of books
@@ -112,6 +114,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/reponse200"
     put:
+      security:
+         - oauth2 : [admin]
       tags:
         - Authors
       summary: Create or update a  Author
@@ -138,6 +142,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/reponse200"
     delete:
+      security:
+         - oauth2 : [admin]
       tags:
         - Authors
       summary: Delete an author
@@ -163,6 +169,8 @@ paths:
 
   /books/{bookId}/authors/{authorId}:
     put:
+      security:
+         - oauth2 : [admin]
       tags:
         - Authors
       summary: update author
@@ -204,6 +212,8 @@ paths:
                 $ref: "#/components/schemas/reponse200"
   /books/authors:
     put:
+      security:
+         - oauth2 : [admin]
       tags:
         - Authors
       summary: Update book-author link
@@ -240,6 +250,8 @@ paths:
 
   /books/import:
     post:
+      security:
+         - oauth2 : [admin]
       tags:
         - Books
       summary: Return list of imported books
@@ -264,6 +276,8 @@ paths:
 
   /authors/import:
     post:
+      security:
+         - oauth2 : [admin]
       tags:
         - Authors
       summary: Return list of imported authors
@@ -306,6 +320,9 @@ paths:
                   $ref: '#/components/schemas/visitor'
   /transaction:
       post: 
+       security:
+         - oauth2 : [admin]
+       
        tags:
          - Visitors
        summary: Performs a book borrowing or return transaction
@@ -390,6 +407,16 @@ paths:
                 items:
                   $ref: '#/components/schemas/transaction'
 components:
+  securitySchemes:
+   oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://library.com/api/oauth/login
+          tokenUrl: https://library.com/api/oauth/token
+          scopes:
+            admin: Accès complet à l'API
+            user: Accès en lecture et visualisation à l'API
   parameters:
     queryPagination:
       in: query
