@@ -284,6 +284,28 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
+  /visitors:
+      post: 
+       tags:
+         - visitors
+       summary: add a new visitors 
+       operationId: postVisitors
+       requestBody:
+         content:
+           application/json:
+             schema: 
+              items:
+               $ref: '#/components/schemas/visitor'
+       responses:
+         200:
+           description: register visitor successful
+           content:
+             application/json:
+                 schema: 
+                  $ref: '#/components/schemas/visitor'
+
+
+
 
 components:
   parameters:
