@@ -195,6 +195,15 @@ paths:
                   format: binary
               required:
                 - file
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
        
       responses:
         200:
@@ -223,6 +232,15 @@ paths:
         required: true
         content:
           application/json:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
             schema:
               type: object
               properties:
