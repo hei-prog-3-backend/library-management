@@ -394,7 +394,14 @@ components:
           topic:
              type: array
              items:
-               $ref: "#/components/schemas/topic"     
+               $ref: "#/components/schemas/topic" 
+    status:
+        type: object
+        properties:
+          statusCode:
+             type: integer
+          Message:
+             type: string    
   parameters:
     queryPagination:
       in: query
@@ -413,7 +420,7 @@ components:
     pathPagination:
       in: path
       name: pathPagination
-      description: number of pageSize
+      description: number page of pagination
       schema: 
         type: object
         properties:
