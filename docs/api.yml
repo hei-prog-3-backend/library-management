@@ -440,13 +440,30 @@ components:
           allOf:
              - $ref: "#/components/schemas/responses"
              - $ref: "#/components/schemas/body"
-    ImportBook:
+    ImportAuthor:
       type: object
       properties:
         authorName:
           type: string
         sex:
           $ref: "#/components/schemas/Sex"
+    ImportBook:
+      type: object
+      properties:
+        bookName:
+          type: string
+        author:
+          $ref: "#/components/schemas/ImportAuthor"
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER
+        idAuthor:
+          type: string
   parameters:
     queryPagination:
       in: query
