@@ -39,6 +39,8 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
     put:
       tags:
         - Books
@@ -54,6 +56,8 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
 
   /books/authors:
     put:
@@ -78,6 +82,8 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
 
   /books/{bookId}/authors/{authorsId}:
     put:
@@ -104,6 +110,8 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
 
   /authors:
     get:
@@ -123,6 +131,8 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/Response200'
+          400:
+            $ref: '#/components/responses/Response400' 
     
     delete:
       tags:
@@ -140,6 +150,8 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
 
 components:
   schemas:
@@ -221,7 +233,16 @@ components:
           schema:
             allOf:
               - $ref: '#/components/schemas/Responses'
-              - $ref: '#/components/responses/Response200' 
+              - $ref: '#/components/responses/Response200'
+
+    Response400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Responses'
+                - $ref: '#/components/responses/Response400' 
 
   parameters:
     queryPagination:
