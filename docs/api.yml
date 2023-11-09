@@ -254,4 +254,21 @@ components:
             - M
             - F
 
-  
+  parameters:
+    queryPagination:
+      in: query
+      name: page
+      description: Page number
+      required: false
+      schema:
+        type: integer
+        default: 1
+
+    pathPagination:
+      in: query
+      name: pageSize
+      description: Number of items per page
+      required: false
+      schema:
+        type: integer
+        default: 50
