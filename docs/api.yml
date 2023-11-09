@@ -325,6 +325,30 @@ paths:
                type: array
                items:
                 $ref: "#/components/schemas/UpdateBookTopic"
+  /books/import:
+       post: 
+          summary: list of books import 
+          operationId: ListImportBook
+          tags:
+            - Books
+          requestBody:
+            content:
+              application/json:
+               schema:
+                oneOf:
+                  - $ref: "#/components/schemas/ImportBook"
+              application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+                schema: 
+                  type: string
+          responses:
+            200:
+             description: list of books import
+             content:
+               application/json:
+                schema: 
+                  type: array
+                  items:
+                   $ref: "#/components/schemas/Book"
 components:
   schemas:
     crupdateBook:
