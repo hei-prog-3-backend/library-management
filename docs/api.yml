@@ -401,7 +401,17 @@ components:
           statusCode:
              type: integer
           Message:
-             type: string    
+             type: string  
+    responses:
+       type: object
+       properties:
+         status:
+           $ref: "#/components/schemas/status"
+    body: 
+       type: object
+       properties:
+         structure:
+           type: string
   parameters:
     queryPagination:
       in: query
