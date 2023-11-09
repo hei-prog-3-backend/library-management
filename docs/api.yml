@@ -6,10 +6,46 @@ info:
 tags:
   - name: Books
   - name: Authors
+  - name: Visiteurs
   - name: Books and Author
 servers:
   - url: https://library.com
 paths:
+  /books/dispo:
+    get:
+      tags:
+        - Books 
+      summary: Get a books 
+      description: The returned books disponibility 
+      operationId: BookDispo 
+      parameters:
+        - $ref: '#/components/schemas/Book'
+      responses:
+        200:
+          $ref: '#/components/responses/SuccessResponse'
+        400:
+          $ref: '#/components/responses/BadRequestResponse'
+        403:
+          $ref: '#/components/responses/ForbiddenResponse'
+        500:
+          $ref: '#/components/responses/InternalServerErrorResponse'
+
+  /visiteurs:
+    get: 
+      tags:
+        - Visiteurs
+      summary: Get All Visitor 
+      description: Get details of all visitors
+      operationId: GetVisitors
+      responses:
+        200:
+          $ref: '#/components/responses/SuccessResponse'
+        400:
+          $ref: '#/components/responses/BadRequestResponse'
+        403:
+          $ref: '#/components/responses/ForbiddenResponse'
+        500:
+          $ref: '#/components/responses/InternalServerErrorResponse'
   /books:
     get:
       tags:
@@ -106,7 +142,6 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         500:
           $ref: '#/components/responses/InternalServerErrorResponse'
-       
   /authors:
     get:
       tags:
@@ -208,8 +243,7 @@ paths:
         403:
           $ref: '#/components/responses/ForbiddenResponse'
         500:
-          $ref: '#/components/responses/InternalServerErrorResponse'
-    
+          $ref: '#/components/responses/InternalServerErrorResponse' 
   /books/{booksId}/author/{authorsId}: 
     put:
       summary: Update Author's Book
@@ -266,8 +300,50 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         500:
           $ref: '#/components/responses/InternalServerErrorResponse'
+  /books/empruntes:
+    get:
+      tags:
+        - Books
+      summary: Get book's taking by the visitor 
+      description: Get a list of books
+      operationId: getTakeBooks
+      responses:
+        200:
+          $ref: '#/components/responses/SuccessResponse'
+        400:
+          $ref: '#/components/responses/BadRequestResponse'
+        403:
+          $ref: '#/components/responses/ForbiddenResponse'
+        500:
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /books/disponibles:
+    get:
+      tags:
+        - Books
+      summary: Get available books
+      description: Get a list of available books
+      operationId: getAvailableBooks
+      responses:
+        200:
+          $ref: '#/components/responses/SuccessResponse'
+        400:
+          $ref: '#/components/responses/BadRequestResponse'
+        403:
+          $ref: '#/components/responses/ForbiddenResponse'
+        500:
+          $ref: '#/components/responses/InternalServerErrorResponse'
 components:
   schemas:
+    Administrateur: 
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+            - administrateur
+    DisponibilityBook: 
+      type: boolean
+      default: true
     Book:
       type: object
       allOf:
@@ -275,6 +351,20 @@ components:
       properties:
         author: 
           $ref: '#/components/schemas/Author'
+        isDispo:
+          type: boolean
+          description: Indicates if the books is currently nodispo
+        dispoId:
+          type: integer
+          description: id of the visitors who take the book
+        startDate:
+          type: string
+          format: date
+          description: Date when the visitors take the book
+        returnDate:
+          type: string
+          format: date
+          description: Date when the book is expected to be returned
     Author:
       type: object
       properties:
@@ -364,6 +454,15 @@ components:
         code:
           type: integer
         message:
+          type: string
+    Visiteures:
+      type: object
+      properties:
+        id: 
+          type: integer
+        name: 
+          type: string 
+        reference: 
           type: string
   responses:
     SuccessResponse:
