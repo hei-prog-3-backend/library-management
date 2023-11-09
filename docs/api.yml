@@ -134,57 +134,25 @@ paths:
       tags:
         - Authors
       summary: Get all authors
-      description: The returned author are ordered by name.
-      operationId: getAuthorByName
+      description: Retrieve a list of all authors in the library, optionally filtered by authorName. Supports pagination.
+      operationId: getAuthors
       parameters:
-        - name: AuthorName
-          in: query
-          description: Filter author by name
-          required: false
+        - in: query
+          name: authorName
+          description: Filter by author name
           schema:
             type: string
-        - in: query
-          name: page 
-          description: "Min Page number for pagination"
-          required: true
-          schema:
-            type: integer
-            default: 1
-        - in: query
-          name: pageSize
-          description: "Max Page number for pagination"
-          required: true
-          schema:
-            type: integer
-            default: 50
+        - $ref: '#/components/parameters/queryPagination'
+        - $ref: '#/components/parameters/pathPagination'
       responses:
-        '200':
-          description: successful operation
+        200:
+          description: List of authors
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Author'
-    
-    put: 
-      tags:
-        - Authors
-      summary: update author
-      description: update author by ID
-      operationId: updateAuthor
-      parameters:
-        - name: AuthorName
-          in: query
-          description: name that need to be update
-          required: true
-          schema: 
-            type: string
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/Author'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
     
     delete:
       tags:
