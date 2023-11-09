@@ -412,6 +412,20 @@ components:
        properties:
          structure:
            type: string
+    responses200:
+     type: object
+     properties:
+       200:
+         allOf:
+           - $ref: "#/components/schemas/responses"
+           - $ref: "#/components/schemas/body"
+    responses400:
+     type: object
+     properties:
+       400:
+          allOf:
+             - $ref: "#/components/schemas/responses"
+             - $ref: "#/components/schemas/body"
   parameters:
     queryPagination:
       in: query
