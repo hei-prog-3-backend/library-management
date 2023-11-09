@@ -41,6 +41,8 @@ paths:
           $ref: '#/components/responses/Response200'
         400:
           $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
     put:
       tags:
         - Books
@@ -58,6 +60,8 @@ paths:
           $ref: '#/components/responses/Response200'
         400:
           $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
 
   /books/authors:
     put:
@@ -84,6 +88,8 @@ paths:
           $ref: '#/components/responses/Response200'
         400:
           $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
 
   /books/{bookId}/authors/{authorsId}:
     put:
@@ -112,6 +118,8 @@ paths:
           $ref: '#/components/responses/Response200'
         400:
           $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
 
   /authors:
     get:
@@ -131,8 +139,10 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/Response200'
-          400:
-            $ref: '#/components/responses/Response400' 
+        400:
+          $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
     
     delete:
       tags:
@@ -152,6 +162,8 @@ paths:
           $ref: '#/components/responses/Response200'
         400:
           $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
 
 components:
   schemas:
@@ -243,6 +255,14 @@ components:
               allOf:
                 - $ref: '#/components/schemas/Responses'
                 - $ref: '#/components/responses/Response400' 
+    Response403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Responses'
+              - $ref: '#/components/responses/Response403'
 
   parameters:
     queryPagination:
