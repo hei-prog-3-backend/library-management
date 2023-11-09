@@ -362,6 +362,23 @@ components:
             type: string
           reference:
             type: string
+            
+    transaction:
+        type: object
+        properties:
+          idVisitor:
+             type: string 
+          idBook:
+             type: string
+          action:
+           type: string
+           enum: [emprunt, rendu]
+          BorrowingDate:
+             type: string
+             format: date
+          RenderDate:
+             type: string
+             format: date 
 
     Author:
       type: object
