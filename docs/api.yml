@@ -10,8 +10,10 @@ tags:
     description: Operations related to managing authors
   - name: Books
     description: Operations related to managing books
-  - name: visitors
+  - name: Visitors
     description: Operations related to visitors
+  - name: Transaction 
+    description: Operations to  generate book borrowing and rendering 
 
 paths:
   /books:
@@ -303,6 +305,32 @@ paths:
              application/json:
                  schema: 
                   $ref: '#/components/schemas/visitor'
+  /transaction:
+      post: 
+       tags:
+         - Transaction
+       summary: Performs a book borrowing or return transaction
+       operationId: postTransaction
+       requestBody:
+         content:
+           application/json:
+              schema: 
+                $ref: '#/components/schemas/transaction'
+       responses:
+         200:
+           description: transaction successful
+           content:
+             application/json:
+                schema: 
+                    $ref: '#/components/schemas/reponse200'
+         400:
+            description: Invalid request
+            content:
+               application/json:
+                 schema:
+                    $ref: '#/components/schemas/Response400'
+                  
+
 
 
 
@@ -362,7 +390,7 @@ components:
             type: string
           reference:
             type: string
-            
+
     transaction:
         type: object
         properties:
