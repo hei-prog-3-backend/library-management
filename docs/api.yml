@@ -277,6 +277,8 @@ components:
            - ROMANCE
            - COMEDY
            - OTHER
+        isBorrowed:
+          type: boolean
     Author: 
       type: object
       properties:
