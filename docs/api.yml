@@ -122,11 +122,10 @@ paths:
             schema:
               type: array
               items:
-<               $ref: "#/components/schemas/Author"
+                $ref: "#/components/schemas/Author"
       responses:
         200:
           description: The Author created or updated Author
-                $ref: '#/components/schemas/Author'
           content:
             application/json:
               schema:
