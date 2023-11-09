@@ -655,6 +655,9 @@ paths:
         - "authors"
       summary: Import authors from Excel or JSON
       operationId: importAuthors
+      consumes:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       requestBody:
           content:
             application/json:
@@ -669,6 +672,9 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/JsonAuthor'
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: object 
       responses:
         200:
           description: List of imported authors
@@ -680,6 +686,19 @@ paths:
                   $ref: '#/components/schemas/author'
 components:
   schemas:
+    ImportAuthor:
+      type: object
+      properties:
+        authorName:
+          type: string
+        sex:
+          type: string
+          enum:
+            - M
+            - F
+      required:
+        - authorName
+        - sex
     ExcelBook:
       type: object
       properties:
