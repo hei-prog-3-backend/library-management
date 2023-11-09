@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.0.1
+  version: 1.1.0
   description: STD22107
 servers:
   - url: https://library.com
@@ -30,20 +30,8 @@ paths:
                endDate:
                  type: string
                  format: date  
-        - in: query
-          name: page
-          description: page number (default 1)
-          required: false
-          schema:
-            type: integer
-            default: 1         
-        - in: query
-          name: pageSize
-          description: page size (default 50)
-          required: false
-          schema:
-            type: integer
-            default: 50        
+        - $ref: '#/components/parameters/queryPage'
+        - $ref: '#/components/parameters/queryPageSize'
       responses:
         200:
           description: The list of filtered books
@@ -75,32 +63,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
-  /authors:
+  /authors/{page}/{pageSize}:
    get:
       tags:
         - Authors
       summary: Get all authors
       operationId: getAuthors
       parameters:
-        - in: query
-          name: authorName
-          required: false
-          schema:
-            type: string
-        - in: path
-          name: page
-          description: page number (default 1)
-          required: false
-          schema:
-            type: integer
-            default: 1         
-        - in: path
-          name: pageSize
-          description: page size (default 50)
-          required: false
-          schema:
-            type: integer
-            default: 50          
+        - $ref: '#/components/parameters/pathPage'
+        - $ref: '#/components/parameters/pathPageSize'
       responses:
         200:
           description:  get author
@@ -110,6 +81,28 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/author'
+  /authors:
+   get:
+      tags:
+        - Authors
+      summary: Get all authors
+      operationId: getAuthors
+      parameters:
+        - in: path
+          name: authorName
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description:  get author
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/author'
+ 
    put:
       tags:
         - Authors
@@ -221,7 +214,7 @@ paths:
           required: false
           schema: 
              type: integer
-             default: 1   
+             default: 50   
       responses:
         "200":
             description: list of topic
@@ -371,17 +364,7 @@ components:
           type: string 
           enum:
             - M
-            - F    
-    topic:
-      type: object
-      properties:
-        id:
-         type: integer
-        topicName:
-         enum:
-          - ROMANCE
-          - COMEDY
-          - OTHER              
+            - F          
     updateBookAuthor:
       type: object
       properties:
@@ -404,7 +387,16 @@ components:
         topic: 
            items:
              $ref: '#/components/schemas/topic'        
-    
+    topic:
+      type: object
+      properties:
+        id:
+         type: integer
+        topicName:
+         enum:
+          - ROMANCE
+          - COMEDY
+          - OTHER
     authorWithTopic:
       type: object
       properties:
@@ -413,4 +405,37 @@ components:
            $ref: '#/components/schemas/author'
         topic: 
           items:
-           $ref: '#/components/schemas/topic'
+           $ref: '#/components/schemas/topic'           
+  parameters:
+    queryPage:
+        in: query
+        name: page
+        description: page number (default 1)
+        required: false
+        schema:
+          type: integer
+          default: 1         
+    queryPageSize:
+        in: query
+        name: pageSize
+        description: size of the page (default 50)
+        required: false
+        schema:
+          type: integer
+          default: 50         
+    pathPage:
+        in: path
+        name: page
+        description: page number (default 1)
+        required: true
+        schema:
+          type: integer
+          default: 1         
+    pathPageSize:
+        in: query
+        name: pageSize
+        description: size of the page (default 50)
+        required: true
+        schema:
+          type: integer
+          default: 50         
