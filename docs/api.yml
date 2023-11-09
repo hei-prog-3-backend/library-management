@@ -12,9 +12,7 @@ tags:
     description: Operations related to managing books
   - name: Visitors
     description: Operations related to visitors
-  - name: Transaction 
-    description: Operations to  generate book borrowing and rendering 
-
+ 
 paths:
   /books:
     get:
@@ -289,7 +287,7 @@ paths:
   /visitors:
       post: 
        tags:
-         - visitors
+         - Visitors
        summary: add a new visitors 
        operationId: postVisitors
        requestBody:
@@ -308,7 +306,7 @@ paths:
   /transaction:
       post: 
        tags:
-         - Transaction
+         - Visitors
        summary: Performs a book borrowing or return transaction
        operationId: postTransaction
        requestBody:
@@ -356,7 +354,41 @@ paths:
           application/json:
             schema: 
               $ref: '#/components/schemas/Book'
-  
+
+  /visitor-activities/{visitorId}:
+    get:
+      tags:
+        - Visitors
+      summary: Retrieve the activities of a specific visitor within a specified time period
+      parameters:
+        - name: visitorId
+          in: path
+          required: true
+          description: ID of the visitor
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          description: Start date of the period
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          description: End date of the period
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Successfully retrieved the visitor's activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/transaction'
+
                   
 
 components:
@@ -394,7 +426,7 @@ components:
             type: integer
             description: The number of items per page (default 50)
             default: 50
-
+   
   schemas:
     Book:
       type: object
@@ -431,6 +463,12 @@ components:
           RenderDate:
              type: string
              format: date 
+          BorrowingTime:
+             type: string
+             format: time 
+          RenderTime:
+              type: string
+              format: time 
 
     Author:
       type: object
