@@ -620,8 +620,78 @@ paths:
                 properties:
                   error:
                     type: string
+  /book/import:
+    post: 
+      tags:
+        - "books"
+      summary: Import books from Excel or JSON
+      operationId: importBooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                excelData:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ExcelBook'
+                jsonData:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/JsonBook'
+      responses:
+        200:
+          description: List of imported books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+  /authors/import:
+    post:
+      tags:
+        - "authors"
+      summary: Import authors from Excel or JSON
+      operationId: importAuthors
+      requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  excelData:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExcelAuthor'
+                  jsonData:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JsonAuthor'
+      responses:
+        200:
+          description: List of imported authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/author'
 components:
   schemas:
+    ExcelBook:
+      type: object
+      properties:
+        book: 
+          $ref: '#/components/schemas/Book'
+    JsonBook:
+      allOf:
+        - $ref: '#/components/schemas/ExcelBook'
+    ExcelAuthor:
+        $ref: "#/components/schemas/authorNoId"
+    JsonAuthor:
+      $ref: '#/components/schemas/ExcelAuthor'
     Book:
       allOf:
         - $ref: '#/components/schemas/CrupDateBook'
