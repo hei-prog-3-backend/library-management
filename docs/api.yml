@@ -14,29 +14,28 @@ paths:
       tags:
         - Books
       summary: Get all books
-      description: The returned books are ordered by updated datetime.
+      description: Retrieve a list of all books in the library, optionally filtered by bookName and releaseDate range. Supports pagination.
       operationId: getBooks
       parameters:
+        - $ref: '#/components/parameters/queryPagination'
+        - $ref: '#/components/parameters/pathPagination'
         - in: query
           name: bookName
-          description: Filter return books by given name
-          required: false
+          description: Filter by book name
           schema:
             type: string
         - in: query
-          name: page 
-          description: "Min Page number for pagination"
-          required: true
+          name: releaseDateMin
+          description: Minimum release date
           schema:
-            type: integer
-            default: 1
+            type: string
+            format: date
         - in: query
-          name: pageSize
-          description: "Max Page number for pagination"
-          required: true
+          name: releaseDateMax
+          description: Maximum release date
           schema:
-            type: integer
-            default: 50
+            type: string
+            format: date
       responses:
         200:
           description: The list of filtered books
