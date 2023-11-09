@@ -221,6 +221,22 @@ components:
             - M
             - F
 
+    Status:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: Status code of the response
+        message:
+          type: string
+          description: Message associated with the status code
+
+    Response:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+
   parameters:
     queryPagination:
       in: query
@@ -239,3 +255,6 @@ components:
       schema:
         type: integer
         default: 50
+
+    
+        
