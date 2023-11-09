@@ -701,6 +701,30 @@ components:
       properties:
         id:
           type: string
+    genericResponse:
+      type: object
+      properties:
+        body:
+          type: object
+  responses:
+    successfulResponse:
+      allOf:
+        - $ref: '#/components/schemas/genericResponse'
+        - properties:
+            status:
+              type: string
+              enum:
+                - success
+    errorResponse:
+      allOf:
+        - $ref: '#/components/schemas/genericResponse'
+        - properties:
+            status:
+              type: string
+              enum:
+                - error
+            error:
+              type: string
   parameters:
     Page:
       name: page
