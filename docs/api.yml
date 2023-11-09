@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Library API
   version: 1.0.0
-  description: STD22001
+  description: STD22017
 servers:
   - url: https://library.com
 tags:
@@ -10,6 +10,8 @@ tags:
     description: Operations related to managing authors
   - name: Books
     description: Operations related to managing books
+  - name: visitors
+    description: Operations related to visitors
 
 paths:
   /books:
@@ -328,6 +330,16 @@ components:
           nullable: true
       allOf:
         - $ref: "#/components/schemas/CrupdateBook"
+
+    visitor:
+       type: object
+       properties:
+          id :
+            type: string 
+          name :
+            type: string
+          reference:
+            type: string
 
     Author:
       type: object
