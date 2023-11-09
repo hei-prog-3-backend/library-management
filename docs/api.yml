@@ -49,6 +49,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
     put:
       tags:
         - "books"
@@ -70,6 +97,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
   /books/{bookId}/authors/{authorId}:
     put:
       tags:
@@ -92,6 +146,33 @@ paths:
       responses:
         200:
           description: Author of the book updated successfully
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
   /books/authors:
     put:
       tags:
@@ -108,6 +189,33 @@ paths:
       responses:
         200:
           description: Authors of multiple books updated successfully
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
   /authors:
   #TODO2: complete GET (can be filtered by name) - PUT - DELETE
     get: 
@@ -133,6 +241,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/author'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
     put:
       tags:
         - "authors"
@@ -154,6 +289,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/author'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
     delete:
       tags:
         - "authors"
@@ -161,6 +323,33 @@ paths:
       responses:
         200:
           description: Deleting author successfully !
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
   /books/{bookid}/topics/{topicId}:
     put:
       tags:
@@ -177,6 +366,33 @@ paths:
       responses:
         200:
           description: topic of the book updated successfully
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
   /books/topics:
     put:
       tags:
@@ -193,6 +409,33 @@ paths:
       responses:
         200:
           description: Authors of multiple books updated successfully
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
   /Topic:
     get:
       tags:
@@ -218,6 +461,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/topic'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
     put:
       tags:
         - "topics"
@@ -239,6 +509,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/topic'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
     delete:
       tags:
         - "topics"
@@ -246,6 +543,33 @@ paths:
       responses:
         200:
           description: Deleting topic successfully 
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
   /authorTopic:
     get:
       tags:
@@ -269,6 +593,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/authorTopic'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema :
+                type: object
+                properties:
+                  error:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
+        500: 
+          description: Internal Server Error 
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  error:
+                    type: string
 components:
   schemas:
     Book:
