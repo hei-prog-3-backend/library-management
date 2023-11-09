@@ -142,6 +142,29 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         500:
           $ref: '#/components/responses/InternalServerErrorResponse'
+  /authors/ajouter:
+    post:
+      tags:
+        - Authors
+      summary: Add a new author
+      description: Add a new author to the library
+      operationId: addAuthor
+      security:
+        - administrateur: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        200:
+          $ref: '#/components/responses/SuccessResponse'
+        400:
+          $ref: '#/components/responses/BadRequestResponse'
+        403:
+          $ref: '#/components/responses/ForbiddenResponse'
+        500:
+          $ref: '#/components/responses/InternalServerErrorResponse'
   /authors:
     get:
       tags:
@@ -316,6 +339,73 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         500:
           $ref: '#/components/responses/InternalServerErrorResponse'
+  /books/emprunter:
+    post:
+      tags:
+        - Books
+      summary: Borrow a book
+      description: Borrow a book onbehalf of a visitor
+      operationId: borrowBook
+      security:
+      - administrateur: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookId:
+                  type: integer
+                  minimum: 1
+                visitorId:
+                  type: integer
+                  minimum: 1
+              required:
+                  - bookId
+                  - visitorId
+      responses:
+        200:
+          $ref: '#/components/responses/SuccessResponse'
+        400:
+          $ref: '#/components/responses/BadRequestResponse'
+        403:
+          $ref: '#/components/responses/ForbiddenResponse'
+        500:
+          $ref: '#/components/responses/InternalServerErrorResponse'
+  /books/rendre: 
+    post:
+      tags:
+        - Books
+      summary: Return a book
+      description: Return a book on behalf of a visitor
+      operationId: returnBook
+      security:
+        - administrateur: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookId:
+                  type: integer
+                  minimum: 1
+                visitorId:
+                  type: integer
+                  minimum: 1
+              required:
+                - bookId
+                - visitorId
+      responses:
+        200:
+          $ref: '#/components/responses/SuccessResponse'
+        400:
+          $ref: '#/components/responses/BadRequestResponse'
+        403:
+          $ref: '#/components/responses/ForbiddenResponse'
+        500:
+          $ref: '#/components/responses/InternalServerErrorResponse'
+
   /books/disponibles:
     get:
       tags:
@@ -415,7 +505,6 @@ components:
           $ref: '#/components/schemas/Status'
         body:
           type: object  # Remplacez ceci par le schéma réel de votre corps de réponse
-
     ErrorResponse:
       type: object
       properties:
