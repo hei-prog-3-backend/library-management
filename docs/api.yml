@@ -421,6 +421,35 @@ components:
              type: array
              items:
                $ref: "#/components/schemas/topic"     
+  parameters:
+    queryPagination:
+      in: query
+      name: queryPagination
+      description: number page of pagination
+      schema:
+        type: object
+        properties:
+          page:
+            type: integer
+            default: 1
+          pageSize:
+            type: integer
+            default: 50
+      required: false          
+    pathPagination:
+      in: path
+      name: pathPagination
+      description: number of pageSize
+      schema: 
+        type: object
+        properties:
+          page: 
+            type: integer
+            default: 1
+          pageSize:
+            type: integer
+            default: 50
+      required: true
            # Question reponses
            # a . Pourquoi les paginations sont-elles nécessaires ?
 
