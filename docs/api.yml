@@ -349,6 +349,30 @@ paths:
                   type: array
                   items:
                    $ref: "#/components/schemas/Book"
+  /auhtors/import:
+      post: 
+          summary: list of authors 
+          operationId: ListAuthorsImport
+          tags:
+            - Authors
+          requestBody:
+             content:
+              application/json:
+               schema:
+                 oneOf:
+                   - $ref: "#/components/schemas/ImportAuthor"
+              application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+               schema: 
+                 type: string
+          responses:
+            200:
+              description: list of authors
+              content:
+                application/json:
+                  schema: 
+                   type: array
+                   items:
+                     $ref: "#/components/schemas/Author"
 components:
   schemas:
     crupdateBook:
