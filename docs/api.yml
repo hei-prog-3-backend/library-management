@@ -231,11 +231,20 @@ components:
           type: string
           description: Message associated with the status code
 
+    Body:
+      type: object
+      properties:
+        property:
+          type: string
+          description: Value of the property in the response body
+
     Response:
       type: object
       properties:
         status:
           $ref: '#/components/schemas/Status'
+        body:
+          $ref: '#/components/schemas/Body'
 
   parameters:
     queryPagination:
