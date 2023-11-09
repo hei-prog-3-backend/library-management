@@ -43,6 +43,8 @@ paths:
           $ref: '#/components/responses/Response400' 
         403:
           $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
     put:
       tags:
         - Books
@@ -62,6 +64,8 @@ paths:
           $ref: '#/components/responses/Response400' 
         403:
           $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
 
   /books/authors:
     put:
@@ -90,6 +94,8 @@ paths:
           $ref: '#/components/responses/Response400' 
         403:
           $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
 
   /books/{bookId}/authors/{authorsId}:
     put:
@@ -120,6 +126,8 @@ paths:
           $ref: '#/components/responses/Response400' 
         403:
           $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
 
   /authors:
     get:
@@ -143,6 +151,8 @@ paths:
           $ref: '#/components/responses/Response400' 
         403:
           $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
     
     delete:
       tags:
@@ -164,6 +174,8 @@ paths:
           $ref: '#/components/responses/Response400' 
         403:
           $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
 
 components:
   schemas:
@@ -255,6 +267,7 @@ components:
               allOf:
                 - $ref: '#/components/schemas/Responses'
                 - $ref: '#/components/responses/Response400' 
+
     Response403:
       description: Forbidden
       content:
@@ -263,6 +276,15 @@ components:
             allOf:
               - $ref: '#/components/schemas/Responses'
               - $ref: '#/components/responses/Response403'
+    
+    Response500:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Responses'
+              - $ref: '#/components/responses/Response500'
 
   parameters:
     queryPagination:
