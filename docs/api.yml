@@ -512,6 +512,9 @@ components:
             - OTHER
         idAuthor:
           type: string
+        releaseDate:
+          type: string
+          format: date
   parameters:
     queryPagination:
       in: query
