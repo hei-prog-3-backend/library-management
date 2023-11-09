@@ -283,7 +283,40 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
-
+                  
+  /visitors/{visitorId}/activities:
+    get:
+      summary: Get visitor activities for a specified period
+      operationId: getVisitorActivities
+      parameters:
+        - in: path
+          name: visitorId
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: startDate
+          schema:
+            type: string
+            format: date-time
+          description: Start date for the period
+          required: true
+        - in: query
+          name: endDate
+          schema:
+            type: string
+            format: date-time
+          description: End date for the period
+          required: true
+      responses:
+        200:
+          description: Visitor activities for the specified period
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Borrowing'
 
 
 components:
