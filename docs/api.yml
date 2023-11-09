@@ -176,6 +176,41 @@ paths:
           $ref: '#/components/responses/Response403'
         500:
           $ref: '#/components/responses/Response500'
+  /books/import:
+    post:
+      tags:
+        - Books
+      summary: Import books
+      operationId: importBooks
+      requestBody:
+        description: Excel or JSON file containing book information
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+       
+      responses:
+        200:
+          description: List of imported books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
 
 components:
   schemas:
