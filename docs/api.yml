@@ -649,35 +649,33 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
-  /authors/import:
+  /author/import:
     post:
       tags:
         - "authors"
       summary: Import authors from Excel or JSON
       operationId: importAuthors
-      consumes:
-        - application/json
-        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
       requestBody:
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  excelData:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ExcelAuthor'
-                  jsonData:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/JsonAuthor'
-            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
-              schema:
-                type: object 
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                excelData:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ExcelAuthor'
+                jsonData:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/JsonAuthor'
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+            schema:
+              type: object 
       responses:
         200:
-          description: List of imported authors
+          description: Successful response. List of imported authors.
           content:
             application/json:
               schema:
