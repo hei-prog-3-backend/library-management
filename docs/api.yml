@@ -212,6 +212,41 @@ paths:
         500:
           $ref: '#/components/responses/Response500'
 
+  /authors/import:
+    post:
+      tags:
+        - Authors
+      summary: Import authors
+      operationId: importAuthors
+      requestBody:
+        description: Excel or JSON file containing author information
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        200:
+          description: List of imported authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
+
 components:
   schemas:
     CrupdatedBook:
