@@ -686,6 +686,10 @@ paths:
                   $ref: '#/components/schemas/author'
 components:
   schemas:
+    ImportBook:
+      oneOf:
+        - $ref: '#/components/schemas/ExcelBook'
+        - $ref: '#/components/schemas/JsonBook'
     ImportAuthor:
       type: object
       properties:
