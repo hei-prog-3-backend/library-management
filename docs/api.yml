@@ -227,6 +227,37 @@ paths:
                 items:
                   $ref: "#/components/schemas/Author"
 
+  /visitors:
+    get:
+      summary: Get all visitors
+      operationId: getAllVisitors
+      responses:
+        200:
+          description: List of visitors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Visitor'
+    post:
+      summary: Create a new visitor
+      operationId: createVisitor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Visitor'
+      responses:
+        201:
+          description: Visitor created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visitor'
+
+
 components:
   schemas:
     Book:
