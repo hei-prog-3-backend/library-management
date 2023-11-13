@@ -54,7 +54,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
-
     put:
       security:
          - oauth2 : [admin]
@@ -494,6 +493,11 @@ components:
         releaseDate:
           type: string
           format: date
+        status:
+          type: string
+          enum:
+            - emprunt
+            - rendu
     UpdateBookAuthor:
       type: object
       properties:
