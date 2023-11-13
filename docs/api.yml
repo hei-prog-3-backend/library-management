@@ -459,6 +459,9 @@ paths:
          operationId: UpLoanRender
          tags:
            - Visitors
+         security:
+           - oauth2: [admin]
+         
          requestBody: 
           content:
             application/json:
