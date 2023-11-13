@@ -560,13 +560,20 @@ components:
            type: string
          idVisitor:
            type: string
+         bookId:
+           type: string
+         action: 
+           type: string
+           enum:
+             - Loan 
+             - Render 
          LoanDate:
            type: string
            format: date
          LoanTime:
            type: string
            format: time 
-         RnderDate:
+         RenderDate:
            type: string
            format: date
          RenderTime:
