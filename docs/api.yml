@@ -522,6 +522,25 @@ components:
            type: string
          reference:
            type: string
+    LoanAndRender:
+       type: object
+       properties:
+         id:
+           type: string
+         idVisitor:
+           type: string
+         LoanDate:
+           type: string
+           format: date
+         LoanTime:
+           type: string
+           format: time 
+         RnderDate:
+           type: string
+           format: date
+         RenderTime:
+           type: string
+           format: time
   parameters:
     queryPagination:
       in: query
