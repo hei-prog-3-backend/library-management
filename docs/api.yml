@@ -72,6 +72,9 @@ paths:
       get:
          summary: List of the books available
          operationId: getBooksAvailable
+         security:
+           - oauth2: [admin,user]
+         
          tags:
            - Books
          responses:
@@ -103,6 +106,9 @@ paths:
     get:
       summary: Get all authors
       operationId: getAuthors
+      security:
+        - oauth2: [admin,user]
+      
       tags:
         - Authors
       parameters:
@@ -427,6 +433,9 @@ paths:
       post:
          summary: register of borrowed and render book
          operationId: AddLoanAndRender
+         security:
+           - oauth2: [admin]
+         
          tags:
            - Visitors
          requestBody:
