@@ -54,11 +54,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
-          headers:
-            status:
-              description: Status of the operation
-              schema:
-                $ref: "#/components/schemas/reponse200"
 
     put:
       security:
@@ -108,11 +103,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
-          headers:
-            status:
-              description: Status of the operation
-              schema:
-                $ref: "#/components/schemas/reponse200"
     put:
       security:
          - oauth2 : [admin]
@@ -136,11 +126,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
-          headers:
-            status:
-              description: Status of the operation
-              schema:
-                $ref: "#/components/schemas/reponse200"
     delete:
       security:
          - oauth2 : [admin]
@@ -159,11 +144,6 @@ paths:
       responses:
         200:
           description: Author successfully deleted
-          headers:
-            status:
-              description: Status of the operation
-              schema:
-                $ref: "#/components/schemas/reponse200"
         404:
           description: Author not found
 
@@ -205,11 +185,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
-          headers:
-            status:
-              description: Status of the operation
-              schema:
-                $ref: "#/components/schemas/reponse200"
   /books/authors:
     put:
       security:
@@ -242,11 +217,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/UpdateBookAuthor"
-          headers:
-            status:
-              description: Status of the operation
-              schema:
-                $ref: "#/components/schemas/reponse200"
 
   /books/import:
     post:
@@ -335,10 +305,6 @@ paths:
        responses:
          200:
            description: transaction successful
-           content:
-             application/json:
-                schema: 
-                    $ref: '#/components/schemas/reponse200'
          400:
             description: Invalid request
             content:
@@ -546,35 +512,26 @@ components:
           type: string
           description: Message associated with the status code
 
-    reponse200:
-      type: object
-      properties:
-        status:
-          $ref: "#/components/schemas/status"
-        body:
-          type: object
-          properties:
-            Property:
-              type: string
-              description: Indicates whether the operation was successful
     Response400:
       type: object
       properties:
         status:
           $ref: "#/components/schemas/status"
         body:
-          type: object
+          type: array
           properties:
             error:
               type: string
               description: Error message for response 400
+          example:
+               
     Response403:
       type: object
       properties:
         status:
           $ref: "#/components/schemas/status"
         body:
-          type: object
+          type: array
           properties:
             message:
               type: string
@@ -585,7 +542,7 @@ components:
         status:
           $ref: "#/components/schemas/status"
         body:
-          type: object
+          type: array
           properties:
             message:
               type: string
