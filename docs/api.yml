@@ -398,6 +398,33 @@ paths:
                  type: array
                  items:
                    $ref: "#/components/schemas/Visitor"
+  /VisitorActivity/VisitorId:
+      get:
+         summary: List of visitor activities between two period
+         operationId: LisVisitorsActivities
+         tags:
+           - Visitors
+         parameters:
+           - name: VisitorId 
+             in: path
+             required: true
+             schema: 
+               type: string
+           - name: StartDate
+             in: query
+             required: true
+             schema: 
+               type: string
+               format: date
+           - name: EndDate
+             in: query
+             required: true
+             schema: 
+                type: string
+                format: date
+         responses:
+           200: 
+              $ref: "#/components/responses/VisitorList_200"
   /LoanAndRender:
       post:
          summary: register of borrowed and render book
@@ -582,6 +609,14 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/Book"
+    VisitorListBody:
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: "#/components/schemas/Visitor" 
     ImportAuthor:
       type: object
       properties:
@@ -680,6 +715,12 @@ components:
        application/json:
         schema:
           $ref: "#/components/schemas/BookListBody"
+    VisitorList_200:
+       description: the list of Visitors
+       content:
+        application/json:
+         schema: 
+            $ref: "#/components/schemas/VisitorListBody"
     400:
       description: Bad request
       content:
