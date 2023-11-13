@@ -83,6 +83,22 @@ paths:
                 type: array
                 items:
                  $ref: "#/components/schemas/Book"
+  /books/borrowed:
+      get:
+         summary:  List of the books not available
+         operationId: getBooksUnVailable
+         tags:
+           - Books
+         responses:
+            200: 
+              description: List of books not available
+              content:
+               application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Book"
+         
   /authors:
     get:
       summary: Get all authors
