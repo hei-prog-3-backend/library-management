@@ -52,6 +52,8 @@ paths:
           $ref: '#/components/responses/BookList_200'
         400:
           $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
     put:
       security:
          - oauth2 : [admin]
@@ -71,6 +73,9 @@ paths:
          $ref: '#/components/responses/BookList_200'
         400:
           $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+
   /authors:
     get:
       tags:
@@ -91,6 +96,9 @@ paths:
          $ref: '#/components/responses/AuthorsList_200'
         400:
           $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+
     put:
       security:
          - oauth2 : [admin]
@@ -110,6 +118,9 @@ paths:
           $ref: "#/components/responses/AuthorsList_200"
         400:
           $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+
     delete:
       security:
          - oauth2 : [admin]
@@ -130,6 +141,8 @@ paths:
           $ref: "#/components/responses/AuthorsList_200"
         400:
           $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
 
   /books/{bookId}/authors/{authorId}:
     put:
@@ -165,6 +178,9 @@ paths:
           $ref: "#/components/responses/AuthorsList_200"
         400:
           $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+
   /books/authors:
     put:
       security:
@@ -193,6 +209,8 @@ paths:
           $ref: "#/components/responses/UpdateBookAuthor_200"
         400:
           $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
 
   /books/import:
     post:
@@ -215,6 +233,8 @@ paths:
           $ref: '#/components/responses/BookList_200'
         400:
           $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
 
   /authors/import:
     post:
@@ -237,6 +257,8 @@ paths:
           $ref: '#/components/responses/AuthorsList_200'
         400:
           $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
 
   /authors/page/{page}/size/{size}:
      get:
@@ -265,6 +287,8 @@ paths:
            $ref: '#/components/responses/VisitorsList_200'
          400:
           $ref: '#/components/responses/400'
+         403:
+          $ref: '#/components/responses/403'
 
   /transaction:
       post: 
@@ -285,6 +309,8 @@ paths:
            $ref: '#/components/responses/Transaction_200'
          400:
           $ref: '#/components/responses/400'
+         403:
+          $ref: '#/components/responses/403'
 
   /books/borrowed:
    get:
@@ -297,6 +323,8 @@ paths:
         $ref: '#/components/responses/BookList_200'
       400:
           $ref: '#/components/responses/400'
+      403:
+          $ref: '#/components/responses/403'
 
   /books/available:
    get:
@@ -309,6 +337,8 @@ paths:
         $ref: "#/components/responses/BookList_200"
       400:
           $ref: '#/components/responses/400'
+      403:
+          $ref: '#/components/responses/403'
 
   /visitor-activities/{visitorId}:
     get:
@@ -339,7 +369,9 @@ paths:
            $ref: '#/components/responses/Transaction_200'
         400:
           $ref: '#/components/responses/400'
-          
+        403:
+          $ref: '#/components/responses/403'
+
 components:
   securitySchemes:
    oauth2:
@@ -429,6 +461,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/BadRequestBody'
+    
+    403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ForbiddenBody'
 
   schemas:
     Book:
@@ -509,6 +548,15 @@ components:
         status:
           code: 400
           message: BAD REQUEST
+        body: { }
+
+    ForbiddenBody:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
+      example:
+        status:
+          code: 403
+          message: FORBIDDEN
         body: { }
 
     visitor:
