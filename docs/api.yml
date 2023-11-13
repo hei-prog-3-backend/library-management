@@ -50,6 +50,8 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/BookList_200'
+        400:
+          $ref: '#/components/responses/400'
     put:
       security:
          - oauth2 : [admin]
@@ -67,6 +69,8 @@ paths:
       responses:
         200:
          $ref: '#/components/responses/BookList_200'
+        400:
+          $ref: '#/components/responses/400'
   /authors:
     get:
       tags:
@@ -85,6 +89,8 @@ paths:
       responses:
         200:
          $ref: '#/components/responses/AuthorsList_200'
+        400:
+          $ref: '#/components/responses/400'
     put:
       security:
          - oauth2 : [admin]
@@ -102,6 +108,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/AuthorsList_200"
+        400:
+          $ref: '#/components/responses/400'
     delete:
       security:
          - oauth2 : [admin]
@@ -120,8 +128,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/AuthorsList_200"
-        404:
-          description: Author not found
+        400:
+          $ref: '#/components/responses/400'
 
   /books/{bookId}/authors/{authorId}:
     put:
@@ -155,6 +163,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/AuthorsList_200"
+        400:
+          $ref: '#/components/responses/400'
   /books/authors:
     put:
       security:
@@ -181,6 +191,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/UpdateBookAuthor_200"
+        400:
+          $ref: '#/components/responses/400'
 
   /books/import:
     post:
@@ -201,6 +213,9 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/BookList_200'
+        400:
+          $ref: '#/components/responses/400'
+
   /authors/import:
     post:
       security:
@@ -220,6 +235,9 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/AuthorsList_200'
+        400:
+          $ref: '#/components/responses/400'
+
   /authors/page/{page}/size/{size}:
      get:
        tags:
@@ -245,6 +263,9 @@ paths:
        responses:
          200:
            $ref: '#/components/responses/VisitorsList_200'
+         400:
+          $ref: '#/components/responses/400'
+
   /transaction:
       post: 
        security:
@@ -263,7 +284,8 @@ paths:
          200:
            $ref: '#/components/responses/Transaction_200'
          400:
-            description: Invalid request
+          $ref: '#/components/responses/400'
+
   /books/borrowed:
    get:
     tags:
@@ -273,6 +295,8 @@ paths:
     responses:
       200:
         $ref: '#/components/responses/BookList_200'
+      400:
+          $ref: '#/components/responses/400'
 
   /books/available:
    get:
@@ -283,6 +307,8 @@ paths:
     responses:
       200:
         $ref: "#/components/responses/BookList_200"
+      400:
+          $ref: '#/components/responses/400'
 
   /visitor-activities/{visitorId}:
     get:
@@ -311,6 +337,9 @@ paths:
       responses:
         '200':
            $ref: '#/components/responses/Transaction_200'
+        400:
+          $ref: '#/components/responses/400'
+          
 components:
   securitySchemes:
    oauth2:
@@ -393,6 +422,14 @@ components:
               schema: 
                items:
                 $ref: '#/components/schemas/UpdateBookAuthorBody'
+    
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestBody'
+
   schemas:
     Book:
       type: object
@@ -464,6 +501,15 @@ components:
                  type: array
                  items:
                    $ref: '#/components/schemas/UpdateBookAuthor'
+
+    BadRequestBody:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
+      example:
+        status:
+          code: 400
+          message: BAD REQUEST
+        body: { }
 
     visitor:
        type: object
