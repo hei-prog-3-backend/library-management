@@ -391,13 +391,9 @@ paths:
                  $ref: "#/components/schemas/Visitor"
         responses:
            200: 
-             description: The list of Visitors 
-             content:
-               application/json:
-                schema: 
-                 type: array
-                 items:
-                   $ref: "#/components/schemas/Visitor"
+             $ref: "#/components/responses/VisitorList_200"
+           400:
+             $ref: "#/components/responses/400"
   /VisitorActivity/VisitorId:
       get:
          summary: List of visitor activities between two period
@@ -425,6 +421,8 @@ paths:
          responses:
            200: 
               $ref: "#/components/responses/VisitorList_200"
+           400:
+             $ref: "#/components/responses/400"
   /LoanAndRender:
       post:
          summary: register of borrowed and render book
@@ -493,6 +491,16 @@ paths:
                    items:
                      $ref: "#/components/schemas/Author"
 components:
+  securitySchemes:
+   oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://library.com/api/oauth/login
+          tokenUrl: https://library.com/api/oauth/token
+          scopes:
+            admin: Admin all access
+            user: read API acces
   schemas:
     crupdateBook:
       type: object
