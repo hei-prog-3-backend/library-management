@@ -513,6 +513,15 @@ components:
         releaseDate:
           type: string
           format: date
+    Visitor:
+       type: object
+       properties:
+         id:
+           type: string
+         VisitorName:
+           type: string
+         reference:
+           type: string
   parameters:
     queryPagination:
       in: query
