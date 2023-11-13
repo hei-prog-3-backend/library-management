@@ -376,6 +376,29 @@ paths:
                   type: array
                   items:
                    $ref: "#/components/schemas/Book"
+  /LoanAndRender:
+      post:
+         summary: register of borrowed and render book
+         operationId: AddLoanAndRender
+         tags:
+           - Authors
+         requestBody:
+             content:
+              application/json:
+               schema:
+                type: string
+                items:
+                  $ref: "#/components/schemas/LoanAndRender"
+         responses:
+            200: 
+               description: Inserted a visitor activity
+               content:
+                application/json:
+                 schema:
+                   type: string
+                   items:
+                     $ref: "#/components/schemas/LoanAndRender"
+                    
   /auhtors/import:
       post: 
           summary: list of authors 
