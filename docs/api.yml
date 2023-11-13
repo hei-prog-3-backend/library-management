@@ -44,13 +44,9 @@ paths:
           $ref: "#/components/parameters/queryPagination"
       responses:
         200:
-          description: The list of filtered books
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
+          $ref: "#/components/responses/Booklist_200"
+        400:
+          $ref: "#/components/responses/400"
     put:
       tags:
         - Books
@@ -443,51 +439,53 @@ components:
              type: array
              items:
                $ref: "#/components/schemas/topic" 
-    status:
+    ResponseStatus:
         type: object
         properties:
           statusCode:
              type: integer
+             example: 200
           Message:
              type: string  
-    responses:
+    ResponseBodyTemplate:
        type: object
        properties:
          status:
-           $ref: "#/components/schemas/status"
-    body: 
-       type: object
-       properties:
-         structure:
-           type: string
-    responses200:
-     type: object
-     properties:
-       200:
-         allOf:
-           - $ref: "#/components/schemas/responses"
-           - $ref: "#/components/schemas/body"
-    responses400:
-     type: object
-     properties:
-       400:
-          allOf:
-             - $ref: "#/components/schemas/responses"
-             - $ref: "#/components/schemas/body"
-    responses403:
-      type: object
-      properties:
-       403:
-          allOf:
-             - $ref: "#/components/schemas/responses"
-             - $ref: "#/components/schemas/body"
-    responses500:
-      type: object
-      properties:
-        500:
-          allOf:
-             - $ref: "#/components/schemas/responses"
-             - $ref: "#/components/schemas/body"
+           $ref: "#/components/schemas/ResponseStatus"
+         code: 
+           type: object
+    BadRequestBody:
+       allOf:
+         - $ref: "#/components/schemas/ResponseBodyTemplate"
+       example:
+         status:
+           code: 400
+           Message: BAD REQUEST 
+         body: { }
+    Forbidden:
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+      example:
+        status:
+          code: 403
+          Message: server forbidden 
+        body: { }
+    ServerError:
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+      example:
+        status:
+          code: 500
+          Message: server error 
+        body: { }
+    BookListBody:
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: "#/components/schemas/Book"
     ImportAuthor:
       type: object
       properties:
@@ -544,24 +542,28 @@ components:
             type: integer
             default: 50
       required: true
-           # Question reponses
-           # a . Pourquoi les paginations sont-elles nécessaires ?
-
-           #, == la pagination est une technique essentielle pour gérer efficacement de grandes quantités de données, 
-           # améliorer les performances, économiser de la bande passante et offrir une meilleure expérience utilisateur.
-           # Elle est couramment utilisée dans les applications web, les API REST et d'autres systèmes pour garantir un
-           # fonctionnement fluide et efficace.
-
-           # 4 -a Est ce qu’on peut gérer la pagination à travers les entêtes de la requête ? Justifiez votre réponse
-
-           #bien que la gestion de la pagination à travers les en-têtes de la requête soit possible sur le plan technique,
-           # il est généralement préférable d'utiliser des paramètres de requête pour des raisons de conventions, 
-           #de simplicité et de compatibilité avec les clients existants.
-
-           # b Est ce qu’on doit gérer la pagination  à travers les entêtes de la requête ? Justifiez votre réponse.
-
-
-           #  bien que la gestion de la pagination à travers les en-têtes de la requête soit possible d'un point de vue technique,
-           # elle n'est généralement pas recommandée en raison de conventions, de lisibilité, de compatibilité avec les clients et 
-           # de facilité de test. Les paramètres de requête offrent une méthode plus courante et plus pratique pour gérer 
-           # la pagination dans les API REST.
+  responses:
+    Booklist_200:
+      description: the list of the books
+      content:
+       application/json:
+        schema:
+          $ref: "#/components/schemas/BookListBody"
+    400:
+      description: Bad request
+      content:
+        application/json:
+         schema: 
+          $ref: "#/components/schemas/BadRequestBody"
+    403:
+       description: server forbidden
+       content:
+        application/json:
+         schema: 
+          $ref: "#/components/schemas/Forbidden"
+    500:
+       description: server error
+       content:
+        application/json:
+         schema: 
+          $ref: "#/components/schemas/ServerError"      
