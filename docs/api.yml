@@ -50,6 +50,9 @@ paths:
     put:
       tags:
         - Books
+      security:
+          - oauth2: [admin]
+        
       summary: Create or update a list of books
       operationId: crupdateBooks
       requestBody:
@@ -133,6 +136,9 @@ paths:
     put:
       summary: Create or update authors
       operationId: crupdateAuthors
+      security:
+        - oauth2: [admin]
+      
       tags:
         - Authors
       requestBody:
@@ -362,6 +368,9 @@ paths:
        post: 
           summary: list of books import 
           operationId: ListImportBook
+          security:
+            - oauth2: [admin]
+          
           tags:
             - Books
           requestBody:
@@ -482,6 +491,9 @@ paths:
       post: 
           summary: list of authors 
           operationId: ListAuthorsImport
+          security:
+            - oauth2: [admin]
+          
           tags:
             - Authors
           requestBody:
