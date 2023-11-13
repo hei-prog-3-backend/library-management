@@ -376,6 +376,28 @@ paths:
                   type: array
                   items:
                    $ref: "#/components/schemas/Book"
+  /visitors:
+     post: 
+        summary: created Visitors
+        operationId: CretateVisitor
+        tags:
+          - Visitors
+        requestBody: 
+           content:
+             application/json:
+              schema: 
+               type: string
+               items:
+                 $ref: "#/components/schemas/Visitor"
+        responses:
+           200: 
+             description: The list of Visitors 
+             content:
+               application/json:
+                schema: 
+                 type: array
+                 items:
+                   $ref: "#/components/schemas/Visitor"
   /LoanAndRender:
       post:
          summary: register of borrowed and render book
@@ -386,7 +408,7 @@ paths:
              content:
               application/json:
                schema:
-                type: array
+                type: string
                 items:
                   $ref: "#/components/schemas/LoanAndRender"
          responses:
