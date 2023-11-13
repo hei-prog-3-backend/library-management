@@ -381,12 +381,12 @@ paths:
          summary: register of borrowed and render book
          operationId: AddLoanAndRender
          tags:
-           - Authors
+           - Visitors
          requestBody:
              content:
               application/json:
                schema:
-                type: string
+                type: array
                 items:
                   $ref: "#/components/schemas/LoanAndRender"
          responses:
@@ -395,10 +395,30 @@ paths:
                content:
                 application/json:
                  schema:
-                   type: string
+                   type: array
                    items:
                      $ref: "#/components/schemas/LoanAndRender"
-                    
+      put:
+         summary: updated the Loan and render books
+         operationId: UpLoanRender
+         tags:
+           - Visitors
+         requestBody: 
+          content:
+            application/json:
+             schema: 
+               type: array
+               items:
+                 $ref: "#/components/schemas/LoanAndRender" 
+         responses:
+           200: 
+            description: List of borrowing and render books 
+            content:
+              application/json:
+               schema: 
+                type: array 
+                items:
+                  $ref: "#/components/schemas/LoanAndRender"             
   /auhtors/import:
       post: 
           summary: list of authors 
