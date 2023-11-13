@@ -49,17 +49,17 @@ paths:
         - $ref: "#/components/parameters/queryPaginationPaginationSize"
       responses:
         200:
-          $ref: '#/components/responses/BookList_200'
+          $ref: "#/components/responses/BookList_200"
         400:
-          $ref: '#/components/responses/400'
+          $ref: "#/components/responses/400"
         403:
-          $ref: '#/components/responses/403'
-        500: 
-         $ref: '#/components/responses/500'
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
     put:
       security:
-         - oauth2 : [admin]
+        - oauth2: [admin]
       tags:
         - Books
       summary: Create or update a list of books
@@ -73,13 +73,13 @@ paths:
                 $ref: "#/components/schemas/Book"
       responses:
         200:
-         $ref: '#/components/responses/BookList_200'
+          $ref: "#/components/responses/BookList_200"
         400:
-          $ref: '#/components/responses/400'
+          $ref: "#/components/responses/400"
         403:
-          $ref: '#/components/responses/403'
-        500: 
-         $ref: '#/components/responses/500'
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /authors:
     get:
@@ -98,17 +98,17 @@ paths:
           required: false
       responses:
         200:
-         $ref: '#/components/responses/AuthorsList_200'
+          $ref: "#/components/responses/AuthorsList_200"
         400:
-          $ref: '#/components/responses/400'
+          $ref: "#/components/responses/400"
         403:
-          $ref: '#/components/responses/403'
-        500: 
-         $ref: '#/components/responses/500'
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
     put:
       security:
-         - oauth2 : [admin]
+        - oauth2: [admin]
       tags:
         - Authors
       summary: Create or update a  Author
@@ -124,15 +124,15 @@ paths:
         200:
           $ref: "#/components/responses/AuthorsList_200"
         400:
-          $ref: '#/components/responses/400'
+          $ref: "#/components/responses/400"
         403:
-          $ref: '#/components/responses/403'
-        500: 
-         $ref: '#/components/responses/500'
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
     delete:
       security:
-         - oauth2 : [admin]
+        - oauth2: [admin]
       tags:
         - Authors
       summary: Delete an author
@@ -149,16 +149,16 @@ paths:
         200:
           $ref: "#/components/responses/AuthorsList_200"
         400:
-          $ref: '#/components/responses/400'
+          $ref: "#/components/responses/400"
         403:
-          $ref: '#/components/responses/403'
-        500: 
-         $ref: '#/components/responses/500'
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /books/{bookId}/authors/{authorId}:
     put:
       security:
-         - oauth2 : [admin]
+        - oauth2: [admin]
       tags:
         - Authors
       summary: update author
@@ -188,16 +188,16 @@ paths:
         200:
           $ref: "#/components/responses/AuthorsList_200"
         400:
-          $ref: '#/components/responses/400'
+          $ref: "#/components/responses/400"
         403:
-          $ref: '#/components/responses/403'
-        500: 
-         $ref: '#/components/responses/500'
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /books/authors:
     put:
       security:
-         - oauth2 : [admin]
+        - oauth2: [admin]
       tags:
         - Authors
       summary: Update book-author link
@@ -221,16 +221,16 @@ paths:
         200:
           $ref: "#/components/responses/UpdateBookAuthor_200"
         400:
-          $ref: '#/components/responses/400'
+          $ref: "#/components/responses/400"
         403:
-          $ref: '#/components/responses/403'
-        500: 
-         $ref: '#/components/responses/500'
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /books/import:
     post:
       security:
-         - oauth2 : [admin]
+        - oauth2: [admin]
       tags:
         - Books
       summary: Return list of imported books
@@ -245,18 +245,18 @@ paths:
                   format: binary
       responses:
         200:
-          $ref: '#/components/responses/BookList_200'
+          $ref: "#/components/responses/BookList_200"
         400:
-          $ref: '#/components/responses/400'
+          $ref: "#/components/responses/400"
         403:
-          $ref: '#/components/responses/403'
-        500: 
-         $ref: '#/components/responses/500'
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /authors/import:
     post:
       security:
-         - oauth2 : [admin]
+        - oauth2: [admin]
       tags:
         - Authors
       summary: Return list of imported authors
@@ -271,108 +271,108 @@ paths:
                   format: binary
       responses:
         200:
-          $ref: '#/components/responses/AuthorsList_200'
+          $ref: "#/components/responses/AuthorsList_200"
         400:
-          $ref: '#/components/responses/400'
+          $ref: "#/components/responses/400"
         403:
-          $ref: '#/components/responses/403'
-        500: 
-         $ref: '#/components/responses/500'
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /authors/page/{page}/size/{size}:
-     get:
-       tags:
-         - Authors
-       parameters:
-         - $ref: "#/components/parameters/pathPaginationPage"
-         - $ref: "#/components/parameters/pathPaginationPageSize"
-       responses:
-          200:
-            $ref: '#/components/responses/AuthorsList_200'
-          400:
-            $ref: '#/components/responses/400'
-          403:
-            $ref: '#/components/responses/403'
-          500: 
-            $ref: '#/components/responses/500'
+    get:
+      tags:
+        - Authors
+      parameters:
+        - $ref: "#/components/parameters/pathPaginationPage"
+        - $ref: "#/components/parameters/pathPaginationPageSize"
+      responses:
+        200:
+          $ref: "#/components/responses/AuthorsList_200"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /visitors:
-      post: 
-       tags:
-         - Visitors
-       summary: add a new visitors 
-       operationId: postVisitors
-       requestBody:
-         content:
-           application/json:
-             schema: 
+    post:
+      tags:
+        - Visitors
+      summary: add a new visitors
+      operationId: postVisitors
+      requestBody:
+        content:
+          application/json:
+            schema:
               items:
-               $ref: '#/components/schemas/visitor'
-       responses:
-         200:
-           $ref: '#/components/responses/VisitorsList_200'
-         400:
-          $ref: '#/components/responses/400'
-         403:
-          $ref: '#/components/responses/403'
-         500: 
-            $ref: '#/components/responses/500'
+                $ref: "#/components/schemas/visitor"
+      responses:
+        200:
+          $ref: "#/components/responses/VisitorsList_200"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /transaction:
-      post: 
-       security:
-         - oauth2 : [admin]
-       
-       tags:
-         - Visitors
-       summary: Performs a book borrowing or return transaction
-       operationId: postTransaction
-       requestBody:
-         content:
-           application/json:
-              schema: 
-                $ref: '#/components/schemas/transaction'
-       responses:
-         200:
-           $ref: '#/components/responses/Transaction_200'
-         400:
-          $ref: '#/components/responses/400'
-         403:
-          $ref: '#/components/responses/403'
-         500: 
-            $ref: '#/components/responses/500'
+    post:
+      security:
+        - oauth2: [admin]
+
+      tags:
+        - Visitors
+      summary: Performs a book borrowing or return transaction
+      operationId: postTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/transaction"
+      responses:
+        200:
+          $ref: "#/components/responses/Transaction_200"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /books/borrowed:
-   get:
-    tags:
-      - Books
-    summary: Retrieve the list of currently borrowed books
-    operationId: getBorrowedBooks
-    responses:
-      200:
-        $ref: '#/components/responses/BookList_200'
-      400:
-          $ref: '#/components/responses/400'
-      403:
-          $ref: '#/components/responses/403'
-      500: 
-          $ref: '#/components/responses/500'
+    get:
+      tags:
+        - Books
+      summary: Retrieve the list of currently borrowed books
+      operationId: getBorrowedBooks
+      responses:
+        200:
+          $ref: "#/components/responses/BookList_200"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /books/available:
-   get:
-    tags:
-      - Books
-    summary: Retrieve the list of currently available books
-    operationId: getAvailableBooks
-    responses:
-      200:
-        $ref: "#/components/responses/BookList_200"
-      400:
-          $ref: '#/components/responses/400'
-      403:
-          $ref: '#/components/responses/403'
-      500: 
-          $ref: '#/components/responses/500'
+    get:
+      tags:
+        - Books
+      summary: Retrieve the list of currently available books
+      operationId: getAvailableBooks
+      responses:
+        200:
+          $ref: "#/components/responses/BookList_200"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
   /visitor-activities/{visitorId}:
     get:
@@ -399,18 +399,18 @@ paths:
             type: string
             format: date
       responses:
-        '200':
-           $ref: '#/components/responses/Transaction_200'
+        "200":
+          $ref: "#/components/responses/Transaction_200"
         400:
-          $ref: '#/components/responses/400'
+          $ref: "#/components/responses/400"
         403:
-          $ref: '#/components/responses/403'
-        500: 
-          $ref: '#/components/responses/500'
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 
 components:
   securitySchemes:
-   oauth2:
+    oauth2:
       type: oauth2
       flows:
         authorizationCode:
@@ -421,96 +421,96 @@ components:
             user: Accès en lecture et visualisation à l'API
   parameters:
     queryPaginationPage:
-        in: query
-        name: page
-        description: Parameters for pagination in the query 
-        schema: 
-          type: integer
-          default: 1
-        required: false
+      in: query
+      name: page
+      description: Parameters for pagination in the query
+      schema:
+        type: integer
+        default: 1
+      required: false
     queryPaginationPaginationSize:
-         in: query
-         name: pageSize
-         description: The number of items per page (default 50)
-         schema: 
-           type: integer
-           default: 50
-         required: false
+      in: query
+      name: pageSize
+      description: The number of items per page (default 50)
+      schema:
+        type: integer
+        default: 50
+      required: false
     pathPaginationPage:
-        in: path
-        name: page
-        description: Parameters for pagination in the path
-        schema: 
-          type: integer
-          default: 1
-        required: true
-    
-    pathPaginationPageSize: 
-       in: path
-       name: size
-       description: The number of items per page (default 50)
-       schema: 
-          type: integer
-          default: 50
-       required: true
+      in: path
+      name: page
+      description: Parameters for pagination in the path
+      schema:
+        type: integer
+        default: 1
+      required: true
+
+    pathPaginationPageSize:
+      in: path
+      name: size
+      description: The number of items per page (default 50)
+      schema:
+        type: integer
+        default: 50
+      required: true
   responses:
     BookList_200:
       description: List of books
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/BookListBody'
+            $ref: "#/components/schemas/BookListBody"
 
-    AuthorsList_200: 
-       description: List of authors 
-       content:
-         application/json:
-           schema: 
-             $ref: '#/components/schemas/AuthorsListBody'
-    
+    AuthorsList_200:
+      description: List of authors
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AuthorsListBody"
+
     VisitorsList_200:
-        description: List of visitor 
-        content:
-          application/json:
-            schema: 
-              $ref: '#/components/schemas/visitorListBody'
-    
+      description: List of visitor
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/visitorListBody"
+
     Transaction_200:
-        description: List of transaction 
-        content:
-            application/json:
-              schema: 
-                items: 
-                  $ref: '#/components/schemas/transactionBody'
+      description: List of transaction
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: "#/components/schemas/transactionBody"
 
     UpdateBookAuthor_200:
-          description: List of UpdateBookAuthor
-          content:
-            application/json:
-              schema: 
-               items:
-                $ref: '#/components/schemas/UpdateBookAuthorBody'
-    
+      description: List of UpdateBookAuthor
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: "#/components/schemas/UpdateBookAuthorBody"
+
     400:
       description: Bad Request
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/BadRequestBody'
-    
+            $ref: "#/components/schemas/BadRequestBody"
+
     403:
       description: Forbidden
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ForbiddenBody'
-    
+            $ref: "#/components/schemas/ForbiddenBody"
+
     500:
       description: Internal Server Error
       content:
         application/json:
-          schema: 
-            $ref: '#/components/schemas/InternalServerErrorBody'
+          schema:
+            $ref: "#/components/schemas/InternalServerErrorBody"
 
   schemas:
     Book:
@@ -535,115 +535,114 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/ResponseStatus'
+          $ref: "#/components/schemas/ResponseStatus"
         body:
           type: object
-          
+
     BookListBody:
       allOf:
-        - $ref: '#/components/schemas/ResponseBodyTemplate'
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
         - properties:
             body:
               type: array
               items:
-                $ref: '#/components/schemas/Book'
+                $ref: "#/components/schemas/Book"
 
     AuthorsListBody:
-        allOf:
-          - $ref: '#/components/schemas/ResponseBodyTemplate'
-          - properties:
-              body:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Author' 
-    
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: "#/components/schemas/Author"
+
     visitorListBody:
-         allOf:
-           - $ref: '#/components/schemas/ResponseBodyTemplate'
-           - properties:
-               body:
-                 type: array
-                 items:
-                   $ref: "#/components/schemas/visitor"
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: "#/components/schemas/visitor"
 
     transactionBody:
-          allOf:
-            - $ref: '#/components/schemas/ResponseBodyTemplate'
-            - properties:
-                body:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: "#/components/schemas/transaction"
 
     UpdateBookAuthorBody:
-          allOf:
-            - $ref: '#/components/schemas/ResponseBodyTemplate'
-            - properties:
-                body:
-                 type: array
-                 items:
-                   $ref: '#/components/schemas/UpdateBookAuthor'
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: "#/components/schemas/UpdateBookAuthor"
 
     BadRequestBody:
       allOf:
-        - $ref: '#/components/schemas/ResponseBodyTemplate'
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
       example:
         status:
           code: 400
           message: BAD REQUEST
-        body: { }
+        body: {}
 
     ForbiddenBody:
       allOf:
-        - $ref: '#/components/schemas/ResponseBodyTemplate'
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
       example:
         status:
           code: 403
           message: FORBIDDEN
-        body: { }
-    
-    InternalServerErrorBody:
-       allOf:
-         - $ref: '#/components/schemas/ResponseBodyTemplate'
-       example:
-         status: 
-           code: 500
-           message: Internal Server Error.
-         body: { }
+        body: {}
 
+    InternalServerErrorBody:
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+      example:
+        status:
+          code: 500
+          message: Internal Server Error.
+        body: {}
 
     visitor:
-       type: object
-       properties:
-          id :
-            type: string 
-          name :
-            type: string
-          reference:
-            type: string
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        reference:
+          type: string
 
     transaction:
-        type: object
-        properties:
-          idVisitor:
-             type: string 
-          idBook:
-             type: string
-          action:
-           type: string
-           enum: [emprunt, rendu]
-          BorrowingDate:
-             type: string
-             format: date
-          RenderDate:
-             type: string
-             format: date 
-          BorrowingTime:
-             type: string
-             format: time 
-          RenderTime:
-              type: string
-              format: time 
+      type: object
+      properties:
+        idVisitor:
+          type: string
+        idBook:
+          type: string
+        action:
+          type: string
+          enum: [emprunt, rendu]
+        BorrowingDate:
+          type: string
+          format: date
+        RenderDate:
+          type: string
+          format: date
+        BorrowingTime:
+          type: string
+          format: time
+        RenderTime:
+          type: string
+          format: time
 
     Author:
       type: object
@@ -666,7 +665,7 @@ components:
         bookName:
           type: string
         author:
-          $ref: '#/components/schemas/Author'
+          $ref: "#/components/schemas/Author"
         pageNumbers:
           type: integer
         topic:
