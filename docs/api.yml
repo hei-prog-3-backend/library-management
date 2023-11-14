@@ -9,6 +9,7 @@ tags:
   - name: Books
   - name: Authors
   - name: Visitors
+  - name: Admins 
 paths:
   /books:
     get:
@@ -456,6 +457,39 @@ paths:
             format: date
         - $ref: '#/components/parameters/queryPagination'
         - $ref: '#/components/parameters/pathPagination'
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
+
+  /admins:
+    post:
+      tags:
+        - Admins
+      summary: Admin borrows a book on behalf of a visitor
+      description: An administrator borrows a book on behalf of a visitor.
+      operationId: adminBorrowBook
+      requestBody:
+        description: Borrow book request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookId:
+                  type: string
+                  description: ID of the book to borrow
+                visitorId:
+                  type: string
+                  description: ID of the visitor
+              required:
+                - bookId
+                - visitorId
       responses:
         200:
           $ref: '#/components/responses/Response200'
