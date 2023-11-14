@@ -5,12 +5,18 @@ info:
   description: STD22107
 servers:
   - url: https://library.com
+security:
+  - oauth2:
+      - admin
+      - visitor  
 paths:
   /books:
     get:
       tags:
         - book
       summary: Get all books
+      security:
+        - oauth2: [admin, visitor]
       description: The returned books are ordered by updated datetime.
       operationId: getBooks
       parameters:
@@ -45,6 +51,8 @@ paths:
       tags:
         - book
       summary: Create or update a list of books with author
+      security:
+        - oauth2: [admin]
       operationId: crupdateBooks
       requestBody:
         content:
@@ -69,6 +77,8 @@ paths:
       tags:
        - book
       summary: import books
+      security:
+        - oauth2: [admin]
       operationId: importBooks
       requestBody:
         required: true 
@@ -94,6 +104,8 @@ paths:
       tags:
        - Authors
       summary: import authors
+      security:
+        - oauth2: [admin]
       operationId: importAuthors
       requestBody:
         required: true 
@@ -137,6 +149,8 @@ paths:
       tags:
         - Authors
       summary: Get all authors
+      security:
+        - oauth2: [admin, visitor]
       operationId: getAuthors
       parameters:
         - in: path
@@ -158,6 +172,8 @@ paths:
       tags:
         - Authors
       summary: Update authors
+      security:
+        - oauth2: [admin]
       requestBody:
         content:
           application/json:
@@ -195,6 +211,8 @@ paths:
       tags:
         - book
       summary: Associate  a single book to one author
+      security:
+        - oauth2: [admin]
       operationId: Associate
       parameters:
         - name: bookId
@@ -223,6 +241,8 @@ paths:
       tags:
         - book
       summary: update the author of the book
+      security:
+        - oauth2: [admin]
       operationId: updateBookAuthor
       requestBody:
         required: true
@@ -322,6 +342,8 @@ paths:
       tags:
         - book
       summary: associate a book with a topic
+      security:
+        - oauth2: [admin]
       operationId: associateBookTopic
       parameters:
         - in: path
@@ -464,6 +486,8 @@ paths:
         tags:
           - customer
         summary: lend book
+        security:
+        - oauth2: [admin]
         operationId: lendBooks
         requestBody:
            content:
@@ -482,6 +506,8 @@ paths:
         tags:
           - customer
         summary: render book
+        security:
+        - oauth2: [admin]
         operationId: renderBooks
         requestBody:
            content:
@@ -496,6 +522,18 @@ paths:
                   schema:
                     $ref: '#/components/schemas/bookCustomer'
 components:
+
+
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            admin: Access to admin operations
+            visitor: Access to visitor operations
+
 
   responses:
     200:
