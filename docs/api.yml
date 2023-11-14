@@ -41,15 +41,12 @@ paths:
         required: false 
       - $ref: '#/components/parameters/QueryPagination'       
       responses:
-       200:
-        $ref: "#/components/responses/Response200"
-        description: the list of bookname order by release date given 
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Book'
+        200:
+          $ref: "#/components/responses/BookList_200"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"    
     put:
       tags:
         - Books
@@ -63,14 +60,7 @@ paths:
               items:
                 $ref: '#/components/schemas/Book'
       responses:
-        200:
-          description: the list of created or updated books 
-          content:
-            application/json:
-              schema: 
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
+        -$ref: "#/components/responses/BookList_200"
   /books/{bookId}/authors/{authorId}:
     put:
       tags: 
