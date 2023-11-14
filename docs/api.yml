@@ -349,6 +349,65 @@ paths:
         500:
           $ref: '#/components/responses/Response500'
 
+  /visitors/{visitorId}/borrowed-books/{bookId}:
+    put:
+      tags:
+        - Visitors
+      summary: Borrow a book
+      description: Borrow a book for a specific visitor.
+      operationId: borrowBook
+      parameters:
+        - in: path
+          name: visitorId
+          description: ID of the visitor
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: bookId
+          description: ID of the book to borrow
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
+
+    delete:
+      tags:
+        - Visitors
+      summary: Return a borrowed book
+      description: Return a borrowed book for a specific visitor.
+      operationId: returnBook
+      parameters:
+        - in: path
+          name: visitorId
+          description: ID of the visitor
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: bookId
+          description: ID of the book to return
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
+
 components:
   schemas:
     CrupdatedBook:
