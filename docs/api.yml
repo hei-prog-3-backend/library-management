@@ -428,6 +428,32 @@ paths:
         500:
           $ref: '#/components/responses/Response500'
 
+  /visitors/{visitorId}/activities:
+    get:
+      tags:
+        - Visitors
+      summary: Get visitor activities
+      description: Retrieve a list of books borrowed and returned by a specific visitor.
+      operationId: getVisitorActivities
+      parameters:
+        - in: path
+          name: visitorId
+          description: ID of the visitor
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/queryPagination'
+        - $ref: '#/components/parameters/pathPagination'
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
+
 components:
   schemas:
     CrupdatedBook:
