@@ -33,13 +33,14 @@ paths:
         - $ref: '#/components/parameters/queryPage'
         - $ref: '#/components/parameters/queryPageSize'
       responses:
-        '200':
-          description: The list of filtered books
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Book'
+        200:
+           $ref: '#/components/responses/200'
+        400:
+           $ref: '#/components/responses/400'
+        403:
+           $ref: '#/components/responses/403'
+        500:
+           $ref: '#/components/responses/500'
     put:
       tags:
         - book
@@ -387,7 +388,86 @@ paths:
                    $ref: '#/components/schemas/authorWithTopic'  
 
 components:
+
+  responses:
+    200:
+      description: list of books
+      content:
+        application/json: 
+           schema:
+             $ref: '#/components/schemas/bookBody'
+    400:
+      description: bad request
+      content:
+        application/json: 
+           schema:
+             $ref: '#/components/schemas/badRequest'
+    403:
+      description: forbidden
+      content:
+        application/json:
+           schema:
+             $ref: '#/components/schemas/forbidden'
+    500:
+      description: internal server error
+      content:
+        application/json:
+           schema:
+             $ref: '#/components/schemas/serverError'
   schemas:
+    responseStatus:
+       type: object
+       properties:
+        schema:
+          type: object
+          properties: 
+            status:
+              type: object
+              properties:
+                code:
+                  type: integer
+                message: 
+                  type: string       
+    responseBodyTemplate:
+       type: object
+       properties:
+         status: 
+            $ref: "#/components/schemas/responseStatus"   
+         body: 
+            type: object   
+    bookBody:
+       allOf:
+         - $ref: '#/components/schemas/responseBodyTemplate'
+         - properties:
+              body:
+                 type: array
+                 items: 
+                   $ref: '#/components/schemas/Book'
+    badRequest:
+       allOf:
+         - $ref: '#/components/schemas/responseBodyTemplate'
+       example:
+         status:
+           code: 400
+           message: bad request
+         body: {}
+    forbidden:
+       allOf:
+         - $ref: '#/components/schemas/responseBodyTemplate'
+       example:
+         status:
+           code: 403
+           message: forbidden
+         body: {}
+    serverError:
+       allOf:
+         - $ref: '#/components/schemas/responseBodyTemplate'
+       example:
+         status:
+           code: 500
+           message: internal server error
+         body: {}
+
     CrupdateBook:
        type: object
        properties:
@@ -470,38 +550,6 @@ components:
         topic: 
           items:
            $ref: '#/components/schemas/topic'  
-
-    responses:
-        type: object
-        properties:
-          status:
-            type: object
-            properties:
-               code:
-                 type: integer
-               message: 
-                 type: string
-          body: 
-            type: object                
-    200:  
-     allOf:
-       - $ref: "#/components/schemas/responses"   
-     description: success
-          
-    400:  
-     allOf:
-       - $ref: "#/components/schemas/responses"
-     description: client error
-
-    403:
-     allOf:
-      - $ref: "#/components/schemas/responses"
-     description: forbidden access
-
-    500:  
-     allOf:
-      - $ref: "#/components/schemas/responses"
-     description: server error 
 
     importBook: 
       allOf:
