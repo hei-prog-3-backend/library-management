@@ -122,7 +122,7 @@ paths:
   /books/import:
     post:
       tags:
-        - Book
+        - Books
       summary: Import books from Excel or JSON
       operationId: importBooks
       requestBody:
@@ -183,6 +183,21 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
+  /authors/page/{page}/size/{size}:
+    get:
+      tags:
+        - Author
+      parameters:
+        - $ref: "#/components/parameters/pathPagination"
+      responses:
+        200:
+          description: list of author
+          content:
+              application/json:
+                schema:
+                  items:
+                    $ref: "#/components/schemas/Author"
+
   /author/import:
     post : 
       tags:
@@ -441,6 +456,17 @@ components:
           pageSize:
             type: integer
             default: 30
+    pathPagination:
+      name:  pathPagination 
+      in: path
+      schema: 
+        type: object
+        properties:
+          page: 
+            type: integer
+          size: 
+            type: integer
+      required: true
   responses:
     BaseResponse : 
       description: response structure 
