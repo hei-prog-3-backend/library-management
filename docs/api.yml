@@ -68,6 +68,26 @@ paths:
         500:
           $ref: '#/components/responses/Response500'
 
+  /books/availability:
+    get:
+      tags:
+        - Books
+      summary: Get all books with availability status
+      description: Retrieve a list of all books in the library with their availability status.
+      operationId: getBooksAvailability
+      parameters:
+        - $ref: '#/components/parameters/queryPagination'
+        - $ref: '#/components/parameters/pathPagination'
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
+
   /books/authors:
     put:
       tags:
