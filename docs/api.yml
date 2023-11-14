@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.1.0
+  version: 1.2.0
   description: STD22107
 servers:
   - url: https://library.com
@@ -387,6 +387,114 @@ paths:
                  schema: 
                    $ref: '#/components/schemas/authorWithTopic'  
 
+  /book/lendedBook/{customerId}:
+      get:
+        tags:
+          - book
+        summary: get the lended book by customerId
+        operationId: getBookLended
+        parameters:
+          - in: path
+            name: customerId
+            schema: 
+              type: string
+            required: true
+          - in: query
+            name: period
+            schema:
+              properties:
+                startDate:
+                   type: string
+                   format: date
+                endDate: 
+                   type: string
+                   format: date
+        responses:
+          200:
+            description: book lended
+            content:
+               application/json:
+                  schema:
+                    $ref: '#/components/schemas/CrupdateBook'
+  /book/renderedBook/{customerId}:
+      get:
+        tags:
+          - book
+        summary: get the rendered book by customerId
+        operationId: getBookRendered
+        parameters:
+          - in: path
+            name: customerId
+            schema: 
+              type: string
+            required: true
+          - in: query
+            name: period
+            schema:
+              properties:
+                startDate:
+                   type: string
+                   format: date
+                endDate: 
+                   type: string
+                   format: date
+        responses:
+          200:
+            description: book rendered
+            content:
+               application/json:
+                  schema:
+                    $ref: '#/components/schemas/CrupdateBook'
+
+  /book/availableBook:
+      get:
+        tags:
+          - book
+        summary: get the list of available book
+        operationId: getAvailableBook
+        responses:
+            200: 
+              description: list of available book
+              content:
+                 application/json:
+                   schema:
+                     $ref: '#/components/schemas/CrupdateBook'          
+  /customer/lendBook:
+      post:
+        tags:
+          - customer
+        summary: lend book
+        operationId: lendBooks
+        requestBody:
+           content:
+             application/json:
+              schema:
+                $ref: '#/components/schemas/bookCustomer'
+        responses:
+          200:
+            description: book lended
+            content:
+               application/json:
+                  schema:
+                    $ref: '#/components/schemas/bookCustomer'
+  /customer/renderBook:
+      post:
+        tags:
+          - customer
+        summary: render book
+        operationId: renderBooks
+        requestBody:
+           content:
+             application/json:
+              schema:
+                $ref: '#/components/schemas/bookCustomer'
+        responses:
+          200:
+            description: book lended
+            content:
+               application/json:
+                  schema:
+                    $ref: '#/components/schemas/bookCustomer'
 components:
 
   responses:
@@ -415,6 +523,22 @@ components:
            schema:
              $ref: '#/components/schemas/serverError'
   schemas:
+
+
+    customer:
+      type: object
+      properties:
+        customerId:
+          type: integer
+        customerName:
+          type: string
+        customerReference:
+          type: string      
+
+    bookCustomer:
+      allOf:
+        - $ref: '#/components/schemas/CrupdateBook'
+        - $ref: '#/components/schemas/customer'
     responseStatus:
        type: object
        properties:
