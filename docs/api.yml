@@ -433,7 +433,7 @@ paths:
       tags:
         - Visitors
       summary: Get visitor activities
-      description: Retrieve a list of books borrowed and returned by a specific visitor.
+      description: Retrieve a list of books borrowed and returned by a specific visitor within a specified time period.
       operationId: getVisitorActivities
       parameters:
         - in: path
@@ -442,6 +442,18 @@ paths:
           required: true
           schema:
             type: string
+        - in: query
+          name: startDate
+          description: 'Start date of the time period (format: yyyy-mm-dd)'
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: endDate
+          description: 'End date of the time period (format: yyyy-mm-dd)'
+          schema:
+            type: string
+            format: date
         - $ref: '#/components/parameters/queryPagination'
         - $ref: '#/components/parameters/pathPagination'
       responses:
