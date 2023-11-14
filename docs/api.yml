@@ -335,6 +335,16 @@ paths:
 
 components:
   schemas:
+    ResponseSatuts:
+      type: object
+      properties:
+        code: 
+          type: integer
+          example: 200
+        messages:
+          type: string
+          example: ok
+        
     Book:
       type: object
       properties:
