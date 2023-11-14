@@ -145,13 +145,11 @@ paths:
         - $ref: "#/components/parameters/QueryPagination"
       responses:
         200:
-         description: the list of author
-         content:
-           application/json:
-            schema: 
-              type: array
-              items:
-                $ref: "#/components/schemas/Author"
+          $ref: "#/components/responses/AuthorList_200"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
     put:
       tags:
         - Author
@@ -359,12 +357,20 @@ components:
         body: { }
     BookList:
       allOf:
-        - $ref: "#/components/schemas/ResponseBodyTemplate"
-          properties:
+        - $ref: '#/components/schemas/ResponseBodyTemplate'
+        - properties:
             body:
               type: array
               items:
-                $ref: "#/components/schemas/Book"
+                $ref: '#/components/schemas/Book'
+    AuthorList:
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: "#/components/schemas/Author"
     Book:
       type: object
       properties:
@@ -503,6 +509,12 @@ components:
       content:
         application/json:
           schema:
+            $ref: "#/components/schemas/BookList"
+    AuthorList_200:
+      description: the list of author 
+      content:
+        application/json:
+          schema: 
             $ref: "#/components/schemas/BookList"
     400:
       description: Bad request 
