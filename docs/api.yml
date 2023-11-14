@@ -351,7 +351,30 @@ components:
           $ref: "#/components/schemas/ResponseStatus"
         body:
           type: object
-       
+    BadRequestBody : 
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+      example:
+        status: 
+          code: 400
+          messages: BAD REQUEST 
+        body: { }
+    ForbiddenBody:
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+      example:
+        status: 
+          code: 403
+          messages: FORBIDDEN
+        body: { }
+    BookList:
+      allOf:
+        - $ref: "#/components/schemas/ResponseBodyTemplate"
+          properties:
+            body:
+              type: array
+              items:
+                $ref: "#/components/schemas/Book"
     Book:
       type: object
       properties:
@@ -485,45 +508,24 @@ components:
             type: integer
       required: true
   responses:
-    BaseResponse : 
-      description: response structure 
+    BookList_200:
+      description: The list of book 
       content:
         application/json:
-          schema:   
-            type: object
-            properties:
-              status:
-                type: object
-              codeOfStatus:
-                type: integer
-              messages:
-                type: string
-              body: 
-                type: string
-    Response200:
-      description: code of status 200 response successfully
+          schema:
+            $ref: "#/components/schemas/BookList"
+    400:
+      description: Bad request 
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BadRequestBody"
+    403:
+      description: Forbidden request 
       content:
         application/json:
           schema: 
-            allOf:
-              - $ref: '#/components/responses/BaseResponse'
-              - type: object
-                properties:
-                  status: 
-                    properties:
-                      codeOfStatus:
-                        type: integer
-                        enum:
-                          - 200
-                      messages:
-                        type: string
-                  body:
-                    type: object
-                    properties:
-                      data: 
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Book" 
+            $ref: "#/components/schemas/ForbiddenBody"
   securitySchemes:
     basicAuth:
       type: http
