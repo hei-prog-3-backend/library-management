@@ -335,7 +335,7 @@ paths:
 
 components:
   schemas:
-    ResponseSatuts:
+    ResponseStatus:
       type: object
       properties:
         code: 
@@ -344,7 +344,14 @@ components:
         messages:
           type: string
           example: ok
-        
+    ResponseBodyTemplate:
+      type: object
+      properties:
+        status: 
+          $ref: "#/components/schemas/ResponseStatus"
+        body:
+          type: object
+       
     Book:
       type: object
       properties:
