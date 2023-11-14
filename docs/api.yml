@@ -500,6 +500,51 @@ paths:
         500:
           $ref: '#/components/responses/Response500'
 
+    put:
+      tags:
+        - Admins
+      summary: Admin imports books
+      description: An administrator imports books to the library.
+      operationId: adminImportBooks
+      requestBody:
+        description: Excel or JSON file containing book information
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+       
+      responses:
+        200:
+          description: List of imported books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
+
   /admins/{adminId}/return-books:
     put:
       tags:
