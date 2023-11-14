@@ -500,6 +500,46 @@ paths:
         500:
           $ref: '#/components/responses/Response500'
 
+  /admins/{adminId}/return-books:
+    put:
+      tags:
+        - Admins
+      summary: Admin returns a book on behalf of a visitor
+      description: An administrator returns a book on behalf of a visitor.
+      operationId: adminReturnBook
+      parameters:
+        - in: path
+          name: adminId
+          description: ID of the administrator
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Return book request
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookId:
+                  type: string
+                  description: ID of the book to return
+                visitorId:
+                  type: string
+                  description: ID of the visitor
+              required:
+                - bookId
+                - visitorId
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400' 
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
+
 components:
   schemas:
     CrupdatedBook:
