@@ -361,8 +361,206 @@ paths:
           $ref: "#/components/responses/403"
         500:
           $ref: "#/components/responses/500"
+  /books/borrow:
+    put:
+      summary: Borrow books
+      operationId: borrowBooks
+      tags:
+        - Books
+      requestBody:
+        description: List of books to borrow
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/BorrowReturnRequest"
+      responses:
+        200:
+          description: Books successfully borrowed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BorrowReturnResponse"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
+
+  /books/return:
+    put:
+      summary: Return books
+      operationId: returnBooks
+      tags:
+        - Books
+      requestBody:
+        description: List of books to return
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/BorrowReturnRequest"
+      responses:
+        200:
+          description: Books successfully returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BorrowReturnResponse"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
+  /books/borrowed:
+    get:
+      summary: Get all borrowed books
+      operationId: getBorrowedBooks
+      tags:
+        - Books
+      responses:
+        200:
+          $ref: "#/components/responses/BookList_200"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
+
+  /books/available:
+    get:
+      summary: Get all available books
+      operationId: getAvailableBooks
+      tags:
+        - Books
+      responses:
+        200:
+         $ref: "#/components/responses/BookList_200"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
+  /visitors/{visitorId}/books/borrowed:
+    get:
+      summary: Get borrowed books for a visitor
+      operationId: getBorrowedBooksForVisitor
+      tags:
+        - Visitors
+      parameters:
+        - in: path
+          name: visitorId
+          description: The unique identifier of the visitor
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: "#/components/responses/BookList_200" 
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
+
+  /visitors/{visitorId}/books/returned:
+    get:
+      summary: Get returned books for a visitor
+      operationId: getReturnedBooksForVisitor
+      tags:
+        - Visitors
+      parameters:
+        - in: path
+          name: visitorId
+          description: The unique identifier of the visitor
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: "#/components/responses/BookList_200" #je sais pas sao hoe anao reponse vaovao hoe miaraka @visitor /components/parameters/Visitors
+     #/components/parameters/Book  sa avela @io
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
+
+  /visitors/activity:
+    get:
+      summary: Get visitor activity
+      operationId: getVisitorActivity
+      tags:
+        - Visitors
+      responses:
+        200:
+          description: List of visitor activities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/VisitorActivity"
+        400:
+          $ref: "#/components/responses/400"
+        403:
+          $ref: "#/components/responses/403"
+        500:
+          $ref: "#/components/responses/500"
 components:
   schemas:
+    VisitorActivity:
+      type: object
+      properties:
+        bookId:
+          type: string
+          description: The unique identifier of the book
+        action:
+          type: string
+          enum: [borrow, return]
+          description: The action performed (borrow or return)
+        date:
+          type: string
+          format: date-time
+          description: The timestamp of the activity
+    BorrowReturnRequest:
+      type: object
+      properties:
+        visitorId:
+          type: string
+        bookIds:
+          type: array
+          items:
+            type: string
+        items:
+          type: string
+
+    BorrowReturnResponse:
+      type: object
+      properties:
+        visitor:
+          $ref: '#/components/schemas/Visitor'
+        books:
+          type: array
+          items:
+            type: object
+            properties:
+              items:
+                $ref: '#/components/schemas/Book'
     ResponseStatus:
       type: object
       properties:
