@@ -323,19 +323,22 @@ paths:
         500:
           $ref: '#/components/responses/Response500'
 
-    delete:
+  /visitors/{visitorId}/borrowed-books:
+    get:
       tags:
         - Visitors
-      summary: delete Visitor
-      description: delete Visitor by ID 
-      operationId: deletevisitor
+      summary: Get books borrowed by a visitor
+      description: Retrieve a list of books borrowed by a specific visitor.
+      operationId: getBorrowedBooks
       parameters:
-        - name: VositorName
-          in: query
-          description: The name that needs to be delete
+        - in: path
+          name: visitorId
+          description: ID of the visitor
           required: true
-          schema: 
+          schema:
             type: string
+        - $ref: '#/components/parameters/queryPagination'
+        - $ref: '#/components/parameters/pathPagination'
       responses:
         200:
           $ref: '#/components/responses/Response200'
